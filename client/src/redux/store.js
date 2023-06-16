@@ -8,5 +8,6 @@ export default configureStore({
     user: userReducer,
     sidebar: sidebarReducer,
     login: loginReducer,
+    sidebar: sidebarReducer,
   },
 });
