@@ -30,8 +30,7 @@ const QuestionBox = ({ question }) => {
     return `${Math.floor(years)}년 전`;
   };
 
-  //api에 있는 detailPost.createdAt를 바꿔주는 것
-  //시간 데이터에 해당하는 값을 axios로 호출한 데이터의 날짜 파라미터로 변경합니다.
+  //시간 데이터에 해당하는 값을 api 데이터의 날짜 파라미터로 변경합니다.
   const nowDate = detailDate(new Date('2023-06-03T00:00:00.000000'));
 
   return (
