@@ -1,0 +1,65 @@
+package synergy_overflow.member;
+
+import lombok.Getter;
+import lombok.Setter;
+
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
+
+public class MemberDTO {
+
+    @Getter
+    @Setter
+    public static class Post {
+        @NotBlank(message = "이메일을 입력해 주세요.")
+        @Email(message = "이메일 형식으로 작성해주세요.")
+        private String email;
+
+        @NotBlank(message = "비밀번호를 입력해 주세요")
+        @Pattern(regexp = "(?=.*[A-Za-z])(?=.*[0-9])(?=.*\\W).{6,20}",
+                message = "비밀번호는 영문 대 소문자,숫자,특수문자를 포함하여 6자 이상 작성해 주세요")
+        private String password;
+
+        @NotBlank(message = "닉네임을 입력해 주세요.")
+        private String nickname;
+    }
+
+    @Getter
+    @Setter
+    public static class Login{
+
+        @NotBlank(message = "이메일을 입력해 주세요.")
+        @Email(message = "이메일 형식으로 작성해주세요.")
+        private String email;
+
+        @NotBlank(message = "비밀번호를 입력해 주세요")
+        @Pattern(regexp = "(?=.*[A-Za-z])(?=.*[0-9])(?=.*\\W).{6,20}",
+                message = "비밀번호는 영문 대 소문자,숫자,특수문자를 포함하여 6자 이상 작성해 주세요")
+        private String password;
+    }
+
+    @Getter
+    @Setter
+    public static class Patch{
+        @NotBlank(message = "비밀번호를 입력해 주세요")
+
+        private String password;
+
+        @NotBlank(message = "닉네임을 입력해 주세요.")
+        private String nickname;
+    }
+
+    @Getter
+    @Setter
+    public static class GetMemberResponse{
+        private Long member_id;
+
+        private String email;
+
+        private String nickname;
+
+    }
+}
