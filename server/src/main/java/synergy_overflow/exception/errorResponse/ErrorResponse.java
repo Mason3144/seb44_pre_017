@@ -51,12 +51,12 @@ public class ErrorResponse {
 
     @Getter
     private static class FieldError{
-        private FieldSource source; // 추가 코드 1 (예외 발생지에 대한 정보 추가)
+        private FieldSource source;
         private String field;
         private Object rejectedValue;
         private String reason;
 
-        public enum FieldSource{ // 추가 코드 2
+        public enum FieldSource{
             QUERY_PARAMETER("Query Parameter"),
             REQUEST_BODY("Request Body");
             @Getter
@@ -66,18 +66,19 @@ public class ErrorResponse {
             }
         }
         public FieldError(FieldSource source, String field, Object rejectedValue, String reason) {
-            this.source = source; // 추가 코드 3
+            this.source = source;
             this.field = field;
             this.rejectedValue = rejectedValue;
             this.reason = reason;
         }
+
+
         public static List<FieldError> of(BindException bindException){
             final List<org.springframework.validation.FieldError> fieldErrors =
                     bindException.getFieldErrors();
             return fieldErrors.stream()
                     .map(e-> new FieldError(
-                            bindException instanceof MethodArgumentNotValidException ? // 추가 코드 4
-                                    FieldSource.QUERY_PARAMETER : FieldSource.REQUEST_BODY ,
+                            FieldSource.REQUEST_BODY ,
                             e.getField(),
                             e.getRejectedValue() == null ? "" : e.getRejectedValue().toString(),
                             e.getDefaultMessage()))
