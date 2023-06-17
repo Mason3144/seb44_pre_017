@@ -38,7 +38,7 @@ const QuestionBox = ({ question }) => {
       <S.Left>
         <S.Votes>0 votes</S.Votes>
         <S.Answers>0 answers</S.Answers>
-        <S.Views>0 Views</S.Views>
+        <S.Views>0 views</S.Views>
       </S.Left>
       <S.Right>
         {/* <S.Title
