@@ -12,17 +12,28 @@ import javax.validation.constraints.Positive;
 @RequestMapping("/questions")
 @Validated
 public class QuestionController {
-//      예외처리 테스트용입니다. 실제 로직 작성시 지워주세요
-//    @PatchMapping("{question-id}")
-//    public ResponseEntity patchQuestion(@RequestBody @Valid QuestionDto.Request request,
-//                                        @PathVariable("question-id") @Positive long questionId,
-//                                        @RequestParam @Positive int filtered){
-//
-//        System.out.println(request.getTitle());
-//        System.out.println(questionId);
-//        System.out.println(filtered);
-//
-//
-//        return null;
-//    }
+    @PostMapping("/ask")
+    public ResponseEntity postQuestion(){
+        return null;
+    }
+    @GetMapping("/{question-id}")
+    public ResponseEntity getQuestion(){
+        return null;
+    }
+
+    @GetMapping
+    public ResponseEntity getQuestions(){
+        return null;
+    }
+
+    @PatchMapping("/{questions-id}/edit")
+    public ResponseEntity patchQuestion(){
+        return null;
+    }
+
+    @DeleteMapping("/{question-id}")
+    public ResponseEntity deleteQuestion(){
+        return null;
+    }
+
 }
