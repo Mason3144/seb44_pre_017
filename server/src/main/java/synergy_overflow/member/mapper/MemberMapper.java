@@ -1,8 +1,9 @@
-package synergy_overflow.member;
+package synergy_overflow.member.mapper;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.springframework.stereotype.Component;
+import synergy_overflow.member.dto.MemberDTO;
+import synergy_overflow.member.entity.Member;
 
 @Mapper(componentModel = "Spring")
 @Component

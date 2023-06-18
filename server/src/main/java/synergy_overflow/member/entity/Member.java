@@ -1,4 +1,4 @@
-package synergy_overflow.member;
+package synergy_overflow.member.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

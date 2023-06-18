@@ -1,8 +1,12 @@
-package synergy_overflow.member;
+package synergy_overflow.member.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import synergy_overflow.member.dto.MemberDTO;
+import synergy_overflow.member.mapper.MemberMapper;
+import synergy_overflow.member.service.MemberService;
+import synergy_overflow.member.entity.Member;
 
 import javax.validation.Valid;
 

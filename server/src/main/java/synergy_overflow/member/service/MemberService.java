@@ -1,8 +1,10 @@
-package synergy_overflow.member;
+package synergy_overflow.member.service;
 
 import org.springframework.stereotype.Service;
 import synergy_overflow.exception.businessLogicException.BusinessLogicException;
 import synergy_overflow.exception.businessLogicException.ExceptionCode;
+import synergy_overflow.member.entity.Member;
+import synergy_overflow.member.repository.MemberRepository;
 
 import java.util.Optional;
 
