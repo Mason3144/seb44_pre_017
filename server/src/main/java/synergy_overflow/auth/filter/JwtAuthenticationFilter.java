@@ -9,6 +9,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import synergy_overflow.auth.dto.LoginDto;
 import synergy_overflow.auth.jwt.JwtTokenizer;
+import synergy_overflow.auth.utils.TokenType;
 import synergy_overflow.member.entity.Member;
 
 import javax.servlet.FilterChain;
@@ -19,6 +20,8 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import static synergy_overflow.auth.utils.TokenType.*;
 
 // 클라이언트의 로그인 인증을 처리하는 필터 (엔트리포인트)
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
@@ -31,7 +34,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         this.jwtTokenizer = jwtTokenizer;
     }
 
-    // 인증을 시도하는 로직
+    // 사용자의 로그인 요청을 받고, 인증을 시도하는 로직
     @SneakyThrows
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
@@ -39,7 +42,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         ObjectMapper objectMapper = new ObjectMapper();
         LoginDto loginDto = objectMapper.readValue(request.getInputStream(), LoginDto.class);
 
-        // 사용자 인증 토큰 생성
+        // 사용자 인증을 시도하기 위한 토큰 생성(아직 인증이 되지 않은 상태)
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword());
 
@@ -59,8 +62,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String accessToken = delegateAccessToken(member);
         String refreshToken = delegateRefreshToken(member);
 
-        response.setHeader("Authorization", "Bearer " + accessToken);
-        response.setHeader("Refresh", refreshToken);
+        response.setHeader(AUTHORIZATION.getType(), BEARER.getType() + accessToken);
+        response.setHeader(REFRESH.getType(), refreshToken);
     }
 
     private String delegateAccessToken(Member member) {
