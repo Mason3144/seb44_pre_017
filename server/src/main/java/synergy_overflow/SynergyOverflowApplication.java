@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 public class SynergyOverflowApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(SynergyOverflowApplication.class, args);
 	}
 
