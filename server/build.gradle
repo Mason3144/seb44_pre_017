@@ -2,7 +2,6 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '2.7.12'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
-	id "org.asciidoctor.jvm.convert" version "3.3.2"
 }
 
 group = 'com.example'
@@ -13,7 +12,6 @@ java {
 }
 
 configurations {
-	asciidoctorExtensions
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
@@ -37,8 +35,6 @@ dependencies {
 
 	//h2
 	runtimeOnly 'com.h2database:h2'
-	implementation 'org.mapstruct:mapstruct:1.5.1.Final'
-	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.1.Final'
 
 	//security
 	implementation 'org.springframework.boot:spring-boot-starter-security'
@@ -58,6 +54,8 @@ dependencies {
 	// 목테스트 및 API 문서화
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 	asciidoctorExtensions 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+	implementation 'org.mapstruct:mapstruct:1.5.1.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.1.Final'
 }
 
 tasks.named('test') {
