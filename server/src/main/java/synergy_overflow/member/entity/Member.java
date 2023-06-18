@@ -21,7 +21,7 @@ public class Member extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long memberid;
+    private Long memberId;
 
     @Column(nullable = false,unique = true)
     private String email;

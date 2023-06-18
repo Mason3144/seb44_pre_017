@@ -29,7 +29,7 @@ public class MemberService {
 
     // 회원 수정
     public Member updateMember(Member member){
-        Member findMember = findVerifiedMember(member.getMemberid());
+        Member findMember = findVerifiedMember(member.getMemberId());
 
         Optional.ofNullable(member.getNickname())
                 .ifPresent(nickname -> findMember.setNickname(nickname));
@@ -53,6 +53,7 @@ public class MemberService {
         memberRepository.delete(findMember);
     }
 
+    // 멩버 찾기
     public Member findVerifiedMember(long memberId){
         Optional<Member> optionalMember =
                 memberRepository.findById(memberId);
@@ -62,6 +63,7 @@ public class MemberService {
         return findMember;
     }
 
+    // 이메일 중복 확인
     private void verifyExistsEmail(String email){
         Optional<Member> member = memberRepository.findByEmail(email);
         if(member.isPresent()){

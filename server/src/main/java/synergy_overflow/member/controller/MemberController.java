@@ -3,7 +3,7 @@ package synergy_overflow.member.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import synergy_overflow.member.dto.MemberDTO;
+import synergy_overflow.member.dto.MemberDto;
 import synergy_overflow.member.mapper.MemberMapper;
 import synergy_overflow.member.service.MemberService;
 import synergy_overflow.member.entity.Member;
@@ -31,7 +31,7 @@ public class MemberController {
 
     // 회원 가입
     @PostMapping("/members")
-    public ResponseEntity createAccountForm(@RequestBody @Valid MemberDTO.Post memberDTO){
+    public ResponseEntity createAccountForm(@RequestBody @Valid MemberDto.Post memberDTO){
         Member response = memberService.createMember(mapper.memberPostDtoToMember(memberDTO));
         return new ResponseEntity <>(response,HttpStatus.CREATED);
     }
@@ -47,7 +47,7 @@ public class MemberController {
     // 회원 수정
     @PatchMapping("/members/{member-id}")
     public ResponseEntity patchMember(@PathVariable("member-id") long memberid,
-                                      @RequestBody @Valid MemberDTO.Patch patchDto){
+                                      @RequestBody @Valid MemberDto.Patch patchDto){
 
         patchDto.setMemberId(memberid);
         Member response =memberService.updateMember(mapper.memberPatchDtoToMember(patchDto));

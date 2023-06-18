@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 
-public class MemberDTO {
+public class MemberDto {
 
     // 회원가입 request Dto
     @Getter
@@ -66,8 +66,8 @@ public class MemberDTO {
     // Response Dto
     @Getter
     @Setter
-    public static class GetMemberResponse{
-        private Long member_id;
+    public static class Response{
+        private Long memberId;
 
         private String email;
 
