@@ -4,6 +4,7 @@ import MyPage from './Pages/My/MyPage.jsx';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoginPage from './Pages/LoginSignup/LoginPage.jsx';
+import Sidebar from './Components/Common/Sidebar/Sidebar';
 
 function App() {
   const authorization = localStorage.getItem('Authorization');
@@ -14,6 +15,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <Sidebar />
         <Routes>
           <Route path="/home" element={<div>HomePage 홈 팀원소개 </div>} />
           <Route path="/members" element={<div>SignupPage 회원가입</div>} />
