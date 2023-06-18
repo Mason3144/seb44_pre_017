@@ -2,12 +2,11 @@ package synergy_overflow.member.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import synergy_overflow.helper.auditable.Auditable;
 
-
 import javax.persistence.*;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,13 +16,13 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-public class Member extends Auditable {
+public class Member extends Auditable implements Principal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberId;
 
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
@@ -34,4 +33,13 @@ public class Member extends Auditable {
 
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<>();
+
+    @Override
+    public String getName() {
+        return getEmail();
+    }
+
+    public enum MemberRole {
+        ROLE_USER
+    }
 }
