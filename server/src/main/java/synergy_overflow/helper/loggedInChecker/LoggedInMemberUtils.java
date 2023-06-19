@@ -7,7 +7,7 @@ import synergy_overflow.question.temporaries.temporaryEntities.MemberEntity;
 public class LoggedInMemberUtils {
     // 임시로 만든 로그인 멤버 찾는 메서드 입니다. 시큐리티 적용 이후 새로 로직 적용 필요합니다.
     public static MemberEntity findLoggedInMember(){
-        return new MemberEntity(1);
+        return new MemberEntity(1L);
     }
     public static boolean verifyIsMine(long memberId){
         MemberEntity loggedInMember = findLoggedInMember();
