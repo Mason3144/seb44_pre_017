@@ -7,8 +7,8 @@ spring:
     url: jdbc:h2:mem:test
   jpa:
     hibernate:
-      ddl-auto: create  # ??? ?? ??
-    show-sql: true      # SQL ?? ??
+      ddl-auto: create
+    show-sql: true
     properties:
       hibernate:
         format_sql: true  # SQL pretty print
@@ -21,3 +21,7 @@ logging:
       springframework:
         orm:
           jpa: DEBUG
+jwt:                      # JWT 관련 정보
+  key: ${JWT_SECRET_KEY}  # 시스템 환경 변수에서 로드
+  access-token-expiration-minutes: 30
+  refresh-token-expiration-minutes: 420

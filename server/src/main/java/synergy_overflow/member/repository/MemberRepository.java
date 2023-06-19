@@ -5,6 +5,6 @@ import synergy_overflow.member.entity.Member;
 
 import java.util.Optional;
 
-public interface MemberRepository extends JpaRepository<Member,Long> {
+public interface MemberRepository extends JpaRepository<Member, Long> {
     Optional<Member> findByEmail(String email);
 }
