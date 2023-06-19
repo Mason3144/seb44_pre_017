@@ -1,10 +1,15 @@
+/* eslint-disable import/named */
 /* eslint-disable no-constant-condition */
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-undef */
 import axios from 'axios';
 import * as S from './Login.styled';
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { login } from '../../redux/user'
+import { setLoginState } from '../../redux/login';
 // import { useNavigate } from 'react-router-dom';
+
 axios.defaults.withCredentials = true;
 
 const Login = () => {
@@ -12,13 +17,15 @@ const Login = () => {
     username: '',
     password: '',
   });
-
-  const regExpEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-  // 이메일 유효성 검증을 위한 정규 표현식
-  const regExpPassword = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,}$/;
-  // 비밀번호 유효성 검증을 위한 정규 표현식
-
+  const user = useSelector((state) => state.user.value);
+  const dispatch = useDispatch();
   // const navigate = useNavigate(); // useNavigate 사용
+
+  const regExpEmail =
+    /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+  const regExpPassword =
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,20}$/;
+
   const handleInputValue = (key) => (e) => {
     setLoginInfo({ ...loginInfo, [key]: e.target.value });
   };
@@ -29,18 +36,32 @@ const Login = () => {
     } else if (loginInfo.username.match(regExpEmail) === null) {
       return alert('올바른 Email 형식이 아닙니다.');
     } else if (loginInfo.password.match(regExpPassword) === null) {
-      return alert('패스워드는 영문, 숫자, 특수기호를 포함하여 6자 이상이어야 합니다.')
+      return alert(
+        '패스워드는 영문, 숫자, 특수기호를 포함하여 6자 이상이어야 합니다.'
+      );
     } else {
       try {
-        const url = 'http://ec2-54-148-132-64.us-west-2.compute.amazonaws.com:8080/auth/login'
+        dispatch(
+          login({ username: loginInfo.username, password: loginInfo.password })
+        );
+        const url =
+          'http://ec2-54-148-132-64.us-west-2.compute.amazonaws.com:8080/auth/login';
         const res = await axios.post(url, loginInfo, {
-          headers: { 'Content-Type': 'application/json' }
+          headers: { 'Content-Type': 'application/json' },
         });
         console.log(res);
-        res.status = 200 ?
-          // navigate('/'); 
-          alert('로그인에 성공하였습니다.')
-          : alert('로그인에 실패하였습니다.');
+        if (res.status === 200) {
+          dispatch(setLoginState(true));
+              alert('로그인에 성공하였습니다.');
+              // navigate('/');     
+        } else if (res.status === 409) {
+          alert('이미 가입된 아이디입니다.')
+        }
+        // else if (res.status === 404) {
+          // navigate('/notfound')
+        else {
+          alert('로그인에 실패하였습니다.');
+        }
       } catch (err) {
         console.error(err);
         alert('아이디와 비밀번호를 확인해주세요.');
@@ -76,7 +97,10 @@ const Login = () => {
       <S.EmailLoginContainer>
         <div className="EmailTextBox">
           <strong>Email</strong>
-          <S.LoginInputBox type="text" onChange={handleInputValue('username')} />
+          <S.LoginInputBox
+            type="text"
+            onChange={handleInputValue('username')}
+          />
         </div>
         <div className="PasswordTextBox">
           <strong>Password</strong>
