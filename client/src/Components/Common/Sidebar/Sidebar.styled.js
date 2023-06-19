@@ -4,16 +4,21 @@ export const SidebarContainer = styled.div`
   width: 300px;
   height: 100vh;
   padding-left: 100px;
+  background-color: white;
+  border-right: 1px solid #dddddd;
 `;
 export const Home = styled.div`
   margin-top: 40px;
   font-size: 15px;
-  font-weight: 700;
-  /* color: #737980; */
-  color: #000000;
-  background-color: #eeeff1;
+  font-weight: ${(props) => (props.active ? '700' : '')};
+  color: ${(props) => (props.active ? '#000000' : '#737980')};
+  background-color: ${(props) => (props.active ? '#eeeff1' : '#ffffff')};
+  border-right: ${(props) => (props.active ? '3px solid #e5883e' : 'none')};
   padding: 10px;
-  border-right: 3px solid #e5883e;
+  cursor: pointer;
+  &:hover {
+    color: #000000;
+  }
 `;
 export const Public = styled.div`
   margin-top: 30px;
@@ -21,19 +26,45 @@ export const Public = styled.div`
   font-size: 13px;
   color: #858c94;
 `;
-export const Icon = styled.div``;
-export const PublicContainer = styled.div`
-  display: flex;
-  gap: 5px;
-`;
+
 export const Groups = styled.div`
   display: flex;
   flex-direction: column;
   gap: 30px;
   font-size: 15px;
   color: #737980;
+  width: 100%;
 `;
-export const Questions = styled.div``;
-export const Tags = styled.div``;
-export const Users = styled.div``;
-export const Companies = styled.div``;
+
+export const Questions = styled.div`
+  display: flex;
+  gap: 5px;
+  padding: 10px;
+  font-weight: ${(props) => (props.active ? '700' : '')};
+  color: ${(props) => (props.active ? '#000000' : '#737980')};
+  background-color: ${(props) => (props.active ? '#eeeff1' : '#ffffff')};
+  border-right: ${(props) => (props.active ? '3px solid #e5883e' : 'none')};
+  cursor: pointer;
+  &:hover {
+    color: #000000;
+  }
+`;
+export const Tags = styled.div`
+  display: flex;
+  gap: 5px;
+  padding: 10px;
+`;
+export const Users = styled.div`
+  display: flex;
+  gap: 5px;
+  padding: 10px;
+`;
+export const Companies = styled.div`
+  display: flex;
+  gap: 5px;
+  padding: 10px;
+`;
+export const Empty = styled.div`
+  width: 15px;
+  height: 15px;
+`;
