@@ -1,14 +1,19 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Sidebar from './Components/Common/Sidebar/Sidebar';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <Sidebar />
         <Routes>
           <Route path="/home" element={<div>HomePage 홈 팀원소개 </div>} />
           <Route path="/members" element={<div>SignupPage 회원가입</div>} />
-          <Route path="/members/welcome" element={<div>AfterSignupPage 회원가입 완료</div>} />
+          <Route
+            path="/members/welcome"
+            element={<div>AfterSignupPage 회원가입 완료</div>}
+          />
           <Route path="/" element={<div>LoginPage 로그인 페이지</div>} />
           <Route
             path="/questions"
