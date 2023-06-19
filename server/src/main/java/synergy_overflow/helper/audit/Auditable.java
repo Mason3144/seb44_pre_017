@@ -1,4 +1,4 @@
-package synergy_overflow.helper.auditable;
+package synergy_overflow.helper.audit;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
