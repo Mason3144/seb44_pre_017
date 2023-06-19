@@ -28,11 +28,9 @@ public class MemberController {
     @PostMapping
     public ResponseEntity postMember(@RequestBody @Valid MemberDto.Post requestBody) {
         Member member = mapper.memberPostToMember(requestBody);
-        Member createdMember = memberService.createMember(member);
+        memberService.createMember(member);
 
-        MemberDto.Response response = mapper.memberToMemberResponse(createdMember);
-
-        return new ResponseEntity<>(response, HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     // 회원 정보 수정
