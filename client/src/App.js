@@ -32,7 +32,7 @@ function App() {
           />
           <Route
             path="/questions/{question-id}/answers"
-            element={<div>AnswerUpdatePage 질문 수정 페이지</div>}
+            element={<div>AnswerUpdatePage 답변 수정 페이지</div>}
           />
           <Route
             path="/members/{member-id}"
