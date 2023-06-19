@@ -5,18 +5,11 @@ import org.springframework.stereotype.Component;
 import synergy_overflow.member.dto.MemberDto;
 import synergy_overflow.member.entity.Member;
 
-@Mapper(componentModel = "Spring")
+@Mapper(componentModel = "spring")
 @Component
 public interface MemberMapper {
+    Member memberPostToMember(MemberDto.Post requestBody);
 
-    Member memberPostDtoToMember(MemberDto.Post request);
-
-
-    MemberDto.Response MemberToGetMemberResponse (Member member);
-
-    Member memberPatchDtoToMember(MemberDto.Patch request);
-
-//    role 전달
-//    Member toEntituy(MemberDTO.Post request,Member.Status);
-
+    Member memberPatchToMember(MemberDto.Patch requestBody);
+    MemberDto.Response memberToMemberResponse(Member member);
 }
