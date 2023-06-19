@@ -6,30 +6,33 @@ import axios from 'axios';
 import * as S from './Login.styled';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { login } from '../../redux/user'
+import { login } from '../../redux/user';
 import { setLoginState } from '../../redux/login';
 import { useNavigate } from 'react-router-dom';
-
 axios.defaults.withCredentials = true;
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate(); // useNavigate 사용
+  // input창에 입력되는 로그인 text 저장
   const [loginInfo, setLoginInfo] = useState({
     username: '',
     password: '',
   });
-  const user = useSelector((state) => state.user.value);
-  const dispatch = useDispatch();
-  const navigate = useNavigate(); // useNavigate 사용
+  // 로그인 text 값 저장
+  const handleInputValue = (key) => (e) => {
+    setLoginInfo({ ...loginInfo, [key]: e.target.value });
+  };
 
+  // 유효성 검사
   const regExpEmail =
     /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
   const regExpPassword =
     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{6,20}$/;
 
-  const handleInputValue = (key) => (e) => {
-    setLoginInfo({ ...loginInfo, [key]: e.target.value });
-  };
-
+  // HTTP 요청
+  // 1. 이메일 로그인
+  // 1-1. 유효성 검사
   const LoginRequestHandler = async () => {
     if (!loginInfo.username || !loginInfo.password) {
       return alert('아이디와 비밀번호를 입력하세요.');
@@ -41,24 +44,31 @@ const Login = () => {
       );
     } else {
       try {
+        // 1-2. 유저 정보 저장
         dispatch(
           login({ username: loginInfo.username, password: loginInfo.password })
         );
+
         const url =
           'http://ec2-54-148-132-64.us-west-2.compute.amazonaws.com:8080/auth/login';
         const res = await axios.post(url, loginInfo, {
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json'
+          },
         });
-        console.log(res);
+        // 1-3. 로그인 성공 시, 로그인 상태 변경
         if (res.status === 200) {
           dispatch(setLoginState(true));
-              alert('로그인에 성공하였습니다.');
-              navigate('/questions');     
-        } else if (res.status === 409) {
-          alert('이미 가입된 아이디입니다.')
+          alert('로그인에 성공하였습니다.');
+          navigate('/questions');
+          // 1-4. 엑세스 토큰, 리프레시 토큰 받고, 브라우저 쿠키에 저장
+          if (res.data.ACCESS_TOKEN) {
+            document.cookie = `access_token=${res.data.ACCESS_TOKEN}; path=/`;
+            document.cookie = `refresh_token=${res.data.REFRESH_TOKEN}; path=/`;
+          }
         }
         // else if (res.status === 404) {
-          // navigate('/notfound')
+        // navigate('/notfound')
         else {
           alert('로그인에 실패하였습니다.');
         }
@@ -69,13 +79,21 @@ const Login = () => {
     }
   };
 
+  // 2. 구글 로그인
   const LoginRequestHandlerGoogle = () => {
+    const url =
+      'http://ec2-54-148-132-64.us-west-2.compute.amazonaws.com:8080/oauth2/authorization/google';
     axios
-      .get(
-        'http://ec2-54-148-132-64.us-west-2.compute.amazonaws.com:8080/oauth2/authorization/google'
-      )
+      .get(url)
       .then((res) => {
-        console.log(res);
+        // 1-1. 로그인 상태 변경
+        if (res.status === 200) {
+          dispatch(setLoginState(true));
+          // 1-2. 엑세스 토큰, 리프레시 토큰 받고, 브라우저 쿠키에 저장
+          if (res.data.ACCESS_TOKEN)
+            document.cookie = `access_token=${res.data.ACCESS_TOKEN}; path=/`;
+            document.cookie = `refresh_token=${res.data.REFRESH_TOKEN}; path=/`;
+            }
         // access token 핸들링 하는 코드 작성 -> access token 발급 이후 코드 작성
         // access token을 response header로만 통신한다.
         // access token을 사용자가 기능을 사용할 때, 모든 HTTP 요청의 request header에 넣어줘야 한다.
@@ -129,4 +147,3 @@ const Login = () => {
 };
 
 export default Login;
-
