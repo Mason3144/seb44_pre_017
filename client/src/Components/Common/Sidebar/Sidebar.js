@@ -22,7 +22,7 @@ function Sidebar() {
         Home
       </S.Home>
       {/* {isLoggedIn ? (
-        <Link to="/home">
+        <Link to="/questions">
           <S.Home
             active={active === 'Home'}
             onClick={() => handleButtonClick('Home')}
@@ -31,7 +31,7 @@ function Sidebar() {
           </S.Home>
         </Link>
       ) : (
-        <Link to="/">
+        <Link to="/home">
           <S.Home
             active={active === 'Home'}
             onClick={() => handleButtonClick('Home')}
