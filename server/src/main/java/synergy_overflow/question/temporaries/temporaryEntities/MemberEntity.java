@@ -15,6 +15,10 @@ import java.util.List;
 @Getter
 @Setter
 public class MemberEntity extends Auditable {
+    public MemberEntity(long member_id) {
+        this.member_id = member_id;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long member_id;
