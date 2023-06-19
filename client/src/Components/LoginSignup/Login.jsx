@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { login } from '../../redux/user'
 import { setLoginState } from '../../redux/login';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 axios.defaults.withCredentials = true;
 
@@ -19,7 +19,7 @@ const Login = () => {
   });
   const user = useSelector((state) => state.user.value);
   const dispatch = useDispatch();
-  // const navigate = useNavigate(); // useNavigate 사용
+  const navigate = useNavigate(); // useNavigate 사용
 
   const regExpEmail =
     /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
@@ -53,7 +53,7 @@ const Login = () => {
         if (res.status === 200) {
           dispatch(setLoginState(true));
               alert('로그인에 성공하였습니다.');
-              // navigate('/');     
+              navigate('/questions');     
         } else if (res.status === 409) {
           alert('이미 가입된 아이디입니다.')
         }
