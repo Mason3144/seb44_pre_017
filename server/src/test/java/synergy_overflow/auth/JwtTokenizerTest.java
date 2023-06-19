@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+import synergy_overflow.auth.jwt.JwtTokenizer;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -27,7 +28,7 @@ public class JwtTokenizerTest {
         jwtTokenizer = new JwtTokenizer();
         secretKey = "hgd12345612345612341235451263124124";
         base64EncodedSecretKey =
-                jwtTokenizer.encodedBase64SecretKey(secretKey);
+                jwtTokenizer.encodeBase64SecretKey(secretKey);
     }
 
     @Test
