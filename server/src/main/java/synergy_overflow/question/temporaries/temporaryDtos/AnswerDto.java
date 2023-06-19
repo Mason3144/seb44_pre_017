@@ -9,6 +9,12 @@ import java.util.List;
 public class AnswerDto {
     @Builder
     @Getter
+    public static class Post{
+        private long answer_id;
+        private String body;
+    }
+    @Builder
+    @Getter
     public static class Response{
         private long answer_id;
         private String answer_body;
