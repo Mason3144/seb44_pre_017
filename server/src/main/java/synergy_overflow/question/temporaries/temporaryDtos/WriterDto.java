@@ -4,7 +4,13 @@ import lombok.Builder;
 import lombok.Getter;
 
 public class WriterDto {
-
+    @Builder
+    @Getter
+    public static class Post{
+        private String nickname;
+        private String email;
+        private String password;
+    }
     @Builder
     @Getter
     public static class Response{
