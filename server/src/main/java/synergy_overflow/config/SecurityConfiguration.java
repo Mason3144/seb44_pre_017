@@ -17,6 +17,8 @@ import synergy_overflow.auth.filter.JwtAuthenticationFilter;
 import synergy_overflow.auth.filter.JwtVerificationFilter;
 import synergy_overflow.auth.handler.MemberAccessDeniedHandler;
 import synergy_overflow.auth.handler.MemberAuthenticationEntryPoint;
+import synergy_overflow.auth.handler.MemberAuthenticationFailureHandler;
+import synergy_overflow.auth.handler.MemberAuthenticationSuccessHandler;
 import synergy_overflow.auth.jwt.JwtTokenizer;
 import synergy_overflow.auth.utils.MemberAuthorityUtils;
 
@@ -72,14 +74,7 @@ public class SecurityConfiguration {
                                 .antMatchers(GET, "/questions/{question-id}/**").permitAll() // 한 건의 질문과 답변 조회
 
                                 // TODO 전체 허용을 제외한 나머지는 모두 회원 조회 가능으로 변경?
-                                .anyRequest().permitAll()
-                        // 회원만 허용
-                        /*
-                        .antMatchers("/members/**").hasRole("USER") // 회원 정보 수정
-                        .antMatchers("/questions/{question-id}/**").hasRole("USER") // 한건의 질문조회 이거 바꿔야할 듯합니다.
-                        .antMatchers("/questions/ask").hasRole("USER")
-                        .antMatchers("⁄**").hasRole("USER") // 나머지 모두 회원만 조회 가능
-                        */
+                                .anyRequest().hasRole("USER")
                 );
 
         return httpSecurity.build();
@@ -98,9 +93,10 @@ public class SecurityConfiguration {
                     builder.getSharedObject(AuthenticationManager.class);
 
             JwtAuthenticationFilter jwtAuthenticationFilter =
-                    new JwtAuthenticationFilter(authenticationManager, jwtTokenizer);
+                    new JwtAuthenticationFilter(authenticationManager);
             jwtAuthenticationFilter.setFilterProcessesUrl("/auth/login");
-            // TODO 인증 성공/실패 핸들러 추가?
+            jwtAuthenticationFilter.setAuthenticationSuccessHandler(new MemberAuthenticationSuccessHandler(jwtTokenizer));
+            jwtAuthenticationFilter.setAuthenticationFailureHandler(new MemberAuthenticationFailureHandler());
 
             JwtVerificationFilter jwtVerificationFilter = new JwtVerificationFilter(jwtTokenizer, authorityUtils);
 
