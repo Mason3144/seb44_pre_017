@@ -2,6 +2,7 @@ package synergy_overflow.question.dto;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import synergy_overflow.helper.validator.NotSpace;
 import synergy_overflow.question.temporaries.temporaryDtos.AnswerDto;
 import synergy_overflow.question.temporaries.temporaryDtos.WriterDto;
@@ -24,7 +25,9 @@ public class QuestionDto {
     }
     @Builder
     @Getter
+    @Setter
     public static class Patch{
+        private long questionId;
         @NotSpace
         @Size(min = 0, max = 50)
         private String title;
@@ -35,6 +38,7 @@ public class QuestionDto {
     }
     @Builder
     @Getter
+    @Setter
     public static class Response{
         private long question_id;
         private String title;
