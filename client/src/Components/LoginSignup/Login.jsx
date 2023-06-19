@@ -53,7 +53,7 @@ const Login = () => {
           'http://ec2-54-148-132-64.us-west-2.compute.amazonaws.com:8080/auth/login';
         const res = await axios.post(url, loginInfo, {
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
           },
         });
         // 1-3. 로그인 성공 시, 로그인 상태 변경
@@ -78,30 +78,23 @@ const Login = () => {
       }
     }
   };
+  // access token 핸들링 하는 코드 작성 -> access token 발급 이후의 코드: access token을 response header로 통신.
+  // 사용자가 기능을 사용할 때, 모든 HTTP 요청의 request header에 access token을 추가해서 전달해야 한다.
 
   // 2. 구글 로그인
   const LoginRequestHandlerGoogle = () => {
-    const url =
-      'http://ec2-54-148-132-64.us-west-2.compute.amazonaws.com:8080/oauth2/authorization/google';
-    axios
-      .get(url)
-      .then((res) => {
-        // 1-1. 로그인 상태 변경
-        if (res.status === 200) {
-          dispatch(setLoginState(true));
-          // 1-2. 엑세스 토큰, 리프레시 토큰 받고, 브라우저 쿠키에 저장
-          if (res.data.ACCESS_TOKEN)
-            document.cookie = `access_token=${res.data.ACCESS_TOKEN}; path=/`;
-            document.cookie = `refresh_token=${res.data.REFRESH_TOKEN}; path=/`;
-            }
-        // access token 핸들링 하는 코드 작성 -> access token 발급 이후 코드 작성
-        // access token을 response header로만 통신한다.
-        // access token을 사용자가 기능을 사용할 때, 모든 HTTP 요청의 request header에 넣어줘야 한다.
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    window.location.href = 'http://ec2-54-148-132-64.us-west-2.compute.amazonaws.com:8080/oauth2/authorization/google';
   };
+  // 구글 로그인 페이지로 이동 -> 사용자 구글 로그인 -> 로그인 성공 시, 메인 페이지로 이동
+  // 질문 1: 로그인 상태는 어느 시점에서 변경해야 할까?
+  // 다시 메인페이지로 리다이렉트 되었을 때, 로그인 상태를 변경해야 할까?
+  //   1-1: 로그인 상태 저장
+  //   dispatch(setLoginState(true));
+  // 질문 2: 토큰 저장 및 브라우저 쿠키 저장은 어느 시점에 해야 할까? 전체 코드 중 어디 코드에 작성되어야 하는가? 
+  //   1-2. 엑세스 토큰, 리프레시 토큰 받고, 브라우저 쿠키에 저장
+  //   if (res.data.ACCESS_TOKEN)
+  //   document.cookie = `access_token=${res.data.ACCESS_TOKEN}; path=/`;
+  //   document.cookie = `refresh_token=${res.data.REFRESH_TOKEN}; path=/`;
 
   return (
     <S.LoginWrapper>
