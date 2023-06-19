@@ -1,3 +1,4 @@
+/*
 package synergy_overflow.member.service;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -44,3 +45,4 @@ public class DBMemberService implements MemberService {
         return null;
     }
 }
+*/
