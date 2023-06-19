@@ -9,9 +9,9 @@ public class QuestionVo {
     public static class Filter{
         private Type type;
         public enum Type{
-            NEW_QUESTION("NEW_QUESTION"),
-            NEW_COMMENT("NEW_COMMENT"),
-            MOST_VIEWS("MOST_VIEWS");
+            NEW_QUESTION("questionId"),
+            MOST_COMMENTS("answers"), // jpql?
+            MOST_VIEWS("views");
             @Getter
             private String type;
 

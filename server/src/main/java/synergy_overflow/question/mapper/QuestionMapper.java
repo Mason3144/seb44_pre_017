@@ -2,6 +2,7 @@ package synergy_overflow.question.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
+import org.springframework.context.annotation.Primary;
 import synergy_overflow.question.dto.MultiResponseDto;
 import synergy_overflow.question.dto.QuestionDto;
 import synergy_overflow.question.entity.Question;
@@ -18,9 +19,28 @@ import java.util.List;
 public interface QuestionMapper {
     Question questionDtoPostToQuestion(QuestionDto.Post questionDtoPost);
     Question questionDtoPatchToQuestion(QuestionDto.Patch questionDtoPost);
-    QuestionDto.Response questionToQuestionDtoResponse(Question question);
-    int answersToAnswerNumber(List<AnswerEntity> answers);
-    MultiResponseDto.MultiQuestionsResponse questionToMultiResponseDto(Question question);
+    QuestionDto.Response questionToQuestionDtoResponseWithoutId(Question question);
+    default QuestionDto.Response questionToQuestionDtoResponse(Question question){
+        QuestionDto.Response response = questionToQuestionDtoResponseWithoutId(question);
+        response.setQuestion_id(question.getQuestionId());
+        response.setCreated_at(question.getCreatedAt());
+        return response;
+    };
+
+    default int answersToAnswerNumber(List<AnswerEntity> answers){
+        return answers.size();
+    }
+    default MultiResponseDto.MultiQuestionsResponse questionToMultiResponseDto(Question question){
+        return MultiResponseDto.MultiQuestionsResponse.builder()
+                .question_id(question.getQuestionId())
+                .title(question.getTitle())
+                .created_at(question.getCreatedAt())
+                .adopted(question.isAdopted())
+                .views(question.getViews())
+                .writer(memberToWriterDtoResponse(question.getWriter()))
+                .answer_number(answersToAnswerNumber(question.getAnswers()))
+                .build();
+    };
     List<MultiResponseDto.MultiQuestionsResponse> questionsToMultiResponseDtos(List<Question> questions);
 
     // 임시 dto 및 entity를 위한 임시 맵핑

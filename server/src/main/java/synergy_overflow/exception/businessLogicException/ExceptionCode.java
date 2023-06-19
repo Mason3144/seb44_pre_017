@@ -10,6 +10,7 @@ public enum ExceptionCode {
     COMMENT_NOT_FOUND(404, "Comment not found"),
     ANSWER_NOT_FOUND(404, "Answer not found"),
     NOT_IMPLEMENTATION(501, "Not Implementation"),
+    INVALID_SORT_PARAMETER(400, "Invalid parameter named 'sort'"),
     INVALID_MEMBER_STATUS(400, "Invalid member status");
 
     @Getter

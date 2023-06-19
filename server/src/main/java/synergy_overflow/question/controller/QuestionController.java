@@ -45,8 +45,8 @@ public class QuestionController {
     @GetMapping
     public ResponseEntity getQuestions(@RequestParam @Positive int page,
                                        @RequestParam @Positive int size,
-                                       @RequestParam QuestionVo.Filter filter){
-        Page<Question> pageQuestions = service.getQuestions(page-1, size, filter);
+                                       @RequestParam String sort){
+        Page<Question> pageQuestions = service.getQuestions(page-1, size, sort);
         List<Question> questions = pageQuestions.getContent();
 
         return new ResponseEntity<>(new MultiResponseDto(mapper.questionsToMultiResponseDtos(questions),pageQuestions),
@@ -54,7 +54,10 @@ public class QuestionController {
     }
 
     @PatchMapping("/{questions-id}/edit")
-    public ResponseEntity patchQuestion(@RequestBody QuestionDto.Patch requestBody){
+    public ResponseEntity patchQuestion(@RequestBody @Valid QuestionDto.Patch requestBody,
+                                        @PathVariable("questions-id") @Positive long questionId){
+        // 스페이스만 입력했을경우, 스페이스 포함 입력했을경우 postman으로 테스트
+        requestBody.setQuestionId(questionId);
         Question editQuestion = service.editQuestion(mapper.questionDtoPatchToQuestion(requestBody));
 
         return new ResponseEntity<>(mapper.questionToQuestionDtoResponse(editQuestion), HttpStatus.OK);

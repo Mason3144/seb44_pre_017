@@ -34,7 +34,7 @@ public class MultiResponseDto {
         private boolean adopted;
         private int views;
         private WriterDto.Response writer;
-        private int comment_number;
+        private int answer_number;
     }
 
     @Getter

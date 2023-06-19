@@ -24,11 +24,14 @@ public class Question extends Auditable {
     private String title;
     @Column(nullable = false, columnDefinition = "TEXT")
     private String body;
-    @Column(nullable = false,columnDefinition = "boolean default false")
+    @Column(nullable = false, columnDefinition = "boolean default false")
     private boolean adopted;
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "integer default 0")
     private int views;
 
+    public void setViews(){
+        this.views++;
+    }
 
     @ManyToOne
     @JoinColumn(name = "member_id", nullable = false)
