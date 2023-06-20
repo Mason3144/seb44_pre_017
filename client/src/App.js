@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import './App.css';
 import MyPage from './Pages/My/MyPage.jsx';
 

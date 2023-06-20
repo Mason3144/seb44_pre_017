@@ -61,8 +61,6 @@ const Login = () => {
       }
     }
   };
-  // access token 핸들링 하는 코드 작성 -> access token 발급 이후의 코드: access token을 response header로 통신.
-  // 사용자가 기능을 사용할 때, 모든 HTTP 요청의 request header에 access token을 추가해서 전달해야 한다.
 
   // 2. 구글 로그인
   const LoginRequestHandlerGoogle = () => {
