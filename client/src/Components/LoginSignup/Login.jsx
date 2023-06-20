@@ -44,17 +44,31 @@ const Login = () => {
       );
     } else {
       try {
-        const url = 'http://ec2-54-148-132-64.us-west-2.compute.amazonaws.com:8080/auth/login'
+        // 1-2. 유저 정보 저장
+        dispatch(
+          login({ username: loginInfo.username, password: loginInfo.password })
+        );
+        const url =
+          'http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/auth/login';
         const res = await axios.post(url, loginInfo, {
           headers: {
             'Content-Type': 'application/json',
           },
         });
+        // 1-3. 로그인 성공 시, 로그인 상태 변경
         console.log(res);
-        res.status = 200 ?
-          // navigate('/'); 
-          alert('로그인에 성공하였습니다.')
-          : alert('로그인에 실패하였습니다.');
+        if (res.status === 200) {
+          dispatch(setLoginState(true));
+          alert('로그인에 성공하였습니다.');
+          navigate('/questions');
+          // 1-4. 엑세스 토큰, 리프레시 토큰 받고, 브라우저 로컬스토리지에 저장)
+          const ACCESS_TOKEN = res.headers.get('Authorization');
+          const REFRESH_TOKEN = res.headers.get('refresh');
+          localStorage.setItem('Authorization', ACCESS_TOKEN);
+          localStorage.setItem('refresh', REFRESH_TOKEN);
+        } else {
+          alert('로그인에 실패하였습니다.');
+        }
       } catch (err) {
         console.error(err);
         alert('아이디와 비밀번호를 확인해주세요.');
@@ -64,19 +78,8 @@ const Login = () => {
 
   // 2. 구글 로그인
   const LoginRequestHandlerGoogle = () => {
-    axios
-      .get(
-        'http://ec2-54-148-132-64.us-west-2.compute.amazonaws.com:8080/oauth2/authorization/google'
-      )
-      .then((res) => {
-        console.log(res);
-        // access token 핸들링 하는 코드 작성 -> access token 발급 이후 코드 작성
-        // access token을 response header로만 통신한다.
-        // access token을 사용자가 기능을 사용할 때, 모든 HTTP 요청의 request header에 넣어줘야 한다.
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    window.location.href =
+      'http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google';
   };
   // 구글 로그인 페이지로 이동 -> 사용자 구글 로그인 -> 로그인 성공 시, 메인 페이지로 이동
   // 질문 1: 로그인 상태는 어느 시점에서 변경해야 할까?
@@ -133,4 +136,3 @@ const Login = () => {
 };
 
 export default Login;
-
