@@ -4,8 +4,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import synergy_overflow.helper.validator.NotSpace;
+import synergy_overflow.member.dto.MemberDto;
 import synergy_overflow.question.temporaries.temporaryDtos.AnswerDto;
-import synergy_overflow.question.temporaries.temporaryDtos.WriterDto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -44,7 +44,7 @@ public class QuestionDto {
         private String title;
         private String body;
         private LocalDateTime createdAt;
-        private WriterDto.Response writer;
+        private MemberDto.Response writer;
         private List<AnswerDto.Response> answers;
     }
 }
