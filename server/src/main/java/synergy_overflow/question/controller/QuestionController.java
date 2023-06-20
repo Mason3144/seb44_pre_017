@@ -10,6 +10,7 @@ import synergy_overflow.question.dto.QuestionDto;
 import synergy_overflow.question.entity.Question;
 import synergy_overflow.question.mapper.QuestionMapper;
 import synergy_overflow.question.sevice.QuestionService;
+import synergy_overflow.question.temporaries.temporaryDtos.WriterDto;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
