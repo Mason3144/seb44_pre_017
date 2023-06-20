@@ -2,6 +2,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Sidebar from './Components/Common/Sidebar/Sidebar';
 import Header from './Components/Common/Header/Header';
+import TopQuestions from './Components/Question/TopQuestions/TopQuestions';
 
 function App() {
   return (
@@ -10,17 +11,14 @@ function App() {
         <Header />
         <Sidebar />
         <Routes>
-          <Route path="/home" element={<div>HomePage 홈 팀원소개 </div>} />
+          <Route path="/home" element={<div>HomePage 홈 팀원소개</div>} />
           <Route path="/members" element={<div>SignupPage 회원가입</div>} />
           <Route
             path="/members/welcome"
             element={<div>AfterSignupPage 회원가입 완료</div>}
           />
           <Route path="/" element={<div>LoginPage 로그인 페이지</div>} />
-          <Route
-            path="/questions"
-            element={<div>MainPage Top Questions 페이지</div>}
-          />
+          <Route path="/questions" element={<TopQuestions />} />
           <Route
             path="/questions/?page=1&size=20"
             element={<div>QuestionsPage All Questions</div>}
@@ -30,7 +28,7 @@ function App() {
             element={<div>QuestionCreatePage 질문 생성 페이지</div>}
           />
           <Route
-            path="/questions/{question-id}"
+            path="/questions/:questionId"
             element={<div>QuestionDetailPage 질문 상세 페이지</div>}
           />
           <Route
