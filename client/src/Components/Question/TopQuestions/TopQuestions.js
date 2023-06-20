@@ -19,7 +19,7 @@ export const TopQuestions = () => {
   useEffect(() => {
     axios
       .get(
-        'http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/'
+        'http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/questions/home'
       )
       .then((res) => {
         setData(res.data.data);
