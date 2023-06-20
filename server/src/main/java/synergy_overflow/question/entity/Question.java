@@ -4,9 +4,9 @@ package synergy_overflow.question.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import synergy_overflow.helper.auditable.Auditable;
+import synergy_overflow.helper.audit.Auditable;
+import synergy_overflow.member.entity.Member;
 import synergy_overflow.question.temporaries.temporaryEntities.AnswerEntity;
-import synergy_overflow.question.temporaries.temporaryEntities.MemberEntity;
 
 import javax.persistence.*;
 import java.util.LinkedList;
@@ -35,7 +35,8 @@ public class Question extends Auditable {
 
     @ManyToOne
     @JoinColumn(name = "member_id", nullable = false)
-    private MemberEntity writer;
+    private Member writer;
+
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
     private List<AnswerEntity> answers = new LinkedList<>();
 
