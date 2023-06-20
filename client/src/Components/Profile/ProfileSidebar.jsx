@@ -12,11 +12,15 @@ const ProfileSidebar = () => {
   return (
     <div>
       <S.SidebarWrapper>
-        <S.Title>PERSONAL INFORMATION</S.Title>
-        <S.Button>Edit profile</S.Button>
-        <S.Button>Delete profile</S.Button>
-        <S.Title>Access</S.Title>
-        <S.Button>Your logins</S.Button>
+        <S.PersonalInfo>
+          <S.Title>PERSONAL INFORMATION</S.Title>
+          <S.Button>Edit profile</S.Button>
+          <S.Button>Delete profile</S.Button>
+        </S.PersonalInfo>
+        <S.Access>
+          <S.Title>Access</S.Title>
+          <S.Button>Your logins</S.Button>
+        </S.Access>
       </S.SidebarWrapper>
     </div>
   );

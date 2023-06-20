@@ -6,6 +6,7 @@ export const SidebarWrapper = styled.div`
   width: 224px;
   height: 524px;
   margin: 20px;
+  gap: 30px;
 `;
 
 export const PersonalInfo = styled.div`
@@ -17,6 +18,8 @@ export const PersonalInfo = styled.div`
 
 export const Title = styled.div`
   box-sizing: border-box;
+  font-size: 14px;
+  font-weight: 600;
 `;
 
 export const Access = styled.div`
@@ -30,8 +33,8 @@ export const Button = styled.div`
   box-sizing: border-box;
   border: 1px solid white;
   border-radius: 20px;
-  width: 80px;
-  height: 35px;
+  width: 180px;
+  height: 30px;
   color: white;
   text-align: center;
   padding-top: 7px;
