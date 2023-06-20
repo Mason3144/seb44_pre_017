@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Footer from './Components/Common/Footer/Footer';
 import Sidebar from './Components/Common/Sidebar/Sidebar';
 import Header from './Components/Common/Header/Header';
-import TopQuestions from './Components/Question/TopQuestions/TopQuestions';
+import MainPage from './Pages/Common/MainPage/MainPage';
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
             element={<div>AfterSignupPage 회원가입 완료</div>}
           />
           <Route path="/" element={<div>LoginPage 로그인 페이지</div>} />
-          <Route path="/questions" element={<TopQuestions />} />
+          <Route path="/questions" element={<MainPage />} />
           <Route
             path="/questions/board"
             element={<div>QuestionsPage All Questions</div>}
