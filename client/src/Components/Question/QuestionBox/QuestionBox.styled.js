@@ -3,8 +3,17 @@ export const ItemContainer = styled.li`
   list-style: none;
   height: 130px;
   width: 100%;
-  border-top: 2px solid #e4e6e8;
   display: flex;
+  position: relative;
+  &:before {
+    content: '';
+    position: absolute;
+    left: 20%;
+    top: 0;
+    height: 1px;
+    width: 70%; /* Adjust the width as needed */
+    background-color: #e4e6e8; /* Adjust the border color as needed */
+  }
 `;
 export const Left = styled.div`
   display: flex;
@@ -12,7 +21,7 @@ export const Left = styled.div`
   align-items: end;
   justify-content: center;
   gap: 10px;
-  margin-left: 10%;
+  margin-left: 20%;
   font-size: 14px;
   font-weight: 500;
 `;
@@ -40,7 +49,7 @@ export const Title = styled.div`
 export const UserInfo = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin-right: 50px;
+  margin-right: 180px;
   gap: 10px;
   font-size: 12px;
   font-weight: 400;
