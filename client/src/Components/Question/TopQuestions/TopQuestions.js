@@ -9,7 +9,11 @@ export const TopQuestions = () => {
   const [data, setData] = useState([]);
 
   const goAsk = () => {
-    navigate('/questions/ask');
+    // if (로그인상태) {
+    //   navigate('/questions/ask');
+    // } else {
+    navigate('/');
+    // }
   };
 
   useEffect(() => {
