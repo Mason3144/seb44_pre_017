@@ -22,7 +22,7 @@ function App() {
             element={<div>MainPage Top Questions 페이지</div>}
           />
           <Route
-            path="/questions/?page=1&size=20"
+            path="/questions/board"
             element={<div>QuestionsPage All Questions</div>}
           />
           <Route
