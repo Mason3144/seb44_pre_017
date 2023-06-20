@@ -3,12 +3,13 @@ package synergy_overflow.question.temporaries.temporaryApp;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import synergy_overflow.member.dto.MemberDto;
+import synergy_overflow.member.entity.Member;
+import synergy_overflow.member.repository.MemberRepository;
 import synergy_overflow.question.entity.Question;
 import synergy_overflow.question.mapper.QuestionMapper;
 import synergy_overflow.question.temporaries.temporaryDtos.AnswerDto;
-import synergy_overflow.question.temporaries.temporaryDtos.WriterDto;
 import synergy_overflow.question.temporaries.temporaryEntities.AnswerEntity;
-import synergy_overflow.question.temporaries.temporaryEntities.MemberEntity;
 
 import javax.transaction.Transactional;
 
@@ -26,13 +27,13 @@ public class Controller {
     }
 
     @PostMapping("/member")
-    public ResponseEntity postMember(@RequestBody WriterDto.Post requestBody){
-        MemberEntity member = new MemberEntity();
+    public ResponseEntity postMember(@RequestBody MemberDto.Post requestBody){
+        Member member = new Member();
         member.setEmail(requestBody.getEmail());
         member.setPassword(requestBody.getPassword());
         member.setNickname(requestBody.getNickname());
 
-        MemberEntity newMember = memberRepository.save(member);
+        Member newMember = memberRepository.save(member);
 
         return new ResponseEntity<>(mapper.memberToWriterDtoResponse(newMember),HttpStatus.CREATED);
     }
@@ -43,7 +44,7 @@ public class Controller {
 
 
         AnswerEntity answer = new AnswerEntity();
-        answer.setWriter(new MemberEntity(1L));
+//        answer.setWriter(new Member(1L));
         answer.setAnswerBody(requestBody.getBody());
 
         Question question = new Question();
