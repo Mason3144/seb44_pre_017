@@ -3,8 +3,7 @@ package synergy_overflow.question.dto;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.data.domain.Page;
-import synergy_overflow.question.entity.Question;
-import synergy_overflow.question.temporaries.temporaryDtos.WriterDto;
+import synergy_overflow.member.dto.MemberDto;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -37,7 +36,7 @@ public class MultiResponseDto {
         private LocalDateTime createdAt;
         private boolean adopted;
         private int views;
-        private WriterDto.Response writer;
+        private MemberDto.Response writer;
         private int answerNumber;
     }
 
