@@ -21,7 +21,7 @@ function App() {
           <Route path="/" element={<div>LoginPage 로그인 페이지</div>} />
           <Route path="/questions" element={<TopQuestions />} />
           <Route
-            path="/questions/?page=1&size=20"
+            path="/questions/board"
             element={<div>QuestionsPage All Questions</div>}
           />
           <Route

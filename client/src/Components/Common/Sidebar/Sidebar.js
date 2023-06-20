@@ -17,12 +17,12 @@ function Sidebar() {
     //   if (로그인상태) {
     //     navigate('/questions');
     //   } else {
-    //     navigate('/home');
+    navigate('/home');
     //   }
   };
   const goQuestions = () => {
     handleButtonClick('Questions');
-    navigate('/questions');
+    navigate('/questions/board');
   };
   return (
     <S.SidebarContainer open={open}>
