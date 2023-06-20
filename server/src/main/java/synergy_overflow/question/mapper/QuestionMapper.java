@@ -22,8 +22,8 @@ public interface QuestionMapper {
     QuestionDto.Response questionToQuestionDtoResponseWithoutId(Question question);
     default QuestionDto.Response questionToQuestionDtoResponse(Question question){
         QuestionDto.Response response = questionToQuestionDtoResponseWithoutId(question);
-        response.setQuestion_id(question.getQuestionId());
-        response.setCreated_at(question.getCreatedAt());
+        response.setQuestionId(question.getQuestionId());
+        response.setCreatedAt(question.getCreatedAt());
         return response;
     };
 
@@ -32,13 +32,13 @@ public interface QuestionMapper {
     }
     default MultiResponseDto.MultiQuestionsResponse questionToMultiResponseDto(Question question){
         return MultiResponseDto.MultiQuestionsResponse.builder()
-                .question_id(question.getQuestionId())
+                .questionId(question.getQuestionId())
                 .title(question.getTitle())
-                .created_at(question.getCreatedAt())
+                .createdAt(question.getCreatedAt())
                 .adopted(question.isAdopted())
                 .views(question.getViews())
                 .writer(memberToWriterDtoResponse(question.getWriter()))
-                .answer_number(answersToAnswerNumber(question.getAnswers()))
+                .answerNumber(answersToAnswerNumber(question.getAnswers()))
                 .build();
     };
     List<MultiResponseDto.MultiQuestionsResponse> questionsToMultiResponseDtos(List<Question> questions);

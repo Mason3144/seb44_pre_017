@@ -19,9 +19,9 @@ import java.util.List;
 public class AnswerEntity extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long answer_id;
+    private long answerId;
     @Column(nullable = false,columnDefinition = "TEXT")
-    private String answer_body;
+    private String answerBody;
     @Column(nullable = false,columnDefinition = "boolean default false")
     private boolean adopted;
 

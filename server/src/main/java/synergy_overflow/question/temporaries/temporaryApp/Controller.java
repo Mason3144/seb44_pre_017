@@ -44,7 +44,7 @@ public class Controller {
 
         AnswerEntity answer = new AnswerEntity();
         answer.setWriter(new MemberEntity(1L));
-        answer.setAnswer_body(requestBody.getBody());
+        answer.setAnswerBody(requestBody.getBody());
 
         Question question = new Question();
         question.setQuestionId(questionId);

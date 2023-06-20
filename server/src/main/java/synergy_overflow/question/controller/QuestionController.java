@@ -11,6 +11,7 @@ import synergy_overflow.question.dto.QuestionVo;
 import synergy_overflow.question.entity.Question;
 import synergy_overflow.question.mapper.QuestionMapper;
 import synergy_overflow.question.sevice.QuestionService;
+import synergy_overflow.question.temporaries.temporaryDtos.WriterDto;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
@@ -39,10 +40,10 @@ public class QuestionController {
     public ResponseEntity getQuestion(@PathVariable("question-id") @Positive long questionId){
         Question foundQuestion = service.getQuestion(questionId);
 
-        return new ResponseEntity<>(mapper.questionToQuestionDtoResponse(foundQuestion), HttpStatus.CREATED);
+        return new ResponseEntity<>(mapper.questionToQuestionDtoResponse(foundQuestion), HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping("/board")
     public ResponseEntity getQuestions(@RequestParam @Positive int page,
                                        @RequestParam @Positive int size,
                                        @RequestParam String sort){
@@ -52,11 +53,19 @@ public class QuestionController {
         return new ResponseEntity<>(new MultiResponseDto(mapper.questionsToMultiResponseDtos(questions),pageQuestions),
                                     HttpStatus.OK);
     }
+    @GetMapping("/home")
+    public ResponseEntity getQuestionsHome(){
+        Page<Question> pageQuestions = service.getQuestions(0,30,"new");
+
+        List<Question> questions = pageQuestions.getContent();
+
+        return new ResponseEntity<>(new MultiResponseDto(mapper.questionsToMultiResponseDtos(questions)),
+                HttpStatus.OK);
+    }
 
     @PatchMapping("/{questions-id}/edit")
     public ResponseEntity patchQuestion(@RequestBody @Valid QuestionDto.Patch requestBody,
                                         @PathVariable("questions-id") @Positive long questionId){
-        // 스페이스만 입력했을경우, 스페이스 포함 입력했을경우 postman으로 테스트
         requestBody.setQuestionId(questionId);
         Question editQuestion = service.editQuestion(mapper.questionDtoPatchToQuestion(requestBody));
 

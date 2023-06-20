@@ -12,7 +12,7 @@ public class LoggedInMemberUtils {
     public static boolean verifyIsMine(long memberId){
         MemberEntity loggedInMember = findLoggedInMember();
         try{
-            return loggedInMember.getMember_id() == memberId;
+            return loggedInMember.getMemberId() == memberId;
         }catch (NullPointerException e){
             return false;
         }

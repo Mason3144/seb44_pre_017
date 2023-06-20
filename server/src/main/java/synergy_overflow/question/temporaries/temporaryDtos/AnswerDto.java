@@ -10,15 +10,15 @@ public class AnswerDto {
     @Builder
     @Getter
     public static class Post{
-        private long answer_id;
+        private long answerId;
         private String body;
     }
     @Builder
     @Getter
     public static class Response{
-        private long answer_id;
-        private String answer_body;
-        private LocalDateTime created_at;
+        private long answerId;
+        private String answerBody;
+        private LocalDateTime createdAt;
         private boolean adopted;
         private WriterDto.Response writer;
         private List<CommentsDto.Response> comments;
