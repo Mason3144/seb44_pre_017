@@ -4,18 +4,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpMethod;
 import synergy_overflow.question.dto.MultiResponseDto;
 import synergy_overflow.question.dto.QuestionDto;
 import synergy_overflow.question.entity.Question;
 import synergy_overflow.question.temporaries.temporaryDtos.AnswerDto;
 import synergy_overflow.question.temporaries.temporaryDtos.CommentsDto;
-import synergy_overflow.question.temporaries.temporaryDtos.WriterDto;
 
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public abstract class QuestionStubData {
     private final String QUESTION_URL = "/questions";

@@ -2,6 +2,7 @@ package synergy_overflow.question.temporaries.temporaryDtos;
 
 import lombok.Builder;
 import lombok.Getter;
+import synergy_overflow.member.dto.MemberDto;
 
 import java.time.LocalDateTime;
 
@@ -13,6 +14,6 @@ public class CommentsDto {
         private long commentId;
         private String commentBody;
         private LocalDateTime createdAt;
-        private WriterDto.Response writer;
+        private MemberDto.Response writer;
     }
 }

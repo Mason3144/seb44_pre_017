@@ -3,7 +3,8 @@ package synergy_overflow.question.temporaries.temporaryEntities;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import synergy_overflow.helper.auditable.Auditable;
+import synergy_overflow.helper.audit.Auditable;
+import synergy_overflow.member.entity.Member;
 
 import javax.persistence.*;
 
@@ -20,7 +21,7 @@ public class CommentEntity extends Auditable {
 
     @ManyToOne
     @JoinColumn(name = "member_id", nullable = false)
-    private MemberEntity writer;
+    private Member writer;
     @ManyToOne
     @JoinColumn(name = "answer_id", nullable = false)
     private AnswerEntity answer;

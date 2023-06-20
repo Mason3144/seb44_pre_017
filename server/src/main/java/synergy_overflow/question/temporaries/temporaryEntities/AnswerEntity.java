@@ -3,13 +3,11 @@ package synergy_overflow.question.temporaries.temporaryEntities;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import synergy_overflow.helper.auditable.Auditable;
+import synergy_overflow.helper.audit.Auditable;
+import synergy_overflow.member.entity.Member;
 import synergy_overflow.question.entity.Question;
-import synergy_overflow.question.temporaries.temporaryDtos.CommentsDto;
-import synergy_overflow.question.temporaries.temporaryDtos.WriterDto;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -29,7 +27,7 @@ public class AnswerEntity extends Auditable {
 
     @ManyToOne
     @JoinColumn(name = "member_id",nullable = false)
-    private MemberEntity writer;
+    private Member writer;
     @ManyToOne
     @JoinColumn(name = "question_id",nullable = false)
     private Question question;
