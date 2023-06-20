@@ -38,12 +38,9 @@ function Footer() {
               <br />
               spring security
               <br />
-              aws EC2
-              <br />
-              h2
+              aws
               <br />
               spring data jpa
-              <br />
             </S.Backend>
           </S.Content>
         </S.Stack>
