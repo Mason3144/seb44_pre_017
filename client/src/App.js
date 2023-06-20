@@ -4,13 +4,14 @@ import Footer from './Components/Common/Footer/Footer';
 import Sidebar from './Components/Common/Sidebar/Sidebar';
 import Header from './Components/Common/Header/Header';
 import TopQuestions from './Components/Question/TopQuestions/TopQuestions';
-
+import QuestionAndAnswer from './Components/Question/QuestionAndAnswer/QuestionAndAnswer';
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Header />
         <Sidebar />
+        <QuestionAndAnswer />
         <Routes>
           <Route path="/home" element={<div>HomePage 홈 팀원소개</div>} />
           <Route path="/members" element={<div>SignupPage 회원가입</div>} />
