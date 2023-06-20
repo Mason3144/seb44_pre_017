@@ -1,12 +1,15 @@
+/* eslint-disable no-undef */
 import './App.css';
 import MyPage from './Pages/My/MyPage.jsx';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoginPage from './Pages/LoginSignup/LoginPage.jsx';
-import { useSelector } from 'react-redux';
 
 function App() {
-  const token = useSelector((state) => state.token.value);
+  const authorization = localStorage.getItem('Authorization');
+  const refresh = localStorage.getItem('refresh');
+  console.log(authorization);
+  console.log(refresh);
 
   return (
     <div className="App">
@@ -21,13 +24,7 @@ function App() {
           <Route path="/" element={<LoginPage />} />
           <Route
             path="/questions"
-            element={
-              <div>
-                MainPage Top Questions 페이지
-                {token.authorization}
-                {token.refresh}
-              </div>
-            }
+            element={<div>MainPage Top Questions 페이지</div>}
           />
           <Route
             path="/questions/?page=1&size=20"
