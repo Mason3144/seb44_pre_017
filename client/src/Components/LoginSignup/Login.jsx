@@ -5,7 +5,7 @@
 import axios from 'axios';
 import * as S from './Login.styled';
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { login } from '../../redux/user';
 import { setLoginState } from '../../redux/login';
 import { useNavigate } from 'react-router-dom';
@@ -48,7 +48,6 @@ const Login = () => {
         dispatch(
           login({ username: loginInfo.username, password: loginInfo.password })
         );
-
         const url =
           'http://ec2-54-148-132-64.us-west-2.compute.amazonaws.com:8080/auth/login';
         const res = await axios.post(url, loginInfo, {
@@ -61,10 +60,11 @@ const Login = () => {
           dispatch(setLoginState(true));
           alert('로그인에 성공하였습니다.');
           navigate('/questions');
-          // 1-4. 엑세스 토큰, 리프레시 토큰 받고, 브라우저 쿠키에 저장
+          // 1-4. 엑세스 토큰, 리프레시 토큰 받고, 브라우저 로컬스토리지에 저장
+          // res 객체에 어떤 프로퍼티에 값이 저장되는지 확인하고, 코드 수정 필요
           if (res.data.ACCESS_TOKEN) {
-            document.cookie = `access_token=${res.data.ACCESS_TOKEN}; path=/`;
-            document.cookie = `refresh_token=${res.data.REFRESH_TOKEN}; path=/`;
+            localStorage.setItem('ACCESS_TOKEN', res.data.ACCESS_TOKEN);
+            localStorage.setItem('REFRESH_TOKEN', res.data.REFRESH_TOKEN);
           }
         }
         // else if (res.status === 404) {
@@ -83,18 +83,19 @@ const Login = () => {
 
   // 2. 구글 로그인
   const LoginRequestHandlerGoogle = () => {
-    window.location.href = 'http://ec2-54-148-132-64.us-west-2.compute.amazonaws.com:8080/oauth2/authorization/google';
+    window.location.href =
+      'http://ec2-54-148-132-64.us-west-2.compute.amazonaws.com:8080/oauth2/authorization/google';
   };
   // 구글 로그인 페이지로 이동 -> 사용자 구글 로그인 -> 로그인 성공 시, 메인 페이지로 이동
   // 질문 1: 로그인 상태는 어느 시점에서 변경해야 할까?
   // 다시 메인페이지로 리다이렉트 되었을 때, 로그인 상태를 변경해야 할까?
   //   1-1: 로그인 상태 저장
   //   dispatch(setLoginState(true));
-  // 질문 2: 토큰 저장 및 브라우저 쿠키 저장은 어느 시점에 해야 할까? 전체 코드 중 어디 코드에 작성되어야 하는가? 
+  // 질문 2: 토큰 저장 및 브라우저 쿠키 저장은 어느 시점에 해야 할까? 전체 코드 중 어디 코드에 작성되어야 하는가?
   //   1-2. 엑세스 토큰, 리프레시 토큰 받고, 브라우저 쿠키에 저장
   //   if (res.data.ACCESS_TOKEN)
-  //   document.cookie = `access_token=${res.data.ACCESS_TOKEN}; path=/`;
-  //   document.cookie = `refresh_token=${res.data.REFRESH_TOKEN}; path=/`;
+  // localStorage.setItem('ACCESS_TOKEN', res.data.ACCESS_TOKEN);
+  // localStorage.setItem('REFRESH_TOKEN', res.data.REFRESH_TOKEN);
 
   return (
     <S.LoginWrapper>
