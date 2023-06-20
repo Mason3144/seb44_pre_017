@@ -1,15 +1,14 @@
 import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Footer from './Components/Common/Footer/Footer';
-import Sidebar from './Components/Common/Sidebar/Sidebar';
-import Header from './Components/Common/Header/Header';
-import TopQuestions from './Components/Question/TopQuestions/TopQuestions';
+// import { BrowserRouter, Routes, Route } from 'react-router-dom';
+// import Sidebar from './Components/Common/Sidebar/Sidebar';
+// import ProfileUser from './Components/Profile/ProfileUser.jsx';
+import ProfileSidebar from './Components/Profile/ProfileSidebar.jsx';
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <Header />
+      <ProfileSidebar />
+      {/* <BrowserRouter>
         <Sidebar />
         <Routes>
           <Route path="/home" element={<div>HomePage 홈 팀원소개</div>} />
@@ -40,16 +39,13 @@ function App() {
             path="/questions/{question-id}/answers"
             element={<div>AnswerUpdatePage 답변 수정 페이지</div>}
           />
+          <Route path="/members/edit" element={<ProfileSidebar />} />
           <Route
-            path="/members/{member-id}"
-            element={<div>MyPage 회원정보 수정</div>}
-          />
-          <Route
-            path="/members/{member-id}/delete"
+            path="/members/delete"
             element={<div>ProfileDelete 회원정보 삭제</div>}
           />
           <Route
-            path="/members/{member-id}/yourlogin"
+            path="/members/yourlogin"
             element={<div>ProfileYourlogins My Logins</div>}
           />
           <Route
@@ -57,8 +53,7 @@ function App() {
             element={<div>MyPage 비밀번호 변경</div>}
           />
         </Routes>
-        <Footer />
-      </BrowserRouter>
+      </BrowserRouter> */}
     </div>
   );
 }
