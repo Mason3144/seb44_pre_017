@@ -13,21 +13,25 @@ function Footer() {
         </S.Team>
         <S.PreProject>
           <S.Title>PRE-PROJECT</S.Title>
-          <S.Content>Stckoverflow Clone Coding</S.Content>
+          <S.Content>
+            Stackoverflow
+            <br />
+            Clone Coding
+          </S.Content>
         </S.PreProject>
         <S.Stack>
           <S.Title>STACK</S.Title>
           <S.Content>
             <S.Frontend>
-              HTML
+              html
               <br />
-              CSS
+              css
               <br />
-              JavaScript
+              javascript
               <br />
-              React
+              react
               <br />
-              Styled-Components
+              styled components
             </S.Frontend>
             <S.Backend>
               java
