@@ -4,6 +4,7 @@ import { ReactComponent as Up } from '../../../icons/up.svg';
 import { ReactComponent as Down } from '../../../icons/down.svg';
 import { ReactComponent as Bookmark } from '../../../icons/bookmark.svg';
 import { ReactComponent as History } from '../../../icons/history.svg';
+import { ReactComponent as Adopt } from '../../../icons/adopt.svg';
 import Comment from '../Comment/Comment';
 
 function QuestionAndAnswer() {
@@ -40,6 +41,9 @@ function QuestionAndAnswer() {
           <div>
             <Bookmark />
           </div>
+          <S.Adopt>
+            <Adopt fill="#BBBFC4" />
+          </S.Adopt>
           <div>
             <History />
           </div>

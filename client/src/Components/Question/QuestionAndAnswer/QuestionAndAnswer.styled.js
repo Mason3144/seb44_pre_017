@@ -80,3 +80,10 @@ export const Add = styled.div`
   margin-top: 10px;
   color: #bbbfc4;
 `;
+export const Adopt = styled.div`
+  padding: 5px;
+  cursor: pointer;
+  &:hover {
+    background-color: #333333;
+  }
+`;
