@@ -40,10 +40,10 @@ public class QuestionDto {
     @Getter
     @Setter
     public static class Response{
-        private long question_id;
+        private long questionId;
         private String title;
         private String body;
-        private LocalDateTime created_at;
+        private LocalDateTime createdAt;
         private WriterDto.Response writer;
         private List<AnswerDto.Response> answers;
     }

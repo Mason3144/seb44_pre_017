@@ -14,9 +14,9 @@ import javax.persistence.*;
 public class CommentEntity extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long comment_id;
+    private long commentId;
     @Column(nullable = false)
-    private String comment_body;
+    private String commentBody;
 
     @ManyToOne
     @JoinColumn(name = "member_id", nullable = false)

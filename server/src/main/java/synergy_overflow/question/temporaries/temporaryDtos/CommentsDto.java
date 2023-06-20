@@ -9,10 +9,10 @@ public class CommentsDto {
     @Builder
     @Getter
     public static class Response{
-        private long answer_id;
-        private long comment_id;
-        private String comment_body;
-        private LocalDateTime created_at;
+        private long answerId;
+        private long commentId;
+        private String commentBody;
+        private LocalDateTime createdAt;
         private WriterDto.Response writer;
     }
 }

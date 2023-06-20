@@ -24,22 +24,26 @@ public class MultiResponseDto {
                 .totalPages(page.getTotalPages())
                 .build();
     }
-
-    @Getter
-    @Builder
-    public static class MultiQuestionsResponse{
-        private long question_id;
-        private String title;
-        private LocalDateTime created_at;
-        private boolean adopted;
-        private int views;
-        private WriterDto.Response writer;
-        private int answer_number;
+    public MultiResponseDto(List<MultiQuestionsResponse> data) {
+        this.data = data;
+        this.pageInfo = null;
     }
 
     @Getter
     @Builder
-    private static class PageInfo{
+    public static class MultiQuestionsResponse{
+        private long questionId;
+        private String title;
+        private LocalDateTime createdAt;
+        private boolean adopted;
+        private int views;
+        private WriterDto.Response writer;
+        private int answerNumber;
+    }
+
+    @Getter
+    @Builder
+    public static class PageInfo{
         private int page;
         private int size;
         private long totalElements;
