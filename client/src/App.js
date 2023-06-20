@@ -1,11 +1,13 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Sidebar from './Components/Common/Sidebar/Sidebar';
+import Header from './Components/Common/Header/Header';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <Header />
         <Sidebar />
         <Routes>
           <Route path="/home" element={<div>HomePage 홈 팀원소개 </div>} />

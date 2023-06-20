@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 
 export const SidebarContainer = styled.div`
+  position: fixed;
+  left: ${({ open }) => (open ? '0' : '-100%')};
   width: 300px;
-  height: 100vh;
   padding-left: 100px;
   background-color: white;
-  border-right: 1px solid #dddddd;
+  height: 100vh;
+  transition: left 0.3s ease-in-out;
 `;
 export const Home = styled.div`
   margin-top: 40px;
