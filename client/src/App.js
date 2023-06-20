@@ -1,5 +1,6 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Footer from './Components/Common/Footer/Footer';
 import Sidebar from './Components/Common/Sidebar/Sidebar';
 import Header from './Components/Common/Header/Header';
 
@@ -58,6 +59,7 @@ function App() {
             element={<div>MyPage 비밀번호 변경</div>}
           />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </div>
   );
