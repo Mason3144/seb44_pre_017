@@ -3,8 +3,11 @@ import MyPage from './Pages/My/MyPage.jsx';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoginPage from './Pages/LoginSignup/LoginPage.jsx';
+import { useSelector } from 'react-redux';
 
 function App() {
+  const token = useSelector((state) => state.token.value);
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -13,12 +16,18 @@ function App() {
           <Route path="/members" element={<div>SignupPage 회원가입</div>} />
           <Route
             path="/members/welcome"
-            element={<div>AfterSignupPage 회원가입 완료</div>}
+            element={<div>AfterSignupPage 회원가입 완료 </div>}
           />
           <Route path="/" element={<LoginPage />} />
           <Route
             path="/questions"
-            element={<div>MainPage Top Questions 페이지</div>}
+            element={
+              <div>
+                MainPage Top Questions 페이지
+                {token.authorization}
+                {token.refresh}
+              </div>
+            }
           />
           <Route
             path="/questions/?page=1&size=20"

@@ -56,16 +56,19 @@ const Login = () => {
           },
         });
         // 1-3. 로그인 성공 시, 로그인 상태 변경
+        console.log(res)
         if (res.status === 200) {
           dispatch(setLoginState(true));
           alert('로그인에 성공하였습니다.');
           navigate('/questions');
           // 1-4. 엑세스 토큰, 리프레시 토큰 받고, 브라우저 로컬스토리지에 저장
-          // res 객체에 어떤 프로퍼티에 값이 저장되는지 확인하고, 코드 수정 필요
-          if (res.data.ACCESS_TOKEN) {
-            localStorage.setItem('ACCESS_TOKEN', res.data.ACCESS_TOKEN);
-            localStorage.setItem('REFRESH_TOKEN', res.data.REFRESH_TOKEN);
-          }
+          const ACCESS_TOKEN = res.headers.get('Authorization');
+          const REFRESH_TOKEN = res.headers.get('refresh');
+          localStorage.setItem('Authorization', ACCESS_TOKEN);
+          localStorage.setItem('refresh', REFRESH_TOKEN);
+          dispatch(
+            {authorization: ACCESS_TOKEN, refresh: REFRESH_TOKEN}
+          )
         }
         // else if (res.status === 404) {
         // navigate('/notfound')
