@@ -9,6 +9,8 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <Header />
+        <Sidebar />
         <Routes>
           <Route path="/home" element={<div>HomePage 홈 팀원소개</div>} />
           <Route path="/members" element={<div>SignupPage 회원가입</div>} />
@@ -41,16 +43,13 @@ function App() {
             path="/questions/{question-id}/answers"
             element={<div>AnswerUpdatePage 답변 수정 페이지</div>}
           />
+          <Route path="/members/edit" element={<ProfileSidebar />} />
           <Route
-            path="/members/{member-id}"
-            element={<div>MyPage 회원정보 수정</div>}
-          />
-          <Route
-            path="/members/{member-id}/delete"
+            path="/members/delete"
             element={<div>ProfileDelete 회원정보 삭제</div>}
           />
           <Route
-            path="/members/{member-id}/yourlogin"
+            path="/members/yourlogin"
             element={<div>ProfileYourlogins My Logins</div>}
           />
           <Route
@@ -58,6 +57,7 @@ function App() {
             element={<div>MyPage 비밀번호 변경</div>}
           />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </div>
   );
