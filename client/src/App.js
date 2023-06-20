@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/home" element={<div>HomePage 홈 팀원소개 </div>} />
+          <Route path="/home" element={<div>HomePage 홈 팀원소개</div>} />
           <Route path="/members" element={<div>SignupPage 회원가입</div>} />
           <Route
             path="/members/welcome"
@@ -30,7 +30,7 @@ function App() {
             element={<div>QuestionCreatePage 질문 생성 페이지</div>}
           />
           <Route
-            path="/questions/{question-id}"
+            path="/questions/:questionId"
             element={<div>QuestionDetailPage 질문 상세 페이지</div>}
           />
           <Route
