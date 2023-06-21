@@ -3,9 +3,28 @@ export const Container = styled.div`
   width: 1000px;
   margin-left: 350px;
   margin-top: 44px;
+  padding-bottom: 10px;
 `;
+
+export const TitleContainer = styled.div`
+  display: flex;
+  gap: 750px;
+`;
+export const AskBtn = styled.button`
+  background-color: #1eaeff;
+  color: #ffffff;
+  border: 1.5px solid #1eaeff;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  &:hover {
+    background-color: #3172c6;
+    border-color: #3172c6;
+  }
+`;
+
 export const Title = styled.h1`
-  font-size: 25px;
+  font-size: 30px;
   font-weight: 400;
 `;
 export const Info = styled.div`
@@ -69,7 +88,7 @@ export const Edit = styled.div`
   }
 `;
 export const Writer = styled.div`
-  margin-left: 650px;
+  margin-left: 500px;
   color: #3172c6;
 `;
 export const Date = styled.div`
@@ -79,6 +98,8 @@ export const Date = styled.div`
 export const Add = styled.div`
   margin-top: 10px;
   color: #bbbfc4;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e4e6e8;
 `;
 export const Adopt = styled.div`
   padding: 5px;

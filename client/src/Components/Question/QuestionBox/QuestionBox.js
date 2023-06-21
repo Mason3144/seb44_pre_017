@@ -10,10 +10,6 @@ const QuestionBox = ({ question }) => {
     navigate(`/questions/${questionId}`);
   };
 
-  if (!question) {
-    return null;
-  }
-
   const { created_at } = question;
 
   const detailDate = (a) => {
@@ -34,7 +30,6 @@ const QuestionBox = ({ question }) => {
     return `${Math.floor(years)} years ago`;
   };
 
-  //시간 데이터에 해당하는 값을 api 데이터의 날짜 파라미터로 변경합니다.
   const nowDate = detailDate(new Date({ created_at }));
 
   return (

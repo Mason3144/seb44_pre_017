@@ -2,6 +2,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   margin-top: 10px;
   border-bottom: 1px solid #e4e6e8;
+  /* border-top: 1px solid #e4e6e8; */
   padding: 10px 0;
   display: flex;
   gap: 10px;

@@ -5,7 +5,6 @@ export const SidebarContainer = styled.div`
   left: ${({ open }) => (open ? '0' : '-100%')};
   width: 300px;
   padding-left: 100px;
-  background-color: white;
   height: 100vh;
   transition: left 0.3s ease-in-out;
 `;
