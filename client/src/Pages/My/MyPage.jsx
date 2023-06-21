@@ -17,8 +17,6 @@ const MyPage = () => {
 
   return (
     <div className="mypage">
-      <Header />
-      <Sidebar />
       <S.MypageWrapper>
         <ProfileUser />
         <S.layout>
@@ -32,7 +30,6 @@ const MyPage = () => {
           </S.ChangeDisplayContainer>
         </S.layout>
       </S.MypageWrapper>
-      <Footer />
     </div>
   );
 };

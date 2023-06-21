@@ -7,7 +7,7 @@ import * as S from './Login.styled';
 import { useState } from 'react';
 import { useDispatch , useSelector } from 'react-redux';
 import { login } from '../../redux/user';
-import { responseUserInfo } from '../../redux/userInfo';
+import { responseUserInfo } from '../../redux/userInfoSlice';
 import { setLoginState } from '../../redux/login';
 import { useNavigate } from 'react-router-dom';
 axios.defaults.withCredentials = true;

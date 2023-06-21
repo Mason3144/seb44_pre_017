@@ -1,16 +1,17 @@
 /* eslint-disable no-undef */
 import './App.css';
-import MyPage from './Pages/My/MyPage.jsx';
-
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Header from './Components/Common/Header/Header';
+import Sidebar from './Components/Common/Sidebar/Sidebar';
+import Footer from './Components/Common/Footer/Footer';
 import LoginPage from './Pages/LoginSignup/LoginPage.jsx';
 import MyPage from './Pages/My/MyPage.jsx';
 
 function App() {
   return (
     <div className="App">
-      <ProfileSidebar />
-      {/* <BrowserRouter>
+      <BrowserRouter>
+        <Header />
         <Sidebar />
         <Routes>
           <Route path="/home" element={<div>HomePage 홈 팀원소개</div>} />
@@ -58,7 +59,8 @@ function App() {
             element={<div>MyPage 비밀번호 변경</div>}
           />
         </Routes>
-      </BrowserRouter> */}
+        <Footer />
+      </BrowserRouter>
     </div>
   );
 }
