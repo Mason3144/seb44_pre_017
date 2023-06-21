@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useId, useState } from 'react';
 import * as S from './QuestionCreatePage.styled';
-import { ReactComponent as Question } from '../../../images/question.svg';
+// import { ReactComponent as Question } from '../../../images/question.svg';
 import axios from 'axios';
 import WebEditor from '../../../Components/Question/QuestionBox/WebEditor';
 import { useNavigate } from 'react-router-dom';
@@ -29,7 +29,7 @@ const QuestionCreatePage = () => {
       <S.PageGroup>
         <S.PageBanner>
           <S.PageTitle>Ask a public question </S.PageTitle>
-          <Question width="330px" height="200px" alt="QuestionPageLogo" />
+          {/* <Question width="330px" height="200px" alt="QuestionPageLogo" /> */}
         </S.PageBanner>
         <QuestionTips />
         <QuestionTitleBox value={titleValue} setValue={setTitleValue} />

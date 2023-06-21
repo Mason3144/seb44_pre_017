@@ -10,6 +10,8 @@ import QuestionDetail from './Pages/Question/QuestionDetails/QuestionDetail';
 import MyPage from './Pages/My/MyPage.jsx';
 import LoginPage from './Pages/LoginSignup/LoginPage.jsx';
 import QuestionCreatePage from './Pages/Question/QuestionCreatePage/QuestionCreatePage';
+import HomePage from './Pages/Common/HomePage/HomePage';
+
 function App() {
   return (
     <div className="App">
@@ -18,7 +20,14 @@ function App() {
         <Sidebar />
 
         <Routes>
-          <Route path="/home" element={<div>HomePage 홈 팀원소개</div>} />
+          <Route
+            path="/home"
+            element={
+              <div>
+                <HomePage />
+              </div>
+            }
+          />
           <Route path="/members" element={<div>SignupPage 회원가입</div>} />
           <Route
             path="/members/welcome"
@@ -31,7 +40,7 @@ function App() {
             element={<div>QuestionsPage All Questions</div>}
           />
           <Route path="/questions/ask" element={<QuestionCreatePage />} />
-          <Route path="/questions/:questionId" element={<QuestionDetail />}/>
+          <Route path="/questions/:questionId" element={<QuestionDetail />} />
           <Route
             path="/questions/{question-id}/update"
             element={<div>QuestionUpdatePage 질문 수정 페이지</div>}

@@ -7,13 +7,15 @@ export const SidebarContainer = styled.div`
   padding-left: 100px;
   height: 100vh;
   transition: left 0.3s ease-in-out;
+  background-color: #ffffff;
+  z-index: 1;
 `;
 export const Home = styled.div`
   margin-top: 40px;
   font-size: 15px;
   font-weight: ${(props) => (props.active ? '700' : '')};
   color: ${(props) => (props.active ? '#000000' : '#737980')};
-  background-color: ${(props) => (props.active ? '#eeeff1' : '#ffffff')};
+  background-color: ${(props) => (props.active ? '#eeeff1' : 'none')};
   border-right: ${(props) => (props.active ? '3px solid #e5883e' : 'none')};
   padding: 10px;
   cursor: pointer;
@@ -42,7 +44,7 @@ export const Questions = styled.div`
   padding: 10px;
   font-weight: ${(props) => (props.active ? '700' : '')};
   color: ${(props) => (props.active ? '#000000' : '#737980')};
-  background-color: ${(props) => (props.active ? '#eeeff1' : '#ffffff')};
+  background-color: ${(props) => (props.active ? '#eeeff1' : '#none')};
   border-right: ${(props) => (props.active ? '3px solid #e5883e' : 'none')};
   cursor: pointer;
   &:hover {
