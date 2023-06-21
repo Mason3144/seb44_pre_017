@@ -1,5 +1,6 @@
 package synergy_overflow.member.service;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -27,9 +28,9 @@ class MemberServiceTest {
 
 
 
-    //verifyExistsEmail() 예외 테스트
     @Test
-    void createMember() {
+    @DisplayName("verifyExistsEmail() 예외 테스트")
+    void verifyExistsEmail() {
 //        given
         Member member = new Member();
         member.setEmail("hgd@gmail.com");
@@ -42,8 +43,8 @@ class MemberServiceTest {
 
     }
 
-    // findVerifiedMember 예외 테스트
     @Test
+    @DisplayName("findVerifiedmember error test")
     void findMember() {
 
         assertThrows(BusinessLogicException.class, () -> memberService.findMember(1));

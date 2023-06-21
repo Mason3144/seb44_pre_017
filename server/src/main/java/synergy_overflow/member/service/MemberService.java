@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 
 
 @Service
+@Transactional
 public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;

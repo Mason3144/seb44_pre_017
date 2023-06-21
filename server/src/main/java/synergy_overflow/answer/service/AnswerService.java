@@ -8,20 +8,28 @@ import synergy_overflow.answer.entity.Answer;
 import synergy_overflow.answer.repository.AnswerRepository;
 import synergy_overflow.exception.businessLogicException.BusinessLogicException;
 import synergy_overflow.exception.businessLogicException.ExceptionCode;
+import synergy_overflow.member.entity.Member;
+import synergy_overflow.member.repository.MemberRepository;
 
 import java.util.Optional;
 
 @Service
+@Transactional
 public class AnswerService {
 
     private final AnswerRepository answerRepository;
 
-    public AnswerService(AnswerRepository answerRepository) {
+    private final MemberRepository memberRepository;
+
+    public AnswerService(AnswerRepository answerRepository,MemberRepository memberRepository) {
         this.answerRepository = answerRepository;
+        this.memberRepository = memberRepository;
     }
 
 
     public Answer createAnswer(Answer answer){
+//        Member member = memberRepository.findByEmail(LoggedInMemberUtils.findLoggedInMember()).get();
+//        member.setAnswers(answer);
         return answerRepository.save(answer);
 
     }

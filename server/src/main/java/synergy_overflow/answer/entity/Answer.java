@@ -25,9 +25,9 @@ public class Answer extends Auditable {
     private boolean adopted;
 
 
-//    @ManyToOne
-//    @JoinColumn(name = "merber_id",nullable = false)
-//    private Member writer;
+    @ManyToOne
+    @JoinColumn(name = "merber_id",nullable = false)
+    private Member writer;
 
 
 }

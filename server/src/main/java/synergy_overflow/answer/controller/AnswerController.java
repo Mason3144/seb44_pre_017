@@ -7,26 +7,32 @@ import synergy_overflow.answer.dto.AnswerDto;
 import synergy_overflow.answer.entity.Answer;
 import synergy_overflow.answer.mapper.AnswerMapper;
 import synergy_overflow.answer.service.AnswerService;
+import synergy_overflow.member.repository.MemberRepository;
 
 @RestController
 @RequestMapping(value = "/questions/{question-id}/answers")
 public class AnswerController {
     private final AnswerService answerService;
 
+    private MemberRepository memberRepository;
     private final AnswerMapper mapper;
 
-    public AnswerController(AnswerService answerService, AnswerMapper mapper) {
+    public AnswerController(AnswerService answerService, AnswerMapper mapper ) {
         this.answerService = answerService;
         this.mapper = mapper;
+
     }
 
+    //답변 등록
     @PostMapping
     public ResponseEntity postAnswer (@RequestBody AnswerDto.postDto requestBody){
+//        Member member = memberRepository.f
         Answer answer = mapper.AnswerPostToAnswer(requestBody);
         answerService.createAnswer(answer);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    // 채택 post
     @PostMapping("/{answer-id}/adopt")
     public ResponseEntity adopted(@PathVariable ("answer-id") Long answerId){
 
@@ -36,6 +42,7 @@ public class AnswerController {
         return new ResponseEntity(response,HttpStatus.OK);
     }
 
+    // 채택 delete
     @DeleteMapping("/{answer-id}/adopt")
     public ResponseEntity unAdopted(@PathVariable ("answer-id") Long answerId){
         Answer unAdoptedAnswer = answerService.unAdotp(answerId);
@@ -44,6 +51,7 @@ public class AnswerController {
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
+    // 답변 수정
     @PatchMapping("/{answer-id}/edit")
     public ResponseEntity patchAnswer(@PathVariable("answer-id") Long answerId,
                                       @RequestBody AnswerDto.patchDto requestBody){
@@ -58,7 +66,7 @@ public class AnswerController {
     }
 
 
-
+    // 답변 삭제
     @DeleteMapping("/{answer-id}")
     public ResponseEntity deleteAnswer(@PathVariable ("answer-id") Long answerId){
         answerService.deleteAnswer(answerId);
