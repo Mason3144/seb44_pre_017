@@ -10,13 +10,9 @@ const ProfileUser = () => {
     <div className="profile-user">
       <S.ProfileWrapper>
         <S.ProfileContainer>
-          <S.UserImg>{user.username}</S.UserImg>
+          <S.UserImg></S.UserImg>
           <S.UsernameContainer>
-            <S.Username>
-              Username
-              {user.username}
-              {/* {user.name} 전역 상태에 저장된 user 정보 불러오기 */}
-            </S.Username>
+            <S.Username>{user.username}</S.Username>
           </S.UsernameContainer>
         </S.ProfileContainer>
         <S.ProfileButtonBar>
