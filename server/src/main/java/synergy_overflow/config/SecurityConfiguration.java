@@ -5,10 +5,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -20,7 +22,10 @@ import synergy_overflow.auth.handler.MemberAuthenticationEntryPoint;
 import synergy_overflow.auth.handler.MemberAuthenticationFailureHandler;
 import synergy_overflow.auth.handler.MemberAuthenticationSuccessHandler;
 import synergy_overflow.auth.jwt.JwtTokenizer;
+import synergy_overflow.auth.oauth2.handler.OAuth2MemberSuccessHandler;
 import synergy_overflow.auth.utils.MemberAuthorityUtils;
+import synergy_overflow.auth.utils.TokenUtils;
+import synergy_overflow.member.service.MemberService;
 
 import java.util.Arrays;
 
@@ -29,19 +34,23 @@ import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
+@EnableWebSecurity
 public class SecurityConfiguration {
     private final JwtTokenizer jwtTokenizer;
+    private final TokenUtils tokenUtils;
     private final MemberAuthorityUtils authorityUtils;
 
     public SecurityConfiguration(JwtTokenizer jwtTokenizer,
+                                 TokenUtils tokenUtils,
                                  MemberAuthorityUtils authorityUtils) {
         this.jwtTokenizer = jwtTokenizer;
+        this.tokenUtils = tokenUtils;
         this.authorityUtils = authorityUtils;
     }
 
     // HttpSecurity를 통해 HTTP 요청에 대한 보안 설정 구성
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity httpSecurity, MemberService memberService) throws Exception {
         httpSecurity
                 .headers().frameOptions().sameOrigin()// 동일 출처로부터 들어오는 요청만 렌더링 허용
 
@@ -65,19 +74,24 @@ public class SecurityConfiguration {
 
                 .and()
                 .authorizeHttpRequests(authorize -> authorize // 접근 권한 인가
-                                // 전체 허용
-                                .antMatchers(GET, "/").permitAll()  // 홈
-                                .antMatchers(POST, "/auth/login").permitAll()   // 폼 로그인
-                                .antMatchers(POST, "/members").permitAll()
-                                .antMatchers(GET, "/oauth2/authorization/google").permitAll()   // oauth
-                                .antMatchers(GET, "/questions/board").permitAll()   // 전체 질문 게시판 조회
-                                .antMatchers(GET, "/questions/{question-id}/**").permitAll() // 한 건의 질문과 답변 조회
+                        // 전체 허용
+                        .antMatchers(GET, "/").permitAll()  // 홈
+                        .antMatchers(POST, "/auth/login").permitAll()   // 폼 로그인
+                        .antMatchers(POST, "/members").permitAll()
+                        .antMatchers(GET, "/questions/board").permitAll()   // 전체 질문 게시판 조회
+                        .antMatchers(GET, "/questions/{question-id}/**").permitAll() // 한 건의 질문과 답변 조회
+                        .antMatchers("/h2/**").permitAll()
 
-                                // TODO 전체 허용을 제외한 나머지는 모두 회원 조회 가능으로 변경?
-                                .anyRequest().hasRole("USER")
+                        // TODO 전체 허용을 제외한 나머지는 모두 회원 조회 가능으로 변경?
+                        .anyRequest().hasRole("USER")
+                )
+                .oauth2Login(oauth2 -> oauth2
+                        .loginPage("/oauth2/authorization/google")
+                        .successHandler(new OAuth2MemberSuccessHandler(authorityUtils, memberService, tokenUtils))
                 );
 
-        return httpSecurity.build();
+        return httpSecurity.build(
+        );
     }
 
     @Bean
@@ -95,14 +109,16 @@ public class SecurityConfiguration {
             JwtAuthenticationFilter jwtAuthenticationFilter =
                     new JwtAuthenticationFilter(authenticationManager);
             jwtAuthenticationFilter.setFilterProcessesUrl("/auth/login");
-            jwtAuthenticationFilter.setAuthenticationSuccessHandler(new MemberAuthenticationSuccessHandler(jwtTokenizer));
+            jwtAuthenticationFilter.setAuthenticationSuccessHandler(new MemberAuthenticationSuccessHandler(tokenUtils));
             jwtAuthenticationFilter.setAuthenticationFailureHandler(new MemberAuthenticationFailureHandler());
 
             JwtVerificationFilter jwtVerificationFilter = new JwtVerificationFilter(jwtTokenizer, authorityUtils);
 
             // Spring Security Filter Chain에 추가
             builder.addFilter(jwtAuthenticationFilter)
+                    .addFilterAfter(jwtVerificationFilter, OAuth2LoginAuthenticationFilter.class)
                     .addFilterAfter(jwtVerificationFilter, JwtAuthenticationFilter.class);
+
         }
     }
 
