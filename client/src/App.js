@@ -4,14 +4,16 @@ import Footer from './Components/Common/Footer/Footer';
 import Sidebar from './Components/Common/Sidebar/Sidebar';
 import Header from './Components/Common/Header/Header';
 import TopQuestions from './Components/Question/TopQuestions/TopQuestions';
-import QuestionAndAnswer from './Components/Question/QuestionAndAnswer/QuestionAndAnswer';
+// import QuestionAndAnswer from './Components/Question/QuestionAndAnswer/QuestionAndAnswer';
+import QuestionDetail from './Pages/Question/QuestionDetails/QuestionDetail';
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Header />
         <Sidebar />
-        <QuestionAndAnswer />
+        {/* <QuestionAndAnswer /> */}
+
         <Routes>
           <Route path="/home" element={<div>HomePage 홈 팀원소개</div>} />
           <Route path="/members" element={<div>SignupPage 회원가입</div>} />
@@ -31,7 +33,11 @@ function App() {
           />
           <Route
             path="/questions/:questionId"
-            element={<div>QuestionDetailPage 질문 상세 페이지</div>}
+            element={
+              <div>
+                <QuestionDetail />
+              </div>
+            }
           />
           <Route
             path="/questions/{question-id}/update"

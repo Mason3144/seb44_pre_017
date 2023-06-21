@@ -105,6 +105,6 @@ export const Adopt = styled.div`
   padding: 5px;
   cursor: pointer;
   &:hover {
-    background-color: #333333;
+    background-color: #e3ecf3;
   }
 `;
