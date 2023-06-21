@@ -36,7 +36,7 @@ const QuestionUpdatePage = () => {
     });
 
     if (response.status === 200) {
-      navigate('/questions/board');
+      navigate(`/questions/${questionId}`);
     }
   };
 
