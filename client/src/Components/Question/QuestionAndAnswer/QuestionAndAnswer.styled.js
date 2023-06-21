@@ -97,10 +97,41 @@ export const Date = styled.div`
 
 export const Add = styled.div`
   margin-top: 10px;
-  color: #bbbfc4;
   padding-bottom: 10px;
+  padding-left: 10px;
   border-bottom: 1px solid #e4e6e8;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
 `;
+export const AddText = styled.div`
+  color: #bbbfc4;
+`;
+export const AddBtn = styled.button`
+  cursor: pointer;
+  padding: 5px 10px;
+  background-color: #e5883e;
+  border: none;
+  border-radius: 3px;
+  color: #ffffff;
+  &:hover {
+    background-color: #edb07f;
+  }
+`;
+
+export const CommentInput = styled.input`
+  width: 80%;
+  height: 2em;
+  border-radius: 3px;
+  resize: none;
+  border: none;
+  background-color: #e4e6e8;
+  &:focus {
+    outline: 2px solid #3172c6;
+  }
+`;
+
 export const Adopt = styled.div`
   padding: 5px;
   cursor: pointer;

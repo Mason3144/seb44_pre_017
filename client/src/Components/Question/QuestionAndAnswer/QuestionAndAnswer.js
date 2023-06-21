@@ -9,15 +9,54 @@ import { ReactComponent as Down } from '../../../icons/down.svg';
 import { ReactComponent as Bookmark } from '../../../icons/bookmark.svg';
 import { ReactComponent as History } from '../../../icons/history.svg';
 import { ReactComponent as Adopt } from '../../../icons/adopt.svg';
+
 import Comment from '../Comment/Comment';
 
 function QuestionAndAnswer({ data, isQuestion }) {
   const { adopted } = data;
   const [isAdopted, setIsAdopted] = useState(adopted);
+  const [comment, setComment] = useState('');
+  const [newComment, setNewComment] = useState('');
+
+  const handleComment = (e) => {
+    setNewComment(e.target.value);
+  };
+
+  const { questionId } = useParams();
+  const { answerId } = useParams();
+
+  const handleAddComment = () => {
+    axios
+      .post(
+        `http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/answers/${answerId}/comments`,
+        {},
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: localStorage.getItem('Authorization'),
+          },
+        }
+      )
+      .then((res) => {
+        setComment(res.data);
+        setNewComment('');
+      })
+      .catch((error) => {
+        console.log('Error occurred while posting comment:', error.message);
+      });
+  };
+
   const handleAdopt = () => {
     axios
       .post(
-        `http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/answers${answerId}/adopt`
+        `http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/answers${answerId}/adopt`,
+        {},
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: localStorage.getItem('Authorization'),
+          },
+        }
       )
       .then(() => {
         setIsAdopted(!isAdopted);
@@ -36,9 +75,6 @@ function QuestionAndAnswer({ data, isQuestion }) {
     alert('로그인 후 질문이 가능합니다.');
     // }
   };
-
-  const { questionId } = useParams();
-  const { answerId } = useParams();
 
   const goEdit = () => {
     if (isQuestion === true) {
@@ -127,7 +163,7 @@ function QuestionAndAnswer({ data, isQuestion }) {
           {isQuestion === false ? (
             <S.Adopt>
               <Adopt
-                onClick={handleAdopt}
+                onClick={adopted === false ? handleAdopt : null}
                 fill={isAdopted === false ? '#BBBFC4' : 'green'}
               />
             </S.Adopt>
@@ -150,7 +186,17 @@ function QuestionAndAnswer({ data, isQuestion }) {
       {isQuestion === false ? (
         <>
           {comments}
-          <S.Add>Add a comment</S.Add> {/*Onclick*/}
+          {comment > 0 ? <Comment data={comment} /> : ''}
+          <S.Add>
+            <S.AddText>Add a coment</S.AddText>
+            <S.CommentInput
+              type="text"
+              value={newComment}
+              onChange={handleComment}
+              autofocus
+            ></S.CommentInput>
+            <S.AddBtn onClick={handleAddComment}>Add</S.AddBtn>
+          </S.Add>
         </>
       ) : (
         ''

@@ -27,7 +27,7 @@ function Comment({ data }) {
   return (
     <S.Container>
       <S.Comment>{data.commentBody} -</S.Comment>
-      <S.Writer>{data.writer.nickname}</S.Writer>
+      {data.writer ? <S.Writer>{data.writer.nickname}</S.Writer> : ''}
       <S.CreatedAt>{nowDate}</S.CreatedAt>
     </S.Container>
   );

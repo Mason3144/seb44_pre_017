@@ -8,6 +8,7 @@ function QuestionDetail() {
   const [data, setData] = useState({});
   const [newAnswer, setNewAnswer] = useState('');
   const [answer, setAnswer] = useState({});
+
   const { questionId } = useParams();
 
   useEffect(() => {
@@ -21,7 +22,7 @@ function QuestionDetail() {
       .catch((error) => {
         console.log('Error occurred:', error.message);
       });
-  }, [questionId]);
+  }, []);
 
   const handleSubmit = () => {
     axios
@@ -55,11 +56,7 @@ function QuestionDetail() {
       <QuestionAndAnswer data={data} isQuestion={true} />
       <S.Title>{data.answers ? data.answers.length : '0'} Answers</S.Title>
       <S.AnswerContainer>{answers}</S.AnswerContainer>
-      {answer <= 0 ? (
-        <QuestionAndAnswer data={answer} isQuestion={false} />
-      ) : (
-        ''
-      )}
+      {answer > 0 ? <QuestionAndAnswer data={answer} isQuestion={false} /> : ''}
       <S.Title>Your Answer</S.Title>
       <S.Editor>
         <WebEditor
