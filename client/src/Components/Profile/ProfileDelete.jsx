@@ -3,7 +3,7 @@ import * as S from './ProfileDelete.styled';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setLoginState } from '../../redux/login';
+import { setLoginState } from '../../redux/loginSlice';
 
 const ProfileDelete = () => {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ const ProfileDelete = () => {
   const secondletter1 = `Deletion is irreversible, and you will have no way to regain any
               of your original content, should this deletion be carried out and
               you change your mind later on.`;
-  const secondlettet2 = `Your questions and answers will remain on the site, but will be
+  const secondletter2 = `Your questions and answers will remain on the site, but will be
               disassociated and anonymized (the author will be listed as
               "user22069902") and will not indicate your authorship even if you
               later return to the site.`;
@@ -65,7 +65,7 @@ const ProfileDelete = () => {
           <br />
           <ul>
             <li>{secondletter1}</li>
-            <li>{secondlettet2}</li>
+            <li>{secondletter2}</li>
             <p>id: {resUserInfo.memberId}</p>
             <p>password: {resUserInfo.nickname}</p>
           </ul>
