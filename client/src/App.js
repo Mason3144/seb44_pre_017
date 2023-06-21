@@ -6,16 +6,17 @@ import Header from './Components/Common/Header/Header';
 import Sidebar from './Components/Common/Sidebar/Sidebar';
 import Footer from './Components/Common/Footer/Footer';
 import TopQuestions from './Components/Question/TopQuestions/TopQuestions';
+import QuestionDetail from './Pages/Question/QuestionDetails/QuestionDetail';
 import MyPage from './Pages/My/MyPage.jsx';
 import LoginPage from './Pages/LoginSignup/LoginPage.jsx';
 import QuestionCreatePage from './Pages/Question/QuestionCreatePage/QuestionCreatePage';
-
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Header />
         <Sidebar />
+
         <Routes>
           <Route path="/home" element={<div>HomePage 홈 팀원소개</div>} />
           <Route path="/members" element={<div>SignupPage 회원가입</div>} />
@@ -32,7 +33,11 @@ function App() {
           <Route path="/questions/ask" element={<QuestionCreatePage />} />
           <Route
             path="/questions/:questionId"
-            element={<div>QuestionDetailPage 질문 상세 페이지</div>}
+            element={
+              <div>
+                <QuestionDetail />
+              </div>
+            }
           />
           <Route
             path="/questions/{question-id}/update"
