@@ -2,9 +2,7 @@ import * as S from './ProfileUser.styled';
 import { useSelector } from 'react-redux';
 
 const ProfileUser = () => {
-  // const user = useSelector((state) => state.user.value)
-  // 처음 렌더링 될 때, 유저 이미지를 서버에 요청해서 get 하는 코드
-  const user = useSelector((state) => state.user.value);
+  const resUserInfo = useSelector((state) => state.responseUserInfo.value);
 
   return (
     <div className="profile-user">
@@ -12,7 +10,7 @@ const ProfileUser = () => {
         <S.ProfileContainer>
           <S.UserImg></S.UserImg>
           <S.UsernameContainer>
-            <S.Username>{/* {user.nickname} */}</S.Username>
+            <S.Username>{resUserInfo.nickname}</S.Username>
           </S.UsernameContainer>
         </S.ProfileContainer>
         <S.ProfileButtonBar>

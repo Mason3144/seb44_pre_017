@@ -4,12 +4,13 @@ import MyPage from './Pages/My/MyPage.jsx';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LoginPage from './Pages/LoginSignup/LoginPage.jsx';
+import MyPage from './Pages/My/MyPage.jsx';
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <Header />
+      <ProfileSidebar />
+      {/* <BrowserRouter>
         <Sidebar />
         <Routes>
           <Route path="/home" element={<div>HomePage 홈 팀원소개</div>} />
@@ -43,7 +44,7 @@ function App() {
             path="/questions/{question-id}/answers"
             element={<div>AnswerUpdatePage 답변 수정 페이지</div>}
           />
-          <Route path="/members/edit" element={<ProfileSidebar />} />
+          <Route path="/members/" element={<MyPage />} />
           <Route
             path="/members/delete"
             element={<div>ProfileDelete 회원정보 삭제</div>}
@@ -57,8 +58,7 @@ function App() {
             element={<div>MyPage 비밀번호 변경</div>}
           />
         </Routes>
-        <Footer />
-      </BrowserRouter>
+      </BrowserRouter> */}
     </div>
   );
 }
