@@ -3,9 +3,11 @@
 import { useState } from 'react';
 import * as S from './ProfileEdit.styled';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const ProfileEdit = () => {
   const [displayName, setDisplayName] = useState('');
+  const navigate = useNavigate();
   const handleInputValue = (e) => {
     setDisplayName(e.target.value);
   };
@@ -37,6 +39,11 @@ const ProfileEdit = () => {
     }
   };
 
+  const cancelClickHandler = () => {
+    alert('변경이 취소되었습니다.');
+    navigate('/questions');
+  };
+
   return (
     <S.ProfileEditWrapper>
       <S.Title>Edit your profile</S.Title>
@@ -63,7 +70,11 @@ const ProfileEdit = () => {
         >
           Save profile
         </S.Button>
-        <S.Button buttontype="cancel" className="cancel">
+        <S.Button
+          buttontype="cancel"
+          className="cancel"
+          onClick={cancelClickHandler}
+        >
           Cancel
         </S.Button>
       </S.ButtonContainer>
