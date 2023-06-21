@@ -13,7 +13,6 @@ function App() {
       <BrowserRouter>
         <Header />
         <Sidebar />
-        {/* <QuestionAndAnswer /> */}
 
         <Routes>
           <Route path="/home" element={<div>HomePage 홈 팀원소개</div>} />
