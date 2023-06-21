@@ -2,7 +2,10 @@ import { useState } from 'react';
 import ProfileUser from '../../Components/Profile/ProfileUser.jsx';
 import ProfileSidebar from '../../Components/Profile/ProfileSidebar.jsx';
 import ProfileEdit from '../../Components/Profile/ProfileEdit.jsx';
-import ProfileDelete from '../../Components/Profile/';
+import Header from '../../Components/Common/Header/Header.js';
+import Sidebar from '../../Components/Common/Sidebar/Sidebar.js';
+import Footer from '../../Components/Common/Footer/Footer.js';
+import ProfileDelete from '../../Components/Profile/ProfileDelete.jsx';
 import ProfileYourLogins from '../../Components/Profile/ProfileYourLogins.jsx';
 import * as S from './MyPage.styled.js';
 
@@ -21,7 +24,7 @@ const MyPage = () => {
           <ProfileSidebar onComponentChange={handleComponentChange} />
           <S.ChangeDisplayContainer>
             {seletedComponent === 'edit' && <ProfileEdit />}
-            {seletedComponent === 'delete' && <div>Profile delete</div>}
+            {seletedComponent === 'delete' && <ProfileDelete />}
             {seletedComponent === 'yourlogins' && <ProfileYourLogins />}
           </S.ChangeDisplayContainer>
         </S.layout>

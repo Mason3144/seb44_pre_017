@@ -1,8 +1,10 @@
+/* eslint-disable no-undef */
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Footer from './Components/Common/Footer/Footer';
-import Sidebar from './Components/Common/Sidebar/Sidebar';
+
 import Header from './Components/Common/Header/Header';
+import Sidebar from './Components/Common/Sidebar/Sidebar';
+import Footer from './Components/Common/Footer/Footer';
 import TopQuestions from './Components/Question/TopQuestions/TopQuestions';
 import MyPage from './Pages/My/MyPage.jsx';
 import LoginPage from './Pages/LoginSignup/LoginPage.jsx';
