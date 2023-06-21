@@ -3,11 +3,9 @@
 // 2. 클릭 시, 페이지 navigate
 import { useState } from 'react';
 import * as S from './ProfileSidebar.styled';
-// import { useNavigate } from 'react-router-dom';
 
 const ProfileSidebar = ({ onComponentChange }) => {
   const [selectedButton, setSelectedButton] = useState('edit');
-  // const navigate = useNavigate();
 
   const handleButtonClick = (buttonName) => {
     setSelectedButton(buttonName);
