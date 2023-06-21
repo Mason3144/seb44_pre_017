@@ -78,23 +78,25 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
     }
 
     private void redirect(HttpServletRequest request, HttpServletResponse response, Member member) throws IOException {
-        String accessToken = tokenUtils.delegateOauth2AccessToken(member);
+        String accessToken = tokenUtils.delegateAccessToken(member);
         String refreshToken = tokenUtils.delegateRefreshToken(member);
 
-        String uri = createURI(accessToken, refreshToken).toString();
+        String uri = createURI(accessToken, refreshToken, member).toString();
         getRedirectStrategy().sendRedirect(request, response, uri);
     }
 
-    private URI createURI(String accessToken, String refreshToken) {
+    private URI createURI(String accessToken, String refreshToken, Member member) {
         MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
         queryParams.add("access_token", accessToken);
         queryParams.add("refresh_token", refreshToken);
+        queryParams.add("memberId", member.getMemberId().toString());
+        queryParams.add("nickname", member.getNickname());
 
         return UriComponentsBuilder.newInstance()
                 .scheme("http")
                 .host("localhost")
 //                .port(80) // default
-                .path("/oauth2/authorization/google") // TODO 수정
+                .path("/oauth2/authorization/google/success")
                 .queryParams(queryParams)
                 .build().toUri();
     }
