@@ -5,22 +5,25 @@
 import axios from 'axios';
 import * as S from './Login.styled';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch , useSelector } from 'react-redux';
 import { login } from '../../redux/user';
+import { responseUserInfo } from '../../redux/userInfo';
 import { setLoginState } from '../../redux/login';
 import { useNavigate } from 'react-router-dom';
 axios.defaults.withCredentials = true;
 
+
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const resUserInfo = useSelector((state) => state.responseUserInfo.value);
 
   // input창에 입력되는 로그인 text 저장
   const [loginInfo, setLoginInfo] = useState({
     username: '',
     password: '',
   });
-  
+
   // 로그인 text 값 저장
   const handleInputValue = (key) => (e) => {
     setLoginInfo({ ...loginInfo, [key]: e.target.value });
@@ -63,11 +66,24 @@ const Login = () => {
           dispatch(setLoginState(true));
           alert('로그인에 성공하였습니다.');
           navigate('/questions');
-          // 1-4. 엑세스 토큰, 리프레시 토큰 받고, 브라우저 로컬스토리지에 저장)
+          console.log(res.data);
+
+          // 1-4 읽기 전용 객체를 깊은 복사로 수정해서 변수에 할당
+          const updatedUserInfo = {
+            ...resUserInfo,
+            memberId: res.data.memberId,
+            nickname: res.data.nickname,
+          }
+          console.log(updatedUserInfo);
+
+          // 1-5. 엑세스 토큰, 리프레시 토큰 받고, 브라우저 로컬스토리지에 저장)
           const ACCESS_TOKEN = res.headers.get('Authorization');
           const REFRESH_TOKEN = res.headers.get('refresh');
           localStorage.setItem('Authorization', ACCESS_TOKEN);
           localStorage.setItem('refresh', REFRESH_TOKEN);
+
+          // 1-6. 리덕스 스토어에 저장
+          dispatch(responseUserInfo(updatedUserInfo));
         } else {
           alert('로그인에 실패하였습니다.');
         }
@@ -98,6 +114,8 @@ const Login = () => {
       'http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google/success';
   };
 
+
+  console.log()
   return (
     <S.LoginWrapper>
       <S.StyledStackoverflowLogo />

@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import sidebarReducer from './sidebarSlice';
 import userReducer from './user';
 import loginReducer from './login';
+import responseUserInfoReducer from './userInfo';
 
 export default configureStore({
   reducer: {
@@ -9,5 +10,6 @@ export default configureStore({
     sidebar: sidebarReducer,
     login: loginReducer,
     sidebar: sidebarReducer,
+    responseUserInfo: responseUserInfoReducer,
   },
 });
