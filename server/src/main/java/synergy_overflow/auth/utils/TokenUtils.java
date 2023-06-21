@@ -27,18 +27,6 @@ public class TokenUtils extends JwtTokenizer{
         return accessToken;
     }
 
-    public String delegateOauth2AccessToken(Member member) {
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("username", member.getEmail());
-        claims.put("roles", member.getRoles());
-
-        String subject = member.getEmail();
-        Date expiration = getTokenExpiration(getAccessTokenExpirationMinutes());
-        String base64EncodedSecretKey = encodeBase64SecretKey(getSecretKey());
-
-        return generateAccessToken(claims, subject, expiration, base64EncodedSecretKey);
-    }
-
     public String delegateRefreshToken(Member member) {
         String subject = member.getEmail();
         Date expiration = getTokenExpiration(getRefreshTokenExpirationMinutes());
