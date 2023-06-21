@@ -27,7 +27,6 @@ export const Public = styled.div`
   font-size: 13px;
   color: #858c94;
 `;
-
 export const Groups = styled.div`
   display: flex;
   flex-direction: column;

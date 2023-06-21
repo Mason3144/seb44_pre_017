@@ -1,13 +1,14 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import * as S from './ProfileEdit.styled';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 const ProfileEdit = () => {
   const [displayName, setDisplayName] = useState('');
-  const navigate = useNavigate();
+  const resUserInfo = useSelector((state) => state.responseUserInfo.value);
+
   const handleInputValue = (e) => {
     setDisplayName(e.target.value);
   };
@@ -21,7 +22,7 @@ const ProfileEdit = () => {
       alert('이름을 입력해주세요.');
     } else {
       try {
-        const memberId = '1';
+        const memberId = resUserInfo.memberId;
         const url = `http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/member/${memberId}`;
         const res = await axios.patch(url, changedUserInfo, {
           headers: {

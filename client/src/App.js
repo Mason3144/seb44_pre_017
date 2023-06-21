@@ -1,11 +1,14 @@
+/* eslint-disable no-undef */
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Footer from './Components/Common/Footer/Footer';
-import Sidebar from './Components/Common/Sidebar/Sidebar';
+
 import Header from './Components/Common/Header/Header';
+import Sidebar from './Components/Common/Sidebar/Sidebar';
+import Footer from './Components/Common/Footer/Footer';
 import TopQuestions from './Components/Question/TopQuestions/TopQuestions';
 import QuestionDetail from './Pages/Question/QuestionDetails/QuestionDetail';
-import MyPage from './Pages/My/MyPage';
+import MyPage from './Pages/My/MyPage.jsx';
+import LoginPage from './Pages/LoginSignup/LoginPage.jsx';
 import QuestionCreatePage from './Pages/Question/QuestionCreatePage/QuestionCreatePage';
 function App() {
   return (
@@ -21,7 +24,7 @@ function App() {
             path="/members/welcome"
             element={<div>AfterSignupPage 회원가입 완료</div>}
           />
-          <Route path="/" element={<MyPage />} />
+          <Route path="/" element={<LoginPage />} />
           <Route path="/questions" element={<TopQuestions />} />
           <Route
             path="/questions/board"
@@ -44,10 +47,7 @@ function App() {
             path="/questions/:questionId/answers/:answerId/edit"
             element={<div>AnswerUpdatePage 답변 수정 페이지</div>}
           />
-          <Route
-            path="/members/{member-id}"
-            element={<div>MyPage 회원정보 수정</div>}
-          />
+          <Route path="/members/" element={<MyPage />} />
           <Route
             path="/members/{member-id}/delete"
             element={<div>ProfileDelete 회원정보 삭제</div>}
