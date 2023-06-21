@@ -22,7 +22,7 @@ import synergy_overflow.auth.handler.MemberAuthenticationEntryPoint;
 import synergy_overflow.auth.handler.MemberAuthenticationFailureHandler;
 import synergy_overflow.auth.handler.MemberAuthenticationSuccessHandler;
 import synergy_overflow.auth.jwt.JwtTokenizer;
-import synergy_overflow.auth.oauth2.handler.OAuth2MemberSuccessHandler;
+import synergy_overflow.auth.oauth2.OAuth2MemberSuccessHandler;
 import synergy_overflow.auth.utils.MemberAuthorityUtils;
 import synergy_overflow.auth.utils.TokenUtils;
 import synergy_overflow.member.service.MemberService;
