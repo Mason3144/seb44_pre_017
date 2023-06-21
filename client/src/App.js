@@ -4,6 +4,7 @@ import Footer from './Components/Common/Footer/Footer';
 import Sidebar from './Components/Common/Sidebar/Sidebar';
 import Header from './Components/Common/Header/Header';
 import TopQuestions from './Components/Question/TopQuestions/TopQuestions';
+import AnswerUpdatePage from './Pages/Question/AnswerUpdatePage/AnswerUpdatePage';
 
 function App() {
   return (
@@ -37,8 +38,8 @@ function App() {
             element={<div>QuestionUpdatePage 질문 수정 페이지</div>}
           />
           <Route
-            path="/questions/{question-id}/answers"
-            element={<div>AnswerUpdatePage 답변 수정 페이지</div>}
+            path="/questions/:questionId/answers/:answerId/edit"
+            element={<AnswerUpdatePage />}
           />
           <Route
             path="/members/{member-id}"
