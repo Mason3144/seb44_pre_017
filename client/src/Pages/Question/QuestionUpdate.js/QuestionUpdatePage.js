@@ -49,12 +49,11 @@ const QuestionUpdatePage = () => {
           <S.BodyBanner>Body</S.BodyBanner>
           <WebEditor value={textValue} setValue={setTextValue} />
         </S.BodyBox>
-        {/* TODO: 버튼 디자인 */}
         <S.ButtonGroup>
           <S.EditBtn onClick={onSubmit}>Save edits</S.EditBtn>
           <S.CancelBtn
             onClick={() => {
-              navigate('/questions/board');
+              navigate(`/questions/${questionId}`);
             }}
           >
             Cancle
@@ -100,7 +99,6 @@ const EditTitleBox = ({ value, setValue }) => {
         id={titleId}
         value={value}
         onChange={onChangeTitle}
-        // placeholder=이전 페이지 내용
       />
     </S.TitleBox>
   );
