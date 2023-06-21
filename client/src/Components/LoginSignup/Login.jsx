@@ -13,12 +13,14 @@ axios.defaults.withCredentials = true;
 
 const Login = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // useNavigate 사용
+  const navigate = useNavigate();
+
   // input창에 입력되는 로그인 text 저장
   const [loginInfo, setLoginInfo] = useState({
     username: '',
     password: '',
   });
+  
   // 로그인 text 값 저장
   const handleInputValue = (key) => (e) => {
     setLoginInfo({ ...loginInfo, [key]: e.target.value });
@@ -80,17 +82,21 @@ const Login = () => {
   const LoginRequestHandlerGoogle = () => {
     window.location.href =
       'http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google';
+
+    // 2-1. 구글 로그인 시, 토큰 받기
+    // /oauth2/authorization/google/success'; App.js 에서 왼쪽 URI로 라우터 설정
+    let accessToken = new URL(location.href).searchParams.get('Authorization');
+    let refreshToken = new URL(location.href).searchParams.get('refreshToken');
+
+    localStorage.setItem('Authorization', accessToken);
+    localStorage.setItem('refresh', refreshToken);
+
+    console.log(accessToken);
+    console.log(refreshToken);
+
+    location.href =
+      'http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google/success';
   };
-  // 구글 로그인 페이지로 이동 -> 사용자 구글 로그인 -> 로그인 성공 시, 메인 페이지로 이동
-  // 질문 1: 로그인 상태는 어느 시점에서 변경해야 할까?
-  // 다시 메인페이지로 리다이렉트 되었을 때, 로그인 상태를 변경해야 할까?
-  //   1-1: 로그인 상태 저장
-  //   dispatch(setLoginState(true));
-  // 질문 2: 토큰 저장 및 브라우저 쿠키 저장은 어느 시점에 해야 할까? 전체 코드 중 어디 코드에 작성되어야 하는가?
-  //   1-2. 엑세스 토큰, 리프레시 토큰 받고, 브라우저 쿠키에 저장
-  //   if (res.data.ACCESS_TOKEN)
-  // localStorage.setItem('ACCESS_TOKEN', res.data.ACCESS_TOKEN);
-  // localStorage.setItem('REFRESH_TOKEN', res.data.REFRESH_TOKEN);
 
   return (
     <S.LoginWrapper>
