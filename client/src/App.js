@@ -3,9 +3,9 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Header from './Components/Common/Header/Header';
+import MainPage from './Pages/Common/MainPage/MainPage';
 import Sidebar from './Components/Common/Sidebar/Sidebar';
 import Footer from './Components/Common/Footer/Footer';
-import TopQuestions from './Components/Question/TopQuestions/TopQuestions';
 import QuestionDetail from './Pages/Question/QuestionDetails/QuestionDetail';
 import MyPage from './Pages/My/MyPage.jsx';
 import LoginPage from './Pages/LoginSignup/LoginPage.jsx';
@@ -24,21 +24,14 @@ function App() {
             path="/members/welcome"
             element={<div>AfterSignupPage 회원가입 완료</div>}
           />
+          <Route path="/questions" element={<MainPage />} />
           <Route path="/" element={<LoginPage />} />
-          <Route path="/questions" element={<TopQuestions />} />
           <Route
             path="/questions/board"
             element={<div>QuestionsPage All Questions</div>}
           />
           <Route path="/questions/ask" element={<QuestionCreatePage />} />
-          <Route
-            path="/questions/:questionId"
-            element={
-              <div>
-                <QuestionDetail />
-              </div>
-            }
-          />
+          <Route path="/questions/:questionId" element={<QuestionDetail />}/>
           <Route
             path="/questions/{question-id}/update"
             element={<div>QuestionUpdatePage 질문 수정 페이지</div>}
