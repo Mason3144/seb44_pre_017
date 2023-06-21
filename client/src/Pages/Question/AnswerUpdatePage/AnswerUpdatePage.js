@@ -15,7 +15,12 @@ const AnswerUpdatePage = () => {
   useEffect(() => {
     const getAnswer = async () => {
       const source = `http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`;
-      const response = await axios.get(source);
+      const response = await axios.get(source, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: localStorage.getItem('Authorization'),
+        },
+      });
 
       setTitleValue(response.data.title);
       setTextValue(response.data.body);
@@ -27,9 +32,18 @@ const AnswerUpdatePage = () => {
   const onSubmit = async () => {
     const source = `http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/answers/${answerId}/edit`;
 
-    const response = await axios.patch(source, {
-      answerBody: textValue,
-    });
+    const response = await axios.patch(
+      source,
+      {
+        answerBody: textValue,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: localStorage.getItem('Authorization'),
+        },
+      }
+    );
 
     if (response.status === 200) {
       navigate(`/questions/${questionId}`);
