@@ -8,44 +8,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.mapping.JpaMetamodelMappingContext;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.*;
-
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
-import static org.springframework.restdocs.payload.PayloadDocumentation.*;
-
-import org.springframework.http.ResponseEntity;
 import org.springframework.restdocs.constraints.ConstraintDescriptions;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.restdocs.payload.JsonFieldType;
-import static org.springframework.restdocs.snippet.Attributes.*;
-
-import static org.springframework.restdocs.request.RequestDocumentation.*;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import synergy_overflow.helper.question.QuestionRestDocsDescriptor;
 import synergy_overflow.helper.question.QuestionStubData;
 import synergy_overflow.question.controller.QuestionController;
-import synergy_overflow.question.dto.MultiResponseDto;
 import synergy_overflow.question.dto.QuestionDto;
 import synergy_overflow.question.entity.Question;
 import synergy_overflow.question.mapper.QuestionMapper;
-import synergy_overflow.question.sevice.QuestionService;
+import synergy_overflow.question.service.QuestionService;
 
 import java.util.List;
 
 import static org.mockito.BDDMockito.given;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.restdocs.request.RequestDocumentation.*;
+import static org.springframework.restdocs.snippet.Attributes.key;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(value = QuestionController.class)
 @MockBean(JpaMetamodelMappingContext.class)
@@ -75,7 +64,7 @@ public class QuestionControllerTest extends QuestionStubData implements Question
         List<String> bodyConstraint = postMemberConstraints.descriptionsForProperty("body");
 
         ResultActions actions = mockMvc.perform(
-                RestDocumentationRequestBuilders.post(getQuestionUrl()+"/ask")
+                RestDocumentationRequestBuilders.post(getQuestionUrl() + "/ask")
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(gson.toJson(questionPost(1))));
@@ -100,7 +89,7 @@ public class QuestionControllerTest extends QuestionStubData implements Question
                         responseFields(
                                 getSingleQuestionDescriptor()
                         )
-                        ));
+                ));
     }
 
     @Test
@@ -112,10 +101,10 @@ public class QuestionControllerTest extends QuestionStubData implements Question
         given(mapper.questionToQuestionDtoResponse(Mockito.any())).willReturn(generateQuestionResponse(1));
 
         ResultActions actions = mockMvc.perform(
-                RestDocumentationRequestBuilders.get(getQuestionUri(),questionId)
+                RestDocumentationRequestBuilders.get(getQuestionUri(), questionId)
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
-                        );
+        );
 
         actions
                 .andExpect(status().isOk())
@@ -139,7 +128,7 @@ public class QuestionControllerTest extends QuestionStubData implements Question
     }
 
     @Test
-    public void patchQuestion() throws Exception{
+    public void patchQuestion() throws Exception {
         long questionId = 1;
 
         given(mapper.questionDtoPatchToQuestion(Mockito.any())).willReturn(new Question());
@@ -153,7 +142,7 @@ public class QuestionControllerTest extends QuestionStubData implements Question
         List<String> bodyConstraint = postMemberConstraints.descriptionsForProperty("body");
 
         ResultActions actions = mockMvc.perform(
-                RestDocumentationRequestBuilders.patch(getQuestionUri()+"/edit",questionId)
+                RestDocumentationRequestBuilders.patch(getQuestionUri() + "/edit", questionId)
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(gson.toJson(questionPatch(1))));
@@ -187,22 +176,22 @@ public class QuestionControllerTest extends QuestionStubData implements Question
 
 
     @Test
-    public void getQuestions() throws Exception{
+    public void getQuestions() throws Exception {
         String page = "1";
         String size = "10";
         String sort = "new";
 
-        MultiValueMap<String,String> params = new LinkedMultiValueMap<>();
-        params.add("page",page);
-        params.add("size",size);
-        params.add("sort",sort);
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        params.add("page", page);
+        params.add("size", size);
+        params.add("sort", sort);
 
-        given(service.getQuestions(Mockito.anyInt(),Mockito.anyInt(),Mockito.anyString())).willReturn(getPageData());
+        given(service.getQuestions(Mockito.anyInt(), Mockito.anyInt(), Mockito.anyString())).willReturn(getPageData());
 
         given(mapper.questionsToMultiResponseDtos(Mockito.any())).willReturn(generateListQuestion(1));
 
         ResultActions actions = mockMvc.perform(
-                RestDocumentationRequestBuilders.get(getQuestionUrl()+"/board")
+                RestDocumentationRequestBuilders.get(getQuestionUrl() + "/board")
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .params(params)
@@ -233,13 +222,13 @@ public class QuestionControllerTest extends QuestionStubData implements Question
     }
 
     @Test
-    public void getQuestionsHome() throws Exception{
-        given(service.getQuestions(Mockito.anyInt(),Mockito.anyInt(),Mockito.anyString())).willReturn(getPageData());
+    public void getQuestionsHome() throws Exception {
+        given(service.getQuestions(Mockito.anyInt(), Mockito.anyInt(), Mockito.anyString())).willReturn(getPageData());
 
         given(mapper.questionsToMultiResponseDtos(Mockito.any())).willReturn(generateListQuestion(1));
 
         ResultActions actions = mockMvc.perform(
-                RestDocumentationRequestBuilders.get(getQuestionUrl()+"/home")
+                RestDocumentationRequestBuilders.get(getQuestionUrl() + "/home")
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
         );
@@ -258,11 +247,11 @@ public class QuestionControllerTest extends QuestionStubData implements Question
     }
 
     @Test
-    public void deleteQuestion() throws Exception{
+    public void deleteQuestion() throws Exception {
         long questionId = 1;
 
         ResultActions actions = mockMvc.perform(
-                RestDocumentationRequestBuilders.delete(getQuestionUri(),questionId)
+                RestDocumentationRequestBuilders.delete(getQuestionUri(), questionId)
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
         );
@@ -277,6 +266,4 @@ public class QuestionControllerTest extends QuestionStubData implements Question
                         )
                 ));
     }
-
-
 }
