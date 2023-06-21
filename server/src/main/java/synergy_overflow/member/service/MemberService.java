@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Transactional
+
 @Service
 public class MemberService {
     private final MemberRepository memberRepository;

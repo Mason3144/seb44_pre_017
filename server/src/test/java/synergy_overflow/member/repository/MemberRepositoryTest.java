@@ -1,5 +1,6 @@
 package synergy_overflow.member.repository;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -14,6 +15,7 @@ class MemberRepositoryTest {
     private MemberRepository memberRepository;
 
     @Test
+    @DisplayName("member save test")
     public void saveMemberTest(){
         //given
         Member member = new Member();
@@ -32,6 +34,7 @@ class MemberRepositoryTest {
     }
 
     @Test
+    @DisplayName("이메일로 회원 찾기 test")
     public void findByEmailTest(){
         //given
         Member member = new Member();

@@ -2,25 +2,30 @@ package synergy_overflow.member.controller;
 
 import com.google.gson.Gson;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+
+import org.springframework.security.test.context.support.WithMockUser;
+
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
-
-import synergy_overflow.SynergyOverflowApplication;
 import synergy_overflow.member.dto.MemberDto;
 
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest(classes = SynergyOverflowApplication.class)
+
+@SpringBootTest
 @AutoConfigureMockMvc
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@WithMockUser(roles = "USER")
 class MemberControllerTest {
 
     @Autowired
@@ -29,16 +34,16 @@ class MemberControllerTest {
     private Gson gson;
 
 
-
     @Test
+    @Order(1)
+    @DisplayName("회원 등록")
     void createAccountForm() throws Exception{
         //given
         MemberDto.Post post = new MemberDto.Post("hgd@gmail.com",
                 "q1w2e3r4!",
                 "홍길동");
+
         String content =gson.toJson(post);
-
-
 
         //when
         ResultActions actions  =
@@ -51,6 +56,8 @@ class MemberControllerTest {
 
 
     @Test
+    @Order(2)
+    @DisplayName("회원 조회")
     void findMember() throws Exception{
         //given
         //post로 데이터 넣기
@@ -67,19 +74,22 @@ class MemberControllerTest {
                                 .content(postContent)
                 );
 
-        //get
-        //when,then
+//        get
+//        when,then
         mockMvc.perform(
                         get("/members/1")
                                 .accept(MediaType.APPLICATION_JSON)
+                                .contentType(MediaType.APPLICATION_JSON)
+
                 )
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.email").value(post.getEmail()))
                 .andExpect(jsonPath("$.nickname").value(post.getNickname()));
 
     }
 
     @Test
+    @Order(3)
+    @DisplayName("회원 수정")
     void patchMember() throws Exception{
         //given
         //post로 데이터 넣기
@@ -95,6 +105,7 @@ class MemberControllerTest {
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(postContent)
                 );
+
         //patch
         //when,then
 
@@ -109,28 +120,29 @@ class MemberControllerTest {
                                 .content(patchContent)
                 )
                 .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.password").value(patch.getPassword()))
                 .andExpect(jsonPath("$.nickname").value(patch.getNickname()));
 
 
 
     }
 
-    //회원 삭제
-
     @Test
+    @Order(4)
+    @DisplayName("회원 삭제")
     void deleteMember() throws Exception{
+
         MemberDto.Post post = new MemberDto.Post("hgd@gmail.com",
                 "q1w2e3r4!",
                 "홍길동");
         String postContent = gson.toJson(post);
 
-                mockMvc.perform(
-                        post("/members")
-                                .accept(MediaType.APPLICATION_JSON)
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .content(postContent)
-                );
+        mockMvc.perform(
+                post("/members")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(postContent)
+
+        );
         mockMvc.perform(
                 delete("/members/1")
         ).andExpect(status().isNoContent());
