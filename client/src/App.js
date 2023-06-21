@@ -10,6 +10,7 @@ import QuestionDetail from './Pages/Question/QuestionDetails/QuestionDetail';
 import MyPage from './Pages/My/MyPage.jsx';
 import LoginPage from './Pages/LoginSignup/LoginPage.jsx';
 import QuestionCreatePage from './Pages/Question/QuestionCreatePage/QuestionCreatePage';
+import AllQuestions from './Components/Question/AllQuestions/AllQuestions';
 function App() {
   return (
     <div className="App">
@@ -26,12 +27,9 @@ function App() {
           />
           <Route path="/questions" element={<MainPage />} />
           <Route path="/" element={<LoginPage />} />
-          <Route
-            path="/questions/board"
-            element={<div>QuestionsPage All Questions</div>}
-          />
+          <Route path="/questions/board" element={<AllQuestions />} />
           <Route path="/questions/ask" element={<QuestionCreatePage />} />
-          <Route path="/questions/:questionId" element={<QuestionDetail />}/>
+          <Route path="/questions/:questionId" element={<QuestionDetail />} />
           <Route
             path="/questions/{question-id}/update"
             element={<div>QuestionUpdatePage 질문 수정 페이지</div>}
