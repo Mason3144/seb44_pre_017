@@ -5,6 +5,8 @@ import Sidebar from './Components/Common/Sidebar/Sidebar';
 import Header from './Components/Common/Header/Header';
 import TopQuestions from './Components/Question/TopQuestions/TopQuestions';
 import QuestionUpdatePage from './Pages/Question/QuestionUpdate.js/QuestionUpdatePage';
+import MyPage from './Pages/My/MyPage';
+import QuestionCreatePage from './Pages/Question/QuestionCreatePage/QuestionCreatePage';
 
 function App() {
   return (
