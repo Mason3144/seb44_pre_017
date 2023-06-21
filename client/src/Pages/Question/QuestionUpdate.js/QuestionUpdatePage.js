@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState, useId, useEffect } from 'react';
 import * as S from './QuestionUpdatePage.styled';
-import WebEditor from '../../../Components/Question/QuestionBox/WebEditor';
+import WebEditor from '../../../../../../../pre-project/seb44_pre_017/client/src/Components/Question/QuestionBox/WebEditor';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
@@ -16,9 +16,12 @@ const QuestionUpdatePage = () => {
   useEffect(() => {
     const getQuestion = async () => {
       const source = `http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`;
-      const response = await axios.get(source);
-
-      console.log(response);
+      const response = await axios.get(source, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: localStorage.getItem('Authorization'),
+        },
+      });
 
       setTitleValue(response.data.title);
       setTextValue(response.data.body);
@@ -30,10 +33,19 @@ const QuestionUpdatePage = () => {
   const onSubmit = async () => {
     const source = `http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/edit`;
 
-    const response = await axios.patch(source, {
-      title: titleValue,
-      body: textValue,
-    });
+    const response = await axios.patch(
+      source,
+      {
+        title: titleValue,
+        body: textValue,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: localStorage.getItem('Authorization'),
+        },
+      }
+    );
 
     if (response.status === 200) {
       navigate(`/questions/${questionId}`);
@@ -105,3 +117,4 @@ const EditTitleBox = ({ value, setValue }) => {
 };
 
 export default QuestionUpdatePage;
+
