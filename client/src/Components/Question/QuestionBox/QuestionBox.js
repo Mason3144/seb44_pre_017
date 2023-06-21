@@ -1,16 +1,20 @@
-//질문 상세 페이지로 이동하기 위한 onClick 이벤트 사용으로 useNavigate 로직과 S.Title 주석 처리했습니다.
-//답변수, 조회수, 제목, 작성자에 해당되는 텍스트는 페이지에서 map을 작성함에 따라 데이터 값에 해당되는 파라미터로 변경해야 합니다.
-
-import React from 'react';
+/* eslint-disable react/prop-types*/
 import * as S from './QuestionBox.styled';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const QuestionBox = ({ question }) => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  // const goToQuestionDetail = () => {
-  //     navigate("/questions/{question-id}");
-  //   };
+  const goToQuestionDetail = () => {
+    const questionId = question.questionId;
+    navigate(`/questions/${questionId}`);
+  };
+
+  if (!question) {
+    return null;
+  }
+
+  const { created_at } = question;
 
   const detailDate = (a) => {
     const milliSeconds = new Date() - a;
@@ -31,25 +35,19 @@ const QuestionBox = ({ question }) => {
   };
 
   //시간 데이터에 해당하는 값을 api 데이터의 날짜 파라미터로 변경합니다.
-  const nowDate = detailDate(new Date('2023-06-03T00:00:00.000000'));
+  const nowDate = detailDate(new Date({ created_at }));
 
   return (
     <S.ItemContainer>
       <S.Left>
         <S.Votes>0 votes</S.Votes>
-        <S.Answers>0 answers</S.Answers>
-        <S.Views>0 views</S.Views>
+        <S.Answers>{question.commentsNumber} answers</S.Answers>
+        <S.Views>{question.views} views</S.Views>
       </S.Left>
       <S.Right>
-        {/* <S.Title
-          onClick={() => {
-            goToQuestionDetail;
-          }}
-        >
-          제목
-        </S.Title> */}
+        <S.Title onClick={goToQuestionDetail}>{question.title}</S.Title>
         <S.UserInfo>
-          <S.User>작성자</S.User>
+          <S.User>{question.writer.nickname}</S.User>
           <S.CreatedAt>{nowDate}</S.CreatedAt>
         </S.UserInfo>
         <S.Empty></S.Empty>
