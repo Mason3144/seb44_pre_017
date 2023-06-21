@@ -14,10 +14,19 @@ const QuestionCreatePage = () => {
 
   const onSubmit = async () => {
     const source = `http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/questions/ask`;
-    const response = await axios.post(source, {
-      title: titleValue,
-      body: textValue,
-    });
+    const response = await axios.post(
+      source,
+      {
+        title: titleValue,
+        body: textValue,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: localStorage.getItem('Authorization'),
+        },
+      }
+    );
 
     if (response.status === 201) {
       navigate('/questions/board');
