@@ -1,6 +1,4 @@
 /* eslint-disable react/prop-types */
-// 1. Button 클릭 시, 클릭된 버튼만 주황색 컬러로 포커스 on, 나머지 버튼은 주황색 컬러로 포커스 false
-// 2. 클릭 시, 페이지 navigate
 import { useState } from 'react';
 import * as S from './ProfileSidebar.styled';
 
