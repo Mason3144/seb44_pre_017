@@ -58,7 +58,7 @@ public class QuestionService {
 
     public Question editQuestion(Question question){
         Question existQuestion = findExistsQuestion(question.getQuestionId());
-        LoggedInMemberUtils.verifyIfNotMineException(existQuestion.getWriter().getEmail());
+        LoggedInMemberUtils.verifyMine(existQuestion.getWriter().getEmail());
 
         Question newQuestion = editUtil.copyNonNullProperties(question,existQuestion);
 
@@ -67,7 +67,7 @@ public class QuestionService {
 
     public void removeQuestion(long questionId){
         Question existQuestion = findExistsQuestion(questionId);
-        LoggedInMemberUtils.verifyIfNotMineException(existQuestion.getWriter().getEmail());
+        LoggedInMemberUtils.verifyMine(existQuestion.getWriter().getEmail());
         questionRepository.deleteById(questionId);
     }
 
