@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import synergy_overflow.helper.audit.Auditable;
+import synergy_overflow.question.entity.Question;
 
 import javax.persistence.*;
 import java.security.Principal;
@@ -31,6 +32,14 @@ public class Member extends Auditable implements Principal {
 
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<>();
+
+    @OneToMany(mappedBy = "writer", cascade = CascadeType.REMOVE)
+    private List<Question> questions = new ArrayList<>();
+
+    public void setQuestions(Question question){
+        questions.add(question);
+        if(question.getWriter() != this) question.setWriter(this);
+    }
 
     public Member(String email) {
         this.email = email;

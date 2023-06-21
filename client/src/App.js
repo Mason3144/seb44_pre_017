@@ -4,8 +4,9 @@ import Footer from './Components/Common/Footer/Footer';
 import Sidebar from './Components/Common/Sidebar/Sidebar';
 import Header from './Components/Common/Header/Header';
 import TopQuestions from './Components/Question/TopQuestions/TopQuestions';
-// import QuestionAndAnswer from './Components/Question/QuestionAndAnswer/QuestionAndAnswer';
 import QuestionDetail from './Pages/Question/QuestionDetails/QuestionDetail';
+import MyPage from './Pages/My/MyPage';
+import QuestionCreatePage from './Pages/Question/QuestionCreatePage/QuestionCreatePage';
 function App() {
   return (
     <div className="App">
@@ -21,16 +22,13 @@ function App() {
             path="/members/welcome"
             element={<div>AfterSignupPage 회원가입 완료</div>}
           />
-          <Route path="/" element={<div>LoginPage 로그인 페이지</div>} />
+          <Route path="/" element={<MyPage />} />
           <Route path="/questions" element={<TopQuestions />} />
           <Route
             path="/questions/board"
             element={<div>QuestionsPage All Questions</div>}
           />
-          <Route
-            path="/questions/ask"
-            element={<div>QuestionCreatePage 질문 생성 페이지</div>}
-          />
+          <Route path="/questions/ask" element={<QuestionCreatePage />} />
           <Route
             path="/questions/:questionId"
             element={
@@ -44,7 +42,7 @@ function App() {
             element={<div>QuestionUpdatePage 질문 수정 페이지</div>}
           />
           <Route
-            path="/questions/{question-id}/answers"
+            path="/questions/:questionId/answers/:answerId/edit"
             element={<div>AnswerUpdatePage 답변 수정 페이지</div>}
           />
           <Route
