@@ -1,10 +1,26 @@
 /* eslint-disable react/no-unescaped-entities */
 import * as S from './ProfileDelete.styled';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { responseUserInfo } from '../../redux/userInfo';
+import { useDispatch, useSelector } from 'react-redux';
 
 const ProfileDelete = () => {
-  const memberId = '1';
-  const userInfo = {};
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const alreadyuserInfo = {
+    memberId: '2',
+    emailnickname: 'dongwoo',
+  };
+  dispatch(responseUserInfo(alreadyuserInfo));
+  // console.log(resUserInfo);
+  const resUserInfo = useSelector((state) => state.responseUserInfo.value);
+  console.log(resUserInfo);
+  // 추가 로직
+  // 1. delete 시, 전역 로그인 상태 false
+  // 2. 현재 store에 있는 회원정보로 memberId를 가져와서, url에 memberId에 할당
+  // 3.
   const firstletter = `Before confirming that you would like your profile deleted, we'd like
           to take a moment to explain the implications of deletion:`;
 
@@ -24,16 +40,17 @@ const ProfileDelete = () => {
           implications of having my profile deleted.`;
 
   const DeleteRequestHandler = () => {
+    const memberId = resUserInfo.memberId;
     const url = `http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/members/${memberId}`;
 
-    const res = axios.delete(url, userInfo, {
+    const res = axios.delete(url, {
       headers: {
         'Content-Type': 'application/json',
       },
     });
     if (res.status === 200) {
       alert('회원정보가 삭제되었습니다.');
-      // navigate('/')
+      navigate('/home');
     } else {
       return;
     }
