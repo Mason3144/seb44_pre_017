@@ -1,24 +1,17 @@
+/* eslint-disable react/prop-types */
 // 1. Button 클릭 시, 클릭된 버튼만 주황색 컬러로 포커스 on, 나머지 버튼은 주황색 컬러로 포커스 false
 // 2. 클릭 시, 페이지 navigate
 import { useState } from 'react';
 import * as S from './ProfileSidebar.styled';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
-const ProfileSidebar = () => {
+const ProfileSidebar = ({ onComponentChange }) => {
   const [selectedButton, setSelectedButton] = useState('edit');
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleButtonClick = (buttonName) => {
     setSelectedButton(buttonName);
-    if (buttonName === 'edit') {
-      navigate('/members/edit');
-    } else if (buttonName === 'delete') {
-      // navigate('/members/delete');
-    } else if (buttonName === 'yourlogins') {
-      // navigate('/members/yourlogins');
-    } else {
-      return;
-    }
+    onComponentChange(buttonName);
   };
 
   return (
