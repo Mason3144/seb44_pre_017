@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { useDispatch , useSelector } from 'react-redux';
 import { login } from '../../redux/user';
 import { responseUserInfo } from '../../redux/userInfoSlice';
-import { setLoginState } from '../../redux/login';
+import { setLoginState } from '../../redux/loginSlice';
 import { useNavigate } from 'react-router-dom';
 axios.defaults.withCredentials = true;
 
