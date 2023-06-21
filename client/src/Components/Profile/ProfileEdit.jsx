@@ -40,6 +40,11 @@ const ProfileEdit = () => {
     }
   };
 
+  const cancelClickHandler = () => {
+    alert('변경이 취소되었습니다.');
+    navigate('/questions');
+  };
+
   return (
     <S.ProfileEditWrapper>
       <S.Title>Edit your profile</S.Title>
@@ -66,7 +71,11 @@ const ProfileEdit = () => {
         >
           Save profile
         </S.Button>
-        <S.Button buttontype="cancel" className="cancel">
+        <S.Button
+          buttontype="cancel"
+          className="cancel"
+          onClick={cancelClickHandler}
+        >
           Cancel
         </S.Button>
       </S.ButtonContainer>
