@@ -56,7 +56,7 @@ const QuestionUpdatePage = () => {
               navigate(`/questions/${questionId}`);
             }}
           >
-            Cancle
+            Cancel
           </S.CancelBtn>
         </S.ButtonGroup>
       </S.PageGroup>
