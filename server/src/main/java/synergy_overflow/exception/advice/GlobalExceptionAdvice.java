@@ -32,7 +32,7 @@ public class GlobalExceptionAdvice {
     //query parameter의 validation 불일치 ex) @Positive
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse handleConstraintViolationException(ConstraintViolationException e){
+    public ErrorResponse handleConstraintViolationException(ConstraintViolationException e) {
         final ErrorResponse response = ErrorResponse.of(e.getConstraintViolations());
         return response;
     }
@@ -40,14 +40,14 @@ public class GlobalExceptionAdvice {
     //쿼리 파라미터 타입 불량
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrorResponse handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e){
+    public ErrorResponse handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException e) {
         String message = "Query Parameter, '" +
                 e.getParameter().getParameter().getName() +
                 "'의 타입은 '" +
-                e.getParameter().getParameter().getType()+
+                e.getParameter().getParameter().getType() +
                 "' 이어야 됩니다.";
 
-        final ErrorResponse response = ErrorResponse.of(HttpStatus.BAD_REQUEST,message);
+        final ErrorResponse response = ErrorResponse.of(HttpStatus.BAD_REQUEST, message);
 
         return response;
     }

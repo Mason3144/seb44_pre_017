@@ -6,7 +6,7 @@ public enum ExceptionCode {
     MEMBER_NOT_FOUND(404, "Member not found"),
     MEMBER_EXISTS(409, "Member exists"),
     ADOPTION_EXISTS(409, "Already adopted in the question"),
-    MEMBER_NOT_AUTHORIZED(403,"Member not authorized"),
+    MEMBER_NOT_AUTHORIZED(403, "Member not authorized"),
     QUESTION_NOT_FOUND(404, "Question not found"),
     ADOPTION_NOT_FOUND(404, "Adoption not found"),
     COMMENT_NOT_FOUND(404, "Comment not found"),

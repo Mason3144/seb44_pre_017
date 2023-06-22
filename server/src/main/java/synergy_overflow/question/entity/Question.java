@@ -30,11 +30,11 @@ public class Question extends Auditable {
     @Column(nullable = false, columnDefinition = "integer default 0")
     private int views;
 
-    public void setViews(){
+    public void setViews() {
         this.views++;
     }
 
-    @OneToOne(mappedBy = "question", cascade = {CascadeType.REMOVE,CascadeType.REFRESH})
+    @OneToOne(mappedBy = "question", cascade = {CascadeType.REMOVE, CascadeType.REFRESH})
     private Adoption adoption;
 
     @ManyToOne
@@ -44,8 +44,8 @@ public class Question extends Auditable {
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
     private List<Answer> answers = new LinkedList<>();
 
-    public void setAnswers(Answer answer){
+    public void setAnswers(Answer answer) {
         this.answers.add(answer);
-        if(answer.getQuestion()!=this) answer.setQuestion(this);
+        if (answer.getQuestion() != this) answer.setQuestion(this);
     }
 }

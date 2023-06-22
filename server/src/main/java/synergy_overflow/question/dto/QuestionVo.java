@@ -6,9 +6,10 @@ import lombok.Getter;
 public class QuestionVo {
     @Builder
     @Getter
-    public static class Filter{
+    public static class Filter {
         private Type type;
-        public enum Type{
+
+        public enum Type {
             NEW_QUESTION("questionId"),
             MOST_COMMENTS("answers"), // jpql?
             MOST_VIEWS("views");

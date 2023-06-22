@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 import synergy_overflow.member.dto.MemberDto;
 
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
@@ -15,7 +14,7 @@ public class CommentDto {
     @Getter
     @Setter
     public static class Post {
-        private  long commentId;
+        private long commentId;
         @NotBlank
         private String commentBody;
     }

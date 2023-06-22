@@ -1,23 +1,17 @@
 package synergy_overflow.member.controller;
 
 import com.google.gson.Gson;
-
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-
 import org.springframework.security.test.context.support.WithMockUser;
-
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import synergy_overflow.member.dto.MemberDto;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -37,28 +31,26 @@ class MemberControllerTest {
     @Test
     @Order(1)
     @DisplayName("회원 등록")
-    void createAccountForm() throws Exception{
+    void createAccountForm() throws Exception {
         //given
         MemberDto.Post post = new MemberDto.Post("hgd@gmail.com",
                 "q1w2e3r4!",
                 "홍길동");
 
-        String content =gson.toJson(post);
+        String content = gson.toJson(post);
 
         //when
-        ResultActions actions  =
+        ResultActions actions =
                 mockMvc.perform(post("/members")
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(content));
     }
 
-
-
     @Test
     @Order(2)
     @DisplayName("회원 조회")
-    void findMember() throws Exception{
+    void findMember() throws Exception {
         //given
         //post로 데이터 넣기
         MemberDto.Post post = new MemberDto.Post("hgd@gmail.com",
@@ -90,7 +82,7 @@ class MemberControllerTest {
     @Test
     @Order(3)
     @DisplayName("회원 수정")
-    void patchMember() throws Exception{
+    void patchMember() throws Exception {
         //given
         //post로 데이터 넣기
         MemberDto.Post post = new MemberDto.Post("hgd@gmail.com",
@@ -109,7 +101,7 @@ class MemberControllerTest {
         //patch
         //when,then
 
-        MemberDto.Patch patch = new MemberDto.Patch(1L,"q1w2e3r4!",
+        MemberDto.Patch patch = new MemberDto.Patch(1L, "q1w2e3r4!",
                 "길동홍");
         String patchContent = gson.toJson(patch);
 
@@ -123,13 +115,12 @@ class MemberControllerTest {
                 .andExpect(jsonPath("$.nickname").value(patch.getNickname()));
 
 
-
     }
 
     @Test
     @Order(4)
     @DisplayName("회원 삭제")
-    void deleteMember() throws Exception{
+    void deleteMember() throws Exception {
 
         MemberDto.Post post = new MemberDto.Post("hgd@gmail.com",
                 "q1w2e3r4!",

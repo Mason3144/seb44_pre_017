@@ -18,7 +18,6 @@ import java.util.List;
 @Setter
 @Entity
 public class Member extends Auditable implements Principal {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberId;
@@ -42,11 +41,11 @@ public class Member extends Auditable implements Principal {
     private List<Comment> comments = new ArrayList<>();
 
     @OneToMany(mappedBy = "writer", cascade = CascadeType.REMOVE)
-    private List<Answer> answers =  new ArrayList<>();
+    private List<Answer> answers = new ArrayList<>();
 
-    public void setAnswers(Answer answer){
-       this.answers.add(answer);
-       if(answer.getWriter() != this) answer.setWriter(this);
+    public void setAnswers(Answer answer) {
+        this.answers.add(answer);
+        if (answer.getWriter() != this) answer.setWriter(this);
     }
 
     public void setQuestions(Question question) {

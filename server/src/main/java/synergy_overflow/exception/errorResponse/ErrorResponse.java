@@ -2,9 +2,7 @@ package synergy_overflow.exception.errorResponse;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.BindException;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import synergy_overflow.exception.businessLogicException.ExceptionCode;
 
 import javax.validation.ConstraintViolation;
@@ -51,21 +49,23 @@ public class ErrorResponse {
     }
 
     @Getter
-    private static class FieldError{
+    private static class FieldError {
         private FieldSource source;
         private String field;
         private Object rejectedValue;
         private String reason;
 
-        public enum FieldSource{
+        public enum FieldSource {
             QUERY_PARAMETER("Query Parameter"),
             REQUEST_BODY("Request Body");
             @Getter
             private String source;
+
             FieldSource(String source) {
                 this.source = source;
             }
         }
+
         public FieldError(FieldSource source, String field, Object rejectedValue, String reason) {
             this.source = source;
             this.field = field;
@@ -73,13 +73,12 @@ public class ErrorResponse {
             this.reason = reason;
         }
 
-
-        public static List<FieldError> of(BindException bindException){
+        public static List<FieldError> of(BindException bindException) {
             final List<org.springframework.validation.FieldError> fieldErrors =
                     bindException.getFieldErrors();
             return fieldErrors.stream()
-                    .map(e-> new FieldError(
-                            FieldSource.REQUEST_BODY ,
+                    .map(e -> new FieldError(
+                            FieldSource.REQUEST_BODY,
                             e.getField(),
                             e.getRejectedValue() == null ? "" : e.getRejectedValue().toString(),
                             e.getDefaultMessage()))
@@ -93,8 +92,7 @@ public class ErrorResponse {
         private Object rejectedValue;
         private String reason;
 
-        private ConstraintViolationError(String propertyPath, Object rejectedValue,
-                                   String reason) {
+        private ConstraintViolationError(String propertyPath, Object rejectedValue, String reason) {
             this.propertyPath = propertyPath;
             this.rejectedValue = rejectedValue;
             this.reason = reason;

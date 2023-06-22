@@ -19,7 +19,7 @@ public class MemberAuthenticationFailureHandler implements AuthenticationFailure
     @Override
     public void onAuthenticationFailure(HttpServletRequest request,
                                         HttpServletResponse response,
-                                        AuthenticationException exception) throws IOException, ServletException, BadCredentialsException{
+                                        AuthenticationException exception) throws IOException, ServletException, BadCredentialsException {
 
         log.error("# Authentication failed: {}", exception.getMessage());
 

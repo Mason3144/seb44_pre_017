@@ -17,12 +17,13 @@ public class MultiResponseDto {
     public MultiResponseDto(List<MultiQuestionsResponse> data, Page page) {
         this.data = data;
         this.pageInfo = PageInfo.builder()
-                .page(page.getNumber()+1)
+                .page(page.getNumber() + 1)
                 .size(page.getSize())
                 .totalElements(page.getTotalElements())
                 .totalPages(page.getTotalPages())
                 .build();
     }
+
     public MultiResponseDto(List<MultiQuestionsResponse> data) {
         this.data = data;
         this.pageInfo = null;
@@ -30,7 +31,7 @@ public class MultiResponseDto {
 
     @Getter
     @Builder
-    public static class MultiQuestionsResponse{
+    public static class MultiQuestionsResponse {
         private long questionId;
         private String title;
         private LocalDateTime createdAt;
@@ -42,7 +43,7 @@ public class MultiResponseDto {
 
     @Getter
     @Builder
-    public static class PageInfo{
+    public static class PageInfo {
         private int page;
         private int size;
         private long totalElements;

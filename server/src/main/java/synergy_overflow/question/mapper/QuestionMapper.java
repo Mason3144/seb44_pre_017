@@ -12,26 +12,28 @@ import synergy_overflow.question.dto.MultiResponseDto;
 import synergy_overflow.question.dto.QuestionDto;
 import synergy_overflow.question.entity.Question;
 
-
-
 import java.util.List;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface QuestionMapper {
     Question questionDtoPostToQuestion(QuestionDto.Post questionDtoPost);
+
     Question questionDtoPatchToQuestion(QuestionDto.Patch questionDtoPost);
+
     QuestionDto.Response questionToQuestionDtoResponseWithoutId(Question question);
-    default QuestionDto.Response questionToQuestionDtoResponse(Question question){
+
+    default QuestionDto.Response questionToQuestionDtoResponse(Question question) {
         QuestionDto.Response response = questionToQuestionDtoResponseWithoutId(question);
         response.setQuestionId(question.getQuestionId());
         response.setCreatedAt(question.getCreatedAt());
         return response;
-    };
+    }
 
-    default int answersToAnswerNumber(List<Answer> answers){
+    default int answersToAnswerNumber(List<Answer> answers) {
         return answers.size();
     }
-    default MultiResponseDto.MultiQuestionsResponse questionToMultiResponseDto(Question question){
+
+    default MultiResponseDto.MultiQuestionsResponse questionToMultiResponseDto(Question question) {
         return MultiResponseDto.MultiQuestionsResponse.builder()
                 .questionId(question.getQuestionId())
                 .title(question.getTitle())
@@ -41,11 +43,13 @@ public interface QuestionMapper {
                 .writer(memberToWriterDtoResponse(question.getWriter()))
                 .answerNumber(answersToAnswerNumber(question.getAnswers()))
                 .build();
-    };
+    }
+
     List<MultiResponseDto.MultiQuestionsResponse> questionsToMultiResponseDtos(List<Question> questions);
 
     MemberDto.Response memberToWriterDtoResponse(Member member);
-    AnswerDto.Response answerToAnswerDtoResponse(Answer answer);
-    CommentDto.Response commentToCommentsDtoResponse(Comment comment);
 
+    AnswerDto.Response answerToAnswerDtoResponse(Answer answer);
+
+    CommentDto.Response commentToCommentsDtoResponse(Comment comment);
 }

@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import synergy_overflow.exception.businessLogicException.BusinessLogicException;
@@ -27,7 +26,6 @@ class MemberServiceTest {
     private MemberService memberService;
 
 
-
     @Test
     @DisplayName("verifyExistsEmail() 예외 테스트")
     void verifyExistsEmail() {
@@ -39,8 +37,7 @@ class MemberServiceTest {
         given(memberRepository.findByEmail(Mockito.anyString())).willReturn(Optional.of(member));
 
         //when,then
-        assertThrows(BusinessLogicException.class,() -> memberService.createMember(member));
-
+        assertThrows(BusinessLogicException.class, () -> memberService.createMember(member));
     }
 
     @Test
@@ -49,7 +46,4 @@ class MemberServiceTest {
 
         assertThrows(BusinessLogicException.class, () -> memberService.findMember(1));
     }
-
-
-
 }
