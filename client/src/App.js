@@ -20,14 +20,7 @@ function App() {
         <Sidebar />
 
         <Routes>
-          <Route
-            path="/home"
-            element={
-              <div>
-                <HomePage />
-              </div>
-            }
-          />
+          <Route path="/home" element={<HomePage />} />
           <Route path="/members" element={<div>SignupPage 회원가입</div>} />
           <Route
             path="/members/welcome"
