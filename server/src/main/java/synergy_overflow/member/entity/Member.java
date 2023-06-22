@@ -49,7 +49,7 @@ public class Member extends Auditable implements Principal {
        if(answer.getWriter() != this) answer.setWriter(this);
     }
 
-    public void addQuestions(Question question) {
+    public void setQuestions(Question question) {
         this.questions.add(question);
         if (question.getWriter() != this) {
             question.setWriter(this);

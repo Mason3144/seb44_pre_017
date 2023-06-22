@@ -44,7 +44,6 @@ public interface QuestionMapper {
     };
     List<MultiResponseDto.MultiQuestionsResponse> questionsToMultiResponseDtos(List<Question> questions);
 
-    // 임시 dto 및 entity를 위한 임시 맵핑
     MemberDto.Response memberToWriterDtoResponse(Member member);
     AnswerDto.Response answerToAnswerDtoResponse(Answer answer);
     CommentDto.Response commentToCommentsDtoResponse(Comment comment);
