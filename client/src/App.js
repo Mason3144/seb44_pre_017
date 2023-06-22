@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Header from './Components/Common/Header/Header';
 import TopQuestions from './Components/Question/TopQuestions/TopQuestions';
+import AnswerUpdatePage from './Pages/Question/AnswerUpdatePage/AnswerUpdatePage';
 import QuestionUpdatePage from './Pages/Question/QuestionUpdate.js/QuestionUpdatePage';
 import MyPage from './Pages/My/MyPage';
 import MainPage from './Pages/Common/MainPage/MainPage';
@@ -40,6 +41,16 @@ function App() {
             element={<QuestionUpdatePage />}
           />
           <Route
+            path="/questions/:questionId"
+            element={<div>QuestionDetailPage 질문 상세 페이지</div>}
+          />
+          <Route
+            path="/questions/{question-id}/update"
+            element={<div>QuestionUpdatePage 질문 수정 페이지</div>}
+          />
+          <Route
+            path="/questions/:questionId/answers/:answerId/edit"
+            element={<AnswerUpdatePage />}
             path="/questions/:questionId/answers/:answerId/edit"
             element={<div>AnswerUpdatePage 답변 수정 페이지</div>}
           />
