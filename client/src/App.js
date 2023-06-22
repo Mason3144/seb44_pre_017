@@ -8,7 +8,7 @@ import QuestionUpdatePage from './Pages/Question/QuestionUpdate.js/QuestionUpdat
 import MainPage from './Pages/Common/MainPage/MainPage';
 import Sidebar from './Components/Common/Sidebar/Sidebar';
 import Footer from './Components/Common/Footer/Footer';
-import QuestionDetail from './Pages/Question/QuestionDetails/QuestionDetail';
+import QuestionDetail from './Pages/Question/QuestionDetail/QuestionDetail';
 import MyPage from './Pages/My/MyPage.jsx';
 import PasswordUpdatePage from './Pages/My/PasswordUpdatePage.jsx';
 import LoginPage from './Pages/LoginSignup/LoginPage.jsx';

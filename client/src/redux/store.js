@@ -3,6 +3,7 @@ import sidebarReducer from './sidebarSlice';
 import userReducer from './userSlice';
 import loginReducer from './loginSlice';
 import responseUserInfoReducer from './userInfoSlice';
+import writerReducer from './writerSlice';
 
 export default configureStore({
   reducer: {
@@ -11,5 +12,6 @@ export default configureStore({
     login: loginReducer,
     responseUserInfo: responseUserInfoReducer,
     userInfo: responseUserInfoReducer,
+    writer: writerReducer,
   },
 });
