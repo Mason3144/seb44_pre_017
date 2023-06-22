@@ -4,6 +4,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import synergy_overflow.member.dto.MemberDto;
+import synergy_overflow.member.entity.Member;
 import synergy_overflow.question.dto.MultiResponseDto;
 import synergy_overflow.question.dto.QuestionDto;
 import synergy_overflow.question.entity.Question;
@@ -61,8 +63,8 @@ public abstract class QuestionStubData {
                 .answers(List.of(generateAnswerResponse(number)))
                 .build();
     }
-    public WriterDto.Response generateWriterResponse(long number){
-        return WriterDto.Response.builder().nickname(number+" 멤버").memberId(number).build();
+    public MemberDto.Response generateWriterResponse(long number){
+        return MemberDto.Response.builder().nickname(number+" 멤버").memberId(number).build();
     }
 
     public AnswerDto.Response generateAnswerResponse(long number){
