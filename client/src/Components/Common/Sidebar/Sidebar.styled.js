@@ -5,7 +5,6 @@ export const SidebarContainer = styled.div`
   left: ${({ open }) => (open ? '0' : '-100%')};
   width: 300px;
   padding-left: 100px;
-  background-color: white;
   height: 100vh;
   transition: left 0.3s ease-in-out;
 `;
@@ -28,7 +27,6 @@ export const Public = styled.div`
   font-size: 13px;
   color: #858c94;
 `;
-
 export const Groups = styled.div`
   display: flex;
   flex-direction: column;

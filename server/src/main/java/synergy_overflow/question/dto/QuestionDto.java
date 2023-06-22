@@ -15,7 +15,7 @@ import java.util.List;
 public class QuestionDto {
     @Builder
     @Getter
-    public static class Post{
+    public static class Post {
         @NotBlank
         @Size(min = 0, max = 50)
         private String title;
@@ -23,10 +23,11 @@ public class QuestionDto {
         @Size(min = 20, max = 255)
         private String body;
     }
+
     @Builder
     @Getter
     @Setter
-    public static class Patch{
+    public static class Patch {
         private long questionId;
         @NotSpace
         @Size(min = 0, max = 50)
@@ -36,10 +37,11 @@ public class QuestionDto {
         private String body;
 
     }
+
     @Builder
     @Getter
     @Setter
-    public static class Response{
+    public static class Response {
         private long questionId;
         private String title;
         private String body;

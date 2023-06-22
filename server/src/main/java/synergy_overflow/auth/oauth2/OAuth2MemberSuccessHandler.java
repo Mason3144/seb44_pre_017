@@ -1,4 +1,4 @@
-package synergy_overflow.auth.oauth2.handler;
+package synergy_overflow.auth.oauth2;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;

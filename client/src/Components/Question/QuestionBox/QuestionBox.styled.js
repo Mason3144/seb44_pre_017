@@ -11,8 +11,8 @@ export const ItemContainer = styled.li`
     left: 20%;
     top: 0;
     height: 1px;
-    width: 70%; /* Adjust the width as needed */
-    background-color: #e4e6e8; /* Adjust the border color as needed */
+    width: 70%;
+    background-color: #e4e6e8;
   }
 `;
 export const Left = styled.div`
