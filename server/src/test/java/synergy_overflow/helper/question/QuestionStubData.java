@@ -11,7 +11,6 @@ import synergy_overflow.question.dto.MultiResponseDto;
 import synergy_overflow.question.dto.QuestionDto;
 import synergy_overflow.question.entity.Question;
 
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -57,7 +56,6 @@ public abstract class QuestionStubData {
         return new PageImpl<>(List.of(new Question()),
                 PageRequest.of(0, 10, Sort.by("questionId").descending()), 1);
     }
-
 
     public QuestionDto.Response generateQuestionResponse(long number) {
         return QuestionDto.Response.builder()

@@ -5,13 +5,10 @@ import org.springframework.transaction.annotation.Transactional;
 import synergy_overflow.adaption.entity.Adoption;
 import synergy_overflow.adaption.repository.AdoptionRepository;
 import synergy_overflow.answer.entity.Answer;
-import synergy_overflow.answer.repository.AnswerRepository;
 import synergy_overflow.answer.service.AnswerService;
 import synergy_overflow.exception.businessLogicException.BusinessLogicException;
 import synergy_overflow.exception.businessLogicException.ExceptionCode;
-import synergy_overflow.member.entity.Member;
 import synergy_overflow.question.entity.Question;
-import synergy_overflow.question.repository.QuestionRepository;
 import synergy_overflow.question.service.QuestionService;
 
 import java.util.Optional;
@@ -30,7 +27,7 @@ public class AdoptionService {
         this.questionService = questionService;
     }
 
-    public Answer createAdoption(long answerId, long questionId){
+    public Answer createAdoption(long answerId, long questionId) {
         verifyExistsAdoption(questionId);
 
         Question question = questionService.findExistsQuestion(questionId);
@@ -48,7 +45,7 @@ public class AdoptionService {
         return answer;
     }
 
-    public Answer deleteAdaption(long answerId, long questionId){
+    public Answer deleteAdaption(long answerId, long questionId) {
         Adoption adoption = findExistsAdoption(questionId);
 
         Answer answer = answerService.findVerifiedAnswer(answerId);
@@ -76,6 +73,4 @@ public class AdoptionService {
         Optional<Adoption> optionalAdoption = adoptionRepository.findByQuestionId(questionId);
         return optionalAdoption.orElseThrow(() -> new BusinessLogicException(ExceptionCode.ADOPTION_NOT_FOUND));
     }
-
-
 }

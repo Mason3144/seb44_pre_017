@@ -8,19 +8,16 @@ import lombok.Setter;
 import synergy_overflow.comment.dto.CommentDto;
 import synergy_overflow.member.dto.MemberDto;
 
-
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.List;
 
 
 public class AnswerDto {
-
     @AllArgsConstructor
     @Getter
     @Setter
-    public static class postDto{
-
+    public static class postDto {
         private long questionId;
 
         @NotBlank
@@ -30,21 +27,18 @@ public class AnswerDto {
     @AllArgsConstructor
     @Getter
     @Setter
-    public static class patchDto{
-
+    public static class patchDto {
         private long answerId;
 
         @NotBlank
         private String answerBody;
-
-
     }
+
     @AllArgsConstructor
     @Getter
     @Setter
     @Builder
-    public static class Response{
-
+    public static class Response {
         private long answerId;
 
         private String answerBody;

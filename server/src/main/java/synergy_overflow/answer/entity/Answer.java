@@ -18,34 +18,32 @@ import java.util.List;
 @Getter
 @Entity
 public class Answer extends Auditable {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long answerId;
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String answerBody;
-    @Column(nullable = false,columnDefinition = "boolean default false")
+
+    @Column(nullable = false, columnDefinition = "boolean default false")
     private boolean adopted;
 
     @ManyToOne
-    @JoinColumn(name = "member_id",nullable = false)
+    @JoinColumn(name = "member_id", nullable = false)
     private Member writer;
 
     @ManyToOne
-    @JoinColumn(name = "question_id",nullable = false)
+    @JoinColumn(name = "question_id", nullable = false)
     private Question question;
 
-    @OneToOne(mappedBy = "answer", cascade = {CascadeType.REMOVE,CascadeType.REFRESH})
+    @OneToOne(mappedBy = "answer", cascade = {CascadeType.REMOVE, CascadeType.REFRESH})
     private Adoption adoption;
 
     @OneToMany(mappedBy = "answer", cascade = CascadeType.REMOVE)
     private List<Comment> comments = new LinkedList<>();
 
-    public void setComments(Comment comment){
+    public void setComments(Comment comment) {
         this.comments.add(comment);
-        if(comment.getAnswer()!=this) comment.setAnswer(this);
+        if (comment.getAnswer() != this) comment.setAnswer(this);
     }
-
-
 }
