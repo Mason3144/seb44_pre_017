@@ -24,15 +24,15 @@ public interface QuestionRestDocsDescriptor {
     default List<FieldDescriptor> getListDataDescriptor(){
         Stream<FieldDescriptor> questionWriter = getWriterDescriptor("data[].", "질문글").stream();
         Stream<FieldDescriptor> questionList = List.of(
-                    fieldWithPath("data").type(JsonFieldType.ARRAY).description("질문 리스트 정보"),
-                    fieldWithPath("data[].questionId").type(JsonFieldType.NUMBER).description("질문글 식별자"),
-                    fieldWithPath("data[].title").type(JsonFieldType.STRING).description("질문글 제목"),
-                    fieldWithPath("data[].adopted").type(JsonFieldType.BOOLEAN).description("답변 채택 유무"),
-                    fieldWithPath("data[].views").type(JsonFieldType.NUMBER).description("조회수"),
-                    fieldWithPath("data[].answerNumber").type(JsonFieldType.NUMBER).description("답변수"),
-                    getDateDescriptor("data[].","질문글")
-            ).stream();
-                return Stream.concat(questionWriter,questionList).collect(Collectors.toList());
+                fieldWithPath("data").type(JsonFieldType.ARRAY).description("질문 리스트 정보"),
+                fieldWithPath("data[].questionId").type(JsonFieldType.NUMBER).description("질문글 식별자"),
+                fieldWithPath("data[].title").type(JsonFieldType.STRING).description("질문글 제목"),
+                fieldWithPath("data[].adopted").type(JsonFieldType.BOOLEAN).description("답변 채택 유무"),
+                fieldWithPath("data[].views").type(JsonFieldType.NUMBER).description("조회수"),
+                fieldWithPath("data[].answerNumber").type(JsonFieldType.NUMBER).description("답변수"),
+                getDateDescriptor("data[].","질문글")
+        ).stream();
+        return Stream.concat(questionWriter,questionList).collect(Collectors.toList());
     }
     default List<FieldDescriptor> getListDataWithoutPageDescriptor(){
         Stream<FieldDescriptor> pageInfo = List.of(fieldWithPath("pageInfo").type(JsonFieldType.NULL).description("페이지 정보")).stream();

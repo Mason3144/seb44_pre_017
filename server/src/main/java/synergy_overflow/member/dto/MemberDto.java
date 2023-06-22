@@ -1,8 +1,8 @@
 package synergy_overflow.member.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -46,6 +46,7 @@ public class MemberDto {
 
     @Getter
     @AllArgsConstructor
+    @Builder
     public static class Response {
         private long memberId;
         private String nickname;

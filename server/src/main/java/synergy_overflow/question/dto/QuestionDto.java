@@ -3,9 +3,9 @@ package synergy_overflow.question.dto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import synergy_overflow.answer.dto.AnswerDto;
 import synergy_overflow.helper.validator.NotSpace;
 import synergy_overflow.member.dto.MemberDto;
-import synergy_overflow.question.temporaries.temporaryDtos.AnswerDto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -15,7 +15,7 @@ import java.util.List;
 public class QuestionDto {
     @Builder
     @Getter
-    public static class Post{
+    public static class Post {
         @NotBlank
         @Size(min = 0, max = 50)
         private String title;
@@ -23,10 +23,11 @@ public class QuestionDto {
         @Size(min = 20, max = 255)
         private String body;
     }
+
     @Builder
     @Getter
     @Setter
-    public static class Patch{
+    public static class Patch {
         private long questionId;
         @NotSpace
         @Size(min = 0, max = 50)
@@ -36,10 +37,11 @@ public class QuestionDto {
         private String body;
 
     }
+
     @Builder
     @Getter
     @Setter
-    public static class Response{
+    public static class Response {
         private long questionId;
         private String title;
         private String body;
