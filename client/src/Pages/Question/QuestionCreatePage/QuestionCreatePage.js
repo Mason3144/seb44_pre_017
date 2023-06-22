@@ -59,7 +59,6 @@ const QuestionCreatePage = () => {
           </S.BodyNote>
           <WebEditor value={textValue} setValue={setTextValue} />
         </S.BodyBox>
-        {/* TODO: 버튼 디자인 */}
         <S.SubmitBtn onClick={onSubmit}>Post your question</S.SubmitBtn>
       </S.PageGroup>
     </section>

@@ -10,5 +10,6 @@ export default configureStore({
     sidebar: sidebarReducer,
     login: loginReducer,
     responseUserInfo: responseUserInfoReducer,
+    userInfo: responseUserInfoReducer,
   },
 });

@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState, useId, useEffect } from 'react';
 import * as S from './QuestionUpdatePage.styled';
-import WebEditor from '../../../../../../../pre-project/seb44_pre_017/client/src/Components/Question/QuestionBox/WebEditor';
+import WebEditor from '../../../Components/Question/QuestionBox/WebEditor';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 

@@ -2,6 +2,7 @@
 import * as S from './QuestionAndAnswer.styled';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 import { ReactComponent as Up } from '../../../icons/up.svg';
@@ -22,8 +23,9 @@ function QuestionAndAnswer({ data, isQuestion }) {
     setNewComment(e.target.value);
   };
 
-  const { questionId } = useParams();
-  const { answerId } = useParams();
+  const login = useSelector((state) => state.login);
+
+  const { questionId, answerId } = useParams();
 
   const handleAddComment = () => {
     axios
@@ -68,12 +70,12 @@ function QuestionAndAnswer({ data, isQuestion }) {
 
   const navigate = useNavigate();
   const goAsk = () => {
-    // if (로그인상태) {
-    //   navigate('/questions/ask');
-    // } else {
-    navigate('/');
-    alert('로그인 후 질문이 가능합니다.');
-    // }
+    if (login === true) {
+      navigate('/questions/ask');
+    } else {
+      navigate('/');
+      alert('로그인 후 이용이 가능합니다.');
+    }
   };
 
   const goEdit = () => {

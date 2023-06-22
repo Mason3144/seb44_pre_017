@@ -3,10 +3,8 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Header from './Components/Common/Header/Header';
-import TopQuestions from './Components/Question/TopQuestions/TopQuestions';
 import AnswerUpdatePage from './Pages/Question/AnswerUpdatePage/AnswerUpdatePage';
 import QuestionUpdatePage from './Pages/Question/QuestionUpdate.js/QuestionUpdatePage';
-import MyPage from './Pages/My/MyPage';
 import MainPage from './Pages/Common/MainPage/MainPage';
 import Sidebar from './Components/Common/Sidebar/Sidebar';
 import Footer from './Components/Common/Footer/Footer';
@@ -24,7 +22,7 @@ function App() {
         <Header />
         <Sidebar />
         <Routes>
-          <Route path="/home" element={<div>HomePage 홈 팀원소개</div>} />
+          <Route path="/" element={<div>HomePage 홈 팀원소개</div>} />
           <Route path="/members" element={<div>SignupPage 회원가입</div>} />
           <Route
             path="/members/welcome"
@@ -32,7 +30,10 @@ function App() {
           />
           <Route path="/questions" element={<MainPage />} />
           <Route path="/" element={<LoginPage />} />
-          <Route path="/questions/board" element={<AllQuestions />} />
+          <Route
+            path="/questions/board"
+            element={<div>QuestionsPage All Questions</div>}
+          />
           <Route path="/questions/ask" element={<QuestionCreatePage />} />
           <Route path="/questions/:questionId" element={<QuestionDetail />} />
           <Route
