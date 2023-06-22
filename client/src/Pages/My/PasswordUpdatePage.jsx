@@ -12,10 +12,10 @@ import axios from 'axios';
 
 const PasswordUpdatePage = () => {
   // 1. 변수 설정
-  // 1-1. 리덕스 스토어에서 UserInfo 불러오기
+  // 1-1. user 리덕스 userInfo 불러오기
   // 1-2. new password / new password(again) 상태 저장
   // 1-3. 비밀번호 유효성검사 정규 표현식
-  const resUserInfo = useSelector((state) => state.responseUserInfo.value);
+  const user = useSelector((state) => state.userInfo.value);
   const navigate = useNavigate();
   const [newPassword, setNewPassword] = useState({
     password: '',
@@ -44,7 +44,7 @@ const PasswordUpdatePage = () => {
       return alert('입력한 비밀번호가 같은지 확인해주세요.');
     } else {
       try {
-        const memberId = resUserInfo.memberId;
+        const memberId = user.memberId;
         const url = `http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/${memberId}`;
         const requestPassword = {
           password: newPassword.password,
