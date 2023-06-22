@@ -9,8 +9,7 @@ import synergy_overflow.question.dto.MultiResponseDto;
 import synergy_overflow.question.dto.QuestionDto;
 import synergy_overflow.question.entity.Question;
 import synergy_overflow.question.mapper.QuestionMapper;
-import synergy_overflow.question.sevice.QuestionService;
-import synergy_overflow.question.temporaries.temporaryDtos.WriterDto;
+import synergy_overflow.question.service.QuestionService;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
@@ -29,14 +28,14 @@ public class QuestionController {
     }
 
     @PostMapping("/ask")
-    public ResponseEntity postQuestion(@RequestBody @Valid QuestionDto.Post requestBody){
+    public ResponseEntity postQuestion(@RequestBody @Valid QuestionDto.Post requestBody) {
         Question createdQuestion = service.createQuestion(mapper.questionDtoPostToQuestion(requestBody));
 
         return new ResponseEntity<>(mapper.questionToQuestionDtoResponse(createdQuestion), HttpStatus.CREATED);
     }
 
     @GetMapping("/{question-id}")
-    public ResponseEntity getQuestion(@PathVariable("question-id") @Positive long questionId){
+    public ResponseEntity getQuestion(@PathVariable("question-id") @Positive long questionId) {
         Question foundQuestion = service.getQuestion(questionId);
 
         return new ResponseEntity<>(mapper.questionToQuestionDtoResponse(foundQuestion), HttpStatus.OK);
@@ -45,16 +44,17 @@ public class QuestionController {
     @GetMapping("/board")
     public ResponseEntity getQuestions(@RequestParam @Positive int page,
                                        @RequestParam @Positive int size,
-                                       @RequestParam String sort){
-        Page<Question> pageQuestions = service.getQuestions(page-1, size, sort);
+                                       @RequestParam String sort) {
+        Page<Question> pageQuestions = service.getQuestions(page - 1, size, sort);
         List<Question> questions = pageQuestions.getContent();
 
-        return new ResponseEntity<>(new MultiResponseDto(mapper.questionsToMultiResponseDtos(questions),pageQuestions),
-                                    HttpStatus.OK);
+        return new ResponseEntity<>(new MultiResponseDto(mapper.questionsToMultiResponseDtos(questions), pageQuestions),
+                HttpStatus.OK);
     }
+
     @GetMapping("/home")
-    public ResponseEntity getQuestionsHome(){
-        Page<Question> pageQuestions = service.getQuestions(0,30,"new");
+    public ResponseEntity getQuestionsHome() {
+        Page<Question> pageQuestions = service.getQuestions(0, 30, "new");
 
         List<Question> questions = pageQuestions.getContent();
 
@@ -64,7 +64,7 @@ public class QuestionController {
 
     @PatchMapping("/{questions-id}/edit")
     public ResponseEntity patchQuestion(@RequestBody @Valid QuestionDto.Patch requestBody,
-                                        @PathVariable("questions-id") @Positive long questionId){
+                                        @PathVariable("questions-id") @Positive long questionId) {
         requestBody.setQuestionId(questionId);
         Question editQuestion = service.editQuestion(mapper.questionDtoPatchToQuestion(requestBody));
 
@@ -72,7 +72,7 @@ public class QuestionController {
     }
 
     @DeleteMapping("/{question-id}")
-    public ResponseEntity deleteQuestion(@PathVariable("question-id") @Positive long questionId){
+    public ResponseEntity deleteQuestion(@PathVariable("question-id") @Positive long questionId) {
         service.removeQuestion(questionId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

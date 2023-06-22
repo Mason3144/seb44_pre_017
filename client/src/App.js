@@ -3,6 +3,10 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Header from './Components/Common/Header/Header';
+import TopQuestions from './Components/Question/TopQuestions/TopQuestions';
+import AnswerUpdatePage from './Pages/Question/AnswerUpdatePage/AnswerUpdatePage';
+import QuestionUpdatePage from './Pages/Question/QuestionUpdate.js/QuestionUpdatePage';
+import MyPage from './Pages/My/MyPage';
 import MainPage from './Pages/Common/MainPage/MainPage';
 import Sidebar from './Components/Common/Sidebar/Sidebar';
 import Footer from './Components/Common/Footer/Footer';
@@ -11,6 +15,7 @@ import MyPage from './Pages/My/MyPage.jsx';
 import PasswordUpdatePage from './Pages/My/PasswordUpdatePage.jsx';
 import LoginPage from './Pages/LoginSignup/LoginPage.jsx';
 import QuestionCreatePage from './Pages/Question/QuestionCreatePage/QuestionCreatePage';
+import AllQuestions from './Components/Question/AllQuestions/AllQuestions';
 
 function App() {
   return (
@@ -27,17 +32,24 @@ function App() {
           />
           <Route path="/questions" element={<MainPage />} />
           <Route path="/" element={<LoginPage />} />
-          <Route
-            path="/questions/board"
-            element={<div>QuestionsPage All Questions</div>}
-          />
+          <Route path="/questions/board" element={<AllQuestions />} />
           <Route path="/questions/ask" element={<QuestionCreatePage />} />
           <Route path="/questions/:questionId" element={<QuestionDetail />} />
+          <Route
+            path="/questions/:questionId/update"
+            element={<QuestionUpdatePage />}
+          />
+          <Route
+            path="/questions/:questionId"
+            element={<div>QuestionDetailPage 질문 상세 페이지</div>}
+          />
           <Route
             path="/questions/{question-id}/update"
             element={<div>QuestionUpdatePage 질문 수정 페이지</div>}
           />
           <Route
+            path="/questions/:questionId/answers/:answerId/edit"
+            element={<AnswerUpdatePage />}
             path="/questions/:questionId/answers/:answerId/edit"
             element={<div>AnswerUpdatePage 답변 수정 페이지</div>}
           />
