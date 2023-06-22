@@ -1,5 +1,5 @@
 import TopQuestions from '../../../Components/Question/TopQuestions/TopQuestions';
-function Sidebar() {
+function MainPage() {
   return <TopQuestions />;
 }
-export default Sidebar;
+export default MainPage;
