@@ -51,8 +51,6 @@ function App() {
           <Route
             path="/questions/:questionId/answers/:answerId/edit"
             element={<AnswerUpdatePage />}
-            path="/questions/:questionId/answers/:answerId/edit"
-            element={<div>AnswerUpdatePage 답변 수정 페이지</div>}
           />
           <Route path="/members/" element={<MyPage />} />
           <Route

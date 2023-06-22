@@ -1,4 +1,3 @@
-//조건부 라우팅, 조건부 UI 는 로그인 상태가 적용된 이후에 해제해야 합니다.
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleSidebar } from '../../../redux/sidebarSlice';
