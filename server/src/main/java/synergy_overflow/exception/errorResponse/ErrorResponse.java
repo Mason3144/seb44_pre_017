@@ -2,6 +2,7 @@ package synergy_overflow.exception.errorResponse;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import synergy_overflow.exception.businessLogicException.ExceptionCode;

@@ -3,6 +3,7 @@ package synergy_overflow.member.dto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import synergy_overflow.helper.validator.NotSpace;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -31,12 +32,12 @@ public class MemberDto {
     public static class Patch {
         private long memberId;
 
-        @NotBlank(message = "비밀번호를 입력해 주세요")
+        @NotSpace(message = "비밀번호를 입력해 주세요")
         @Pattern(regexp = "(?=.*[A-Za-z])(?=.*[0-9])(?=.*\\W).{6,20}",
                 message = "비밀번호는 영문 대 소문자,숫자,특수문자를 포함하여 6자 이상 작성해 주세요")
         private String password;
 
-        @NotBlank(message = "닉네임을 입력해 주세요.")
+        @NotSpace(message = "닉네임을 입력해 주세요.")
         private String nickname;
 
         public void setMemberId(long memberId) {

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import synergy_overflow.auth.utils.MemberAuthorityUtils;
 import synergy_overflow.exception.businessLogicException.BusinessLogicException;
 import synergy_overflow.exception.businessLogicException.ExceptionCode;
+import synergy_overflow.helper.loggedInChecker.LoggedInMemberUtils;
 import synergy_overflow.member.entity.Member;
 import synergy_overflow.member.repository.MemberRepository;
 
@@ -52,6 +53,7 @@ public class MemberService {
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
     public Member updateMember(Member member) {
         Member findMember = findVerifiedMember(member.getMemberId());
+        LoggedInMemberUtils.verifyMine(findMember.getEmail());
 
         Optional.ofNullable(member.getNickname())
                 .ifPresent(findMember::setNickname);
@@ -76,6 +78,7 @@ public class MemberService {
     // 회원 삭제
     public void deleteMember(long memberId) {
         Member findMember = findVerifiedMember(memberId);
+        LoggedInMemberUtils.verifyMine(findMember.getEmail());
         memberRepository.delete(findMember);
     }
 
