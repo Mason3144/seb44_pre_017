@@ -31,6 +31,16 @@ const QuestionUpdatePage = () => {
   }, []);
 
   const onSubmit = async () => {
+    if (titleValue.length > 50) {
+      alert('Title should be 50 characters or less.');
+      return;
+    }
+
+    if (textValue.length < 20) {
+      alert('Text should be at least 20 characters.');
+      return;
+    }
+
     const source = `http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/edit`;
 
     const response = await axios.patch(
@@ -117,4 +127,3 @@ const EditTitleBox = ({ value, setValue }) => {
 };
 
 export default QuestionUpdatePage;
-

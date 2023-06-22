@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import sidebarReducer from './sidebarSlice';
-import userReducer from './user';
+import userReducer from './userSlice';
 import loginReducer from './loginSlice';
 import responseUserInfoReducer from './userInfoSlice';
 
