@@ -9,9 +9,9 @@ import synergy_overflow.answer.entity.Answer;
 @Component
 public interface AnswerMapper {
 
-    Answer AnswerPostToAnswer(AnswerDto.postDto requestBody);
+    Answer AnswerDtoPostToAnswer(AnswerDto.postDto requestBody);
 
-    Answer AnswerPatchToAnswer(AnswerDto.patchDto requestBody);
+    Answer AnswerDtoPatchToAnswer(AnswerDto.patchDto requestBody);
 
     AnswerDto.responseDto AnswerToResponse(Answer answer);
 }

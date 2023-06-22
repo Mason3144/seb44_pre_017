@@ -2,21 +2,19 @@ package synergy_overflow.member.mapper;
 
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
-import synergy_overflow.member.dto.MemberDto.Patch;
-import synergy_overflow.member.dto.MemberDto.Post;
-import synergy_overflow.member.dto.MemberDto.Response;
+import synergy_overflow.member.dto.MemberDto;
 import synergy_overflow.member.entity.Member;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-06-21T14:10:12+0900",
-    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.18 (Azul Systems, Inc.)"
+    date = "2023-06-21T16:11:54+0900",
+    comments = "version: 1.5.1.Final, compiler: javac, environment: Java 11.0.18 (Azul Systems, Inc.)"
 )
 @Component
 public class MemberMapperImpl implements MemberMapper {
 
     @Override
-    public Member memberPostToMember(Post requestBody) {
+    public Member memberPostToMember(MemberDto.Post requestBody) {
         if ( requestBody == null ) {
             return null;
         }
@@ -31,7 +29,7 @@ public class MemberMapperImpl implements MemberMapper {
     }
 
     @Override
-    public Member memberPatchToMember(Patch requestBody) {
+    public Member memberPatchToMember(MemberDto.Patch requestBody) {
         if ( requestBody == null ) {
             return null;
         }
@@ -46,7 +44,7 @@ public class MemberMapperImpl implements MemberMapper {
     }
 
     @Override
-    public Response memberToMemberResponse(Member member) {
+    public MemberDto.Response memberToMemberResponse(Member member) {
         if ( member == null ) {
             return null;
         }
@@ -59,7 +57,7 @@ public class MemberMapperImpl implements MemberMapper {
         }
         nickname = member.getNickname();
 
-        Response response = new Response( memberId, nickname );
+        MemberDto.Response response = new MemberDto.Response( memberId, nickname );
 
         return response;
     }
