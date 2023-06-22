@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import * as S from './QuestionDetail.styled';
 import { useState, useEffect } from 'react';
 import QuestionAndAnswer from '../../../Components/Question/QuestionAndAnswer/QuestionAndAnswer';
@@ -8,9 +9,7 @@ function QuestionDetail() {
   const [data, setData] = useState({});
   const [newAnswer, setNewAnswer] = useState('');
   const [answer, setAnswer] = useState({});
-
   const { questionId } = useParams();
-
   useEffect(() => {
     axios
       .get(

@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types*/
 import * as S from './QuestionAndAnswer.styled';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 
@@ -15,34 +15,29 @@ import Comment from '../Comment/Comment';
 
 function QuestionAndAnswer({ data, isQuestion }) {
   const navigate = useNavigate();
-
-  if (!data || !data.writer || !data.writer.memberId) {
-    return null;
-  }
-
-  const {
-    writer: { memberId },
-  } = data; //작성자Id
-  const { createdAt } = data;
-  const { adopted } = data;
-
-  const [isAdopted, setIsAdopted] = useState(adopted);
+  const { questionId } = useParams();
+  const { answerId } = data;
   const [comment, setComment] = useState('');
   const [newComment, setNewComment] = useState('');
+  const [isAdopted, setIsAdopted] = useState('');
 
-  const handleComment = (e) => {
-    setNewComment(e.target.value);
-  };
-
+  const memberId = () => data?.writer?.memberId;
   const login = useSelector((state) => state.login); //로그인상태
-  const questionWriter = useSelector((state) => state.writer.value.memberId); //질문작성자Id
+  const questionWriter = useSelector((state) => state.writer.value.memberId); //질문자Id
   const userId = useSelector((state) => state.userInfo.value.memberId); //사용자Id
+  const { createdAt } = data;
+  const { adopted } = data;
+  useEffect(() => {
+    {
+      setIsAdopted(adopted);
+    }
+  }, [adopted]);
 
-  const { questionId } = useParams();
+  const handleComment = useCallback((e) => {
+    setNewComment(e.target.value);
+  }, []);
 
-  const { answerId } = data;
-
-  const handleAddComment = () => {
+  const handleAddComment = useCallback(() => {
     //댓글등록
     axios
       .post(
@@ -69,9 +64,9 @@ function QuestionAndAnswer({ data, isQuestion }) {
           }
         }
       });
-  };
+  }, [questionId, answerId]);
 
-  const handleAdopt = () => {
+  const handleAdopt = useCallback(() => {
     //채택
     if (questionWriter === userId) {
       //질문 작성자와 사용자가 같을 때
@@ -95,9 +90,9 @@ function QuestionAndAnswer({ data, isQuestion }) {
     } else {
       alert('질문 작성자만 채택이 가능합니다.');
     }
-  };
+  }, [questionWriter, userId, questionId, answerId]);
 
-  const handleAdoptDelete = () => {
+  const handleAdoptDelete = useCallback(() => {
     if (questionWriter === userId) {
       //질문작성자와 사용자가 같을 때
       axios
@@ -113,9 +108,9 @@ function QuestionAndAnswer({ data, isQuestion }) {
     } else {
       null;
     }
-  };
+  }, [questionWriter, userId, questionId, answerId]);
 
-  const handleDelete = () => {
+  const handleDelete = useCallback(() => {
     //질문, 답변 삭제
     if (memberId === userId && window.confirm('삭제하시겠습니까?')) {
       //작성자와 사용자의 Id가 같고
@@ -151,20 +146,20 @@ function QuestionAndAnswer({ data, isQuestion }) {
     } else {
       alert('작성자만 삭제가 가능합니다.');
     }
-  };
+  }, [memberId, userId, questionId, isQuestion]);
 
   //질문
-  const goAsk = () => {
+  const goAsk = useCallback(() => {
     if (login === true) {
       navigate('/questions/ask');
     } else {
       navigate('/login');
       alert('로그인 후 이용이 가능합니다.');
     }
-  };
+  }, [login, navigate]);
 
   //수정
-  const goEdit = () => {
+  const goEdit = useCallback(() => {
     if (memberId === userId) {
       //작성자와 사용자 Id가 같을 때
       if (isQuestion === true) {
@@ -177,9 +172,9 @@ function QuestionAndAnswer({ data, isQuestion }) {
     } else {
       alert('작성자만 수정이 가능합니다.');
     }
-  };
+  }, [memberId, userId, isQuestion, questionId, answerId]);
 
-  const detailDate = (a) => {
+  const detailDate = useCallback((a) => {
     const milliSeconds = new Date() - a;
     const seconds = milliSeconds / 1000;
     if (seconds < 60) return `${Math.floor(seconds)} secs ago`;
@@ -195,10 +190,10 @@ function QuestionAndAnswer({ data, isQuestion }) {
     if (months < 12) return `${Math.floor(months)} months ago`;
     const years = days / 365;
     return `${Math.floor(years)} years ago`;
-  };
+  }, []);
 
-  const now = new Date({ createdAt });
-  const nowDate = detailDate(now);
+  const now = useMemo(() => new Date({ createdAt }), [createdAt]);
+  const nowDate = useMemo(() => detailDate(now), [detailDate, now]);
 
   let year = now.getFullYear();
   const monthName = [
@@ -298,4 +293,14 @@ function QuestionAndAnswer({ data, isQuestion }) {
   );
 }
 
+// function QuestionAndAnswer({ data, isQuestion }) {
+//   // const questionWriter = useSelector((state) => state.writer.value.memberId);
+//   return (
+//     <QuestionAndAnswerContainer
+//       data={data}
+//       isQuestion={isQuestion}
+//       questionWriter={questionWriter}
+//     />
+//   );
+// }
 export default QuestionAndAnswer;

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { useState } from 'react';
 import ProfileUser from '../../Components/Profile/ProfileUser.jsx';
 import ProfileSidebar from '../../Components/Profile/ProfileSidebar.jsx';

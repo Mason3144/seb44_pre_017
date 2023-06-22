@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
-import QuestionBox from '../QuestionBox';
+import QuestionBox from '../QuestionBox/QuestionBox';
 import * as S from './AllQuestions.styled';
 
 const AllQuestions = () => {
