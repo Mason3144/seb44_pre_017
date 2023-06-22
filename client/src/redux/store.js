@@ -1,4 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
+import sidebarReducer from './sidebarSlice';
+import userReducer from './userSlice';
+import loginReducer from './loginSlice';
+import responseUserInfoReducer from './userInfoSlice';
+
 export default configureStore({
-  reducer: {},
+  reducer: {
+    user: userReducer,
+    sidebar: sidebarReducer,
+    login: loginReducer,
+    responseUserInfo: responseUserInfoReducer,
+  },
 });
