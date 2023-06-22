@@ -102,7 +102,6 @@ public class MemberService {
     // 이미 존재하는 회원의 이메일로 멤버 객체 리턴
     public Member findMemberByEmail(String email) {
         Optional<Member> member = memberRepository.findByEmail(email);
-
         return member.get();
     }
 

@@ -10,6 +10,7 @@ import synergy_overflow.member.entity.Member;
 import synergy_overflow.question.entity.Question;
 
 import javax.persistence.*;
+import java.util.LinkedList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -31,7 +32,7 @@ public class Answer extends Auditable {
     @JoinColumn(name = "member_id",nullable = false)
     private Member writer;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "question_id",nullable = false)
     private Question question;
 
@@ -39,7 +40,7 @@ public class Answer extends Auditable {
     private Adoption adoption;
 
     @OneToMany(mappedBy = "answer", cascade = CascadeType.REMOVE)
-    private List<Comment> comments;
+    private List<Comment> comments = new LinkedList<>();
 
     public void setComments(Comment comment){
         this.comments.add(comment);

@@ -1,5 +1,7 @@
 package synergy_overflow.answer.service;
 
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import synergy_overflow.adaption.repository.AdoptionRepository;
@@ -10,6 +12,7 @@ import synergy_overflow.exception.businessLogicException.ExceptionCode;
 import synergy_overflow.helper.loggedInChecker.LoggedInMemberUtils;
 import synergy_overflow.member.entity.Member;
 import synergy_overflow.member.repository.MemberRepository;
+import synergy_overflow.member.service.MemberService;
 import synergy_overflow.question.entity.Question;
 import synergy_overflow.question.repository.QuestionRepository;
 import synergy_overflow.question.service.QuestionService;
@@ -19,32 +22,22 @@ import java.util.Optional;
 
 @Service
 @Transactional
+@AllArgsConstructor
 public class AnswerService {
 
     private final AnswerRepository answerRepository;
 
-    private final MemberRepository memberRepository;
-
-    private final QuestionRepository questionRepository;
-
     private final QuestionService questionService;
 
-    private final AdoptionRepository adoptionRepository;
+    private final MemberService memberService;
 
-    public AnswerService(AnswerRepository answerRepository, MemberRepository memberRepository, QuestionRepository questionRepository, QuestionService questionService, AdoptionRepository adoptionRepository) {
-        this.questionRepository = questionRepository;
-        this.answerRepository = answerRepository;
-        this.memberRepository = memberRepository;
-        this.questionService = questionService;
-        this.adoptionRepository = adoptionRepository;
-    }
 
     public Answer createAnswer(Answer answer, long questionId){
-        Member member = memberRepository.findByEmail(LoggedInMemberUtils.findLoggedInMember()).get();
+        Member member = memberService.findMemberByEmail(LoggedInMemberUtils.findLoggedInMember());
 
         member.setAnswers(answer);
 
-        Question question = questionRepository.findById(questionId).get();
+        Question question = questionService.findExistsQuestion(questionId);
         question.setAnswers(answer);
 
         return answerRepository.save(answer);

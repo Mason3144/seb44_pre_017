@@ -2,6 +2,7 @@ package synergy_overflow.comment.service;
 
 import org.springframework.stereotype.Service;
 import synergy_overflow.answer.entity.Answer;
+import synergy_overflow.answer.service.AnswerService;
 import synergy_overflow.comment.entity.Comment;
 import synergy_overflow.comment.repository.CommentRepository;
 import synergy_overflow.helper.loggedInChecker.LoggedInMemberUtils;
@@ -12,11 +13,12 @@ import synergy_overflow.member.service.MemberService;
 public class CommentService {
     private final CommentRepository commentRepository;
     private final MemberService memberService;
+    private final AnswerService answerService;
 
-    public CommentService(CommentRepository commentRepository,
-                          MemberService memberService) {
+    public CommentService(CommentRepository commentRepository, MemberService memberService, AnswerService answerService) {
         this.commentRepository = commentRepository;
         this.memberService = memberService;
+        this.answerService = answerService;
     }
 
     public Comment createComment(Comment comment, long answerId) {
@@ -25,7 +27,7 @@ public class CommentService {
         Member member = memberService.findMemberByEmail(authenticatedMemberEmail);
 
         // answer 추가
-        Answer answer = new Answer();
+        Answer answer = answerService.findVerifiedAnswer(answerId);
         answer.setAnswerId(answerId);
 
         // 회원과 답변에 댓글 추가
