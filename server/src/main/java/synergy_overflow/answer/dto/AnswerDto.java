@@ -5,11 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import synergy_overflow.comment.dto.CommentDto;
 import synergy_overflow.member.dto.MemberDto;
 
 
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 public class AnswerDto {
@@ -19,7 +21,7 @@ public class AnswerDto {
     @Setter
     public static class postDto{
 
-        private long memberId;
+        private long questionId;
 
         @NotBlank
         private String answerBody;
@@ -40,7 +42,8 @@ public class AnswerDto {
     @AllArgsConstructor
     @Getter
     @Setter
-    public static class responseDto{
+    @Builder
+    public static class Response{
 
         private long answerId;
 
@@ -50,8 +53,8 @@ public class AnswerDto {
 
         private boolean adopted;
 
-        private MemberDto.Response Writer;
+        private MemberDto.Response writer;
 
-//        private List<CommentsDto.Response> comments;
+        private List<CommentDto.Response> comments;
     }
 }

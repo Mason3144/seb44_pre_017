@@ -8,10 +8,10 @@ import javax.persistence.*;
 
 @Entity
 @Setter
-public class Adaption {
+public class Adoption {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long AdaptionId;
+    private Long adaptionId;
 
     @OneToOne
     @JoinColumn(name = "question_id")

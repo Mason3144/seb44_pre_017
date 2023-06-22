@@ -4,7 +4,7 @@ package synergy_overflow.question.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import synergy_overflow.adaption.entity.Adaption;
+import synergy_overflow.adaption.entity.Adoption;
 import synergy_overflow.answer.entity.Answer;
 import synergy_overflow.helper.audit.Auditable;
 import synergy_overflow.member.entity.Member;
@@ -34,8 +34,8 @@ public class Question extends Auditable {
         this.views++;
     }
 
-    @OneToOne(mappedBy = "question", cascade = CascadeType.REMOVE)
-    private Adaption adaption;
+    @OneToOne(mappedBy = "question", cascade = {CascadeType.REMOVE,CascadeType.REFRESH})
+    private Adoption adoption;
 
     @ManyToOne
     @JoinColumn(name = "member_id", nullable = false)

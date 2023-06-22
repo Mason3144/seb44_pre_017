@@ -3,9 +3,9 @@ package synergy_overflow.comment.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import synergy_overflow.answer.entity.Answer;
 import synergy_overflow.helper.audit.Auditable;
 import synergy_overflow.member.entity.Member;
-import synergy_overflow.question.temporaries.temporaryEntities.AnswerEntity;
 
 import javax.persistence.*;
 
@@ -18,7 +18,7 @@ public class Comment extends Auditable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long commentId;
 
-    @Column(nullable = false, columnDefinition = "CONTENT")
+    @Column(nullable = false)
     private String body;
 
     @ManyToOne
@@ -27,5 +27,5 @@ public class Comment extends Auditable {
 
     @ManyToOne
     @JoinColumn(name = "answer_id", nullable = false)
-    private AnswerEntity answer; // TODO Answer로 수정, Answer에 연관관계 매핑
+    private Answer answer;
 }

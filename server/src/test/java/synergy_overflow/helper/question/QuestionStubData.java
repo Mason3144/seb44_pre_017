@@ -4,11 +4,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import synergy_overflow.answer.dto.AnswerDto;
+import synergy_overflow.comment.dto.CommentDto;
+import synergy_overflow.member.dto.MemberDto;
 import synergy_overflow.question.dto.MultiResponseDto;
 import synergy_overflow.question.dto.QuestionDto;
 import synergy_overflow.question.entity.Question;
-import synergy_overflow.question.temporaries.temporaryDtos.AnswerDto;
-import synergy_overflow.question.temporaries.temporaryDtos.CommentsDto;
+
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -83,8 +85,8 @@ public abstract class QuestionStubData {
                 .build();
     }
 
-    public CommentsDto.Response generateCommentResponse(long number) {
-        return CommentsDto.Response.builder()
+    public CommentDto.Response generateCommentResponse(long number) {
+        return CommentDto.Response.builder()
                 .answerId(number)
                 .commentId(number)
                 .commentBody(number + " 댓글 내용")

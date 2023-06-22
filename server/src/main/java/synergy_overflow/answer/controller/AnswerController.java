@@ -3,12 +3,11 @@ package synergy_overflow.answer.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import synergy_overflow.adaption.service.AdoptionService;
 import synergy_overflow.answer.dto.AnswerDto;
 import synergy_overflow.answer.entity.Answer;
 import synergy_overflow.answer.mapper.AnswerMapper;
 import synergy_overflow.answer.service.AnswerService;
-import synergy_overflow.question.entity.Question;
-import synergy_overflow.question.sevice.QuestionService;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
@@ -17,15 +16,14 @@ import javax.validation.constraints.Positive;
 @RequestMapping(value = "/questions/{question-id}/answers")
 public class AnswerController {
     private final AnswerService answerService;
-    private final QuestionService questionService;
-
-
+    private final AdoptionService adoptionService;
     private final AnswerMapper mapper;
 
-    public AnswerController(AnswerService answerService, AnswerMapper mapper,QuestionService questionService ) {
+
+    public AnswerController(AnswerService answerService, AdoptionService adoptionService, AnswerMapper mapper) {
         this.answerService = answerService;
+        this.adoptionService = adoptionService;
         this.mapper = mapper;
-        this.questionService=questionService;
     }
 
     //답변 등록
@@ -34,18 +32,18 @@ public class AnswerController {
                                       @Positive @PathVariable("question-id") long questionId){
         Answer postAnswer = mapper.AnswerDtoPostToAnswer(requestBody);
         answerService.createAnswer(postAnswer,questionId);
-        AnswerDto.responseDto response =mapper.AnswerToResponse(postAnswer);
+        AnswerDto.Response response =mapper.AnswerToResponse(postAnswer);
         return new ResponseEntity<>(response,HttpStatus.CREATED);
     }
 
     // 채택 post
     @PostMapping("/{answer-id}/adopt")
-    public ResponseEntity adopted(@Positive @PathVariable ("answer-id") Long answerId,
-                                  @Positive @PathVariable ("question-id") Long questionId){
+    public ResponseEntity adopted(@Positive @PathVariable ("answer-id") long answerId,
+                                  @Positive @PathVariable ("question-id") long questionId){
 
+        Answer adoptedAnswer = adoptionService.createAdoption(answerId,questionId);
 
-        Answer adoptedAnswer = answerService.adopt(answerId,questionId);
-        AnswerDto.responseDto response = mapper.AnswerToResponse(adoptedAnswer);
+        AnswerDto.Response response = mapper.AnswerToResponse(adoptedAnswer);
 
         return new ResponseEntity(response,HttpStatus.OK);
     }
@@ -54,8 +52,9 @@ public class AnswerController {
     @DeleteMapping("/{answer-id}/adopt")
     public ResponseEntity unAdopted(@PathVariable ("answer-id") Long answerId,
                                     @Positive @PathVariable ("question-id") Long questionId){
-        Answer unAdoptedAnswer = answerService.unAdopt(answerId,questionId);
-        AnswerDto.responseDto response = mapper.AnswerToResponse(unAdoptedAnswer);
+        Answer unAdoptedAnswer = adoptionService.deleteAdaption(answerId,questionId);
+
+        AnswerDto.Response response = mapper.AnswerToResponse(unAdoptedAnswer);
 
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
@@ -68,7 +67,7 @@ public class AnswerController {
 
         Answer answer = mapper.AnswerDtoPatchToAnswer(requestBody);
         Answer updatedAnswer =answerService.updateAnswer(answer);
-        AnswerDto.responseDto response = mapper.AnswerToResponse(updatedAnswer);
+        AnswerDto.Response response = mapper.AnswerToResponse(updatedAnswer);
 
 
         return new ResponseEntity<>(response, HttpStatus.OK);

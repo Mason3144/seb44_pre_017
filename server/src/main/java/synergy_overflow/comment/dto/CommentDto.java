@@ -1,6 +1,7 @@
 package synergy_overflow.comment.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import synergy_overflow.member.dto.MemberDto;
 
@@ -19,6 +20,7 @@ public class CommentDto {
 
     @AllArgsConstructor
     @Getter
+    @Builder
     public static class Response {
         private long answerId;
         private long commentId;

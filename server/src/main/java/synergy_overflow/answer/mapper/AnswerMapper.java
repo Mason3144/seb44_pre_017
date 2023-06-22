@@ -13,5 +13,5 @@ public interface AnswerMapper {
 
     Answer AnswerDtoPatchToAnswer(AnswerDto.patchDto requestBody);
 
-    AnswerDto.responseDto AnswerToResponse(Answer answer);
+    AnswerDto.Response AnswerToResponse(Answer answer);
 }
