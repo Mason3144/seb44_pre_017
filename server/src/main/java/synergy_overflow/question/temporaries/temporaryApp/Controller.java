@@ -18,12 +18,10 @@ import javax.transaction.Transactional;
 public class Controller {
     private final MemberRepository memberRepository;
     private final QuestionMapper mapper;
-    private final AnswerRepository answerRepository;
 
-    public Controller(MemberRepository memberRepository, QuestionMapper mapper, AnswerRepository answerRepository) {
+    public Controller(MemberRepository memberRepository, QuestionMapper mapper) {
         this.memberRepository = memberRepository;
         this.mapper = mapper;
-        this.answerRepository = answerRepository;
     }
 
     @PostMapping("/member")
@@ -52,8 +50,6 @@ public class Controller {
 
         question.setAnswers(answer);
 
-        AnswerEntity newAnswer = answerRepository.save(answer);
-
-        return new ResponseEntity<>(mapper.answerToAnswerDtoResponse(newAnswer),HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
