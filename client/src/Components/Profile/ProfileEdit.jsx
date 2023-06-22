@@ -3,9 +3,15 @@
 import { useState } from 'react';
 import * as S from './ProfileEdit.styled';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { responseUserInfo } from '../../redux/userInfoSlice';
+import { useNavigate } from 'react-router-dom';
 
 const ProfileEdit = () => {
   const [displayName, setDisplayName] = useState('');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const handleInputValue = (e) => {
     setDisplayName(e.target.value);
   };
@@ -29,6 +35,8 @@ const ProfileEdit = () => {
         });
         if (res.status === 200) {
           alert('회원정보 수정이 완료되었습니다.');
+          dispatch(responseUserInfo(res.data.nickname));
+          navigate('/questions');
         }
       } catch (err) {
         console.error(err);
