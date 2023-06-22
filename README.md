@@ -1,53 +1,37 @@
 # Synergy Overflow ❤️‍🔥
 <img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=SynergeOverFlow&fontSize=90" />
 
-파이팅입니다~
+
+# 프로젝트 개요
+
+SynergyOverFlow는 게시판을 통해 회원이 등록한 질문을 다른 회원들이 
+답변과 댓글들을 작성하여 해결법을 제시해주는 웹 어플레케이션입니다. 
 
 
-![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=mason3144&theme=dark&show_icons=true)
 
 
-[![Solved.ac
-프로필](http://mazassumnida.wtf/api/mini/generate_badge?boj={handle})](https://solved.ac/{handle})
+<div align=center><h1>📚 STACKS AND TOOLS</h1></div>
+<div align=center> 
+  
+<img src="https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white">
+<img src="https://img.shields.io/badge/spring boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white">
+<img src="https://img.shields.io/badge/spring security-6DB33F?style=for-the-badge&logo=spring-security&logoColor=white">
+<br>
 
-[![Solved.ac
-프로필](http://mazassumnida.wtf/api/v2/generate_badge?boj={handle})](https://solved.ac/{handle})
-
-
-일반적인 README 구조
-
-
-1. 프로젝트 Description
-- 프로젝트 명
-
-- 어떤 프로젝트인지 소개
-
-
-2. 프로젝트 정보
-- 설치(Getting Started / Installation)
-
-- 컴파일 방법, 사용 환경, 브라우저 서포트(웹 프로젝트라면!)
-
-- 간단한 사용 방법 및 예제
+  <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> 
+  <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> 
+  <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+  <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black">
+      <img src="https://img.shields.io/badge/styledComponent-DB7093?style=for-the-badge&logo=styled-components&logoColor=black">
+<br>
+   
+  <img src="https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white"> 
+  <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+  <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
+  <br>
+</div>
 
 
-3. Contribute
-- 다른 사람들이 코드에 Contribute하기 쉽도록 설명
-
-- 어떤 류의 Contribute를 원하는지 또는 Contributing 규칙 등을 적을 수도 있다.
+## Contributors
 
 
-4. LICENSE
-- 라이선스 : 저작물의 수정 배포에 대한 권한이나 저작권들에 대한 조항들
-
-- 보통 MIT License를 많이 사용하고 BSD 라이선스도 많이 사용한다
-
-
-5. 외부리소스 정보
-- 프로젝트에 포함된 외부 코드나 리소스 정보(각각의 출처 및 배포 라이선스)
-
-
-6. Code Status
-- Shield라는 것을 사용하여 [build | passing]과 같은 정보를 줄 수 있다.
-
-- 프로젝트가 커질수록 도움이 되는 부분
