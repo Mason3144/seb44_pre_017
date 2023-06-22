@@ -7,8 +7,7 @@
 import { useState } from 'react';
 import * as S from './PasswordUpdatePage.styled.js';
 import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { login } from '../../redux/userSlice';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 const PasswordUpdatePage = () => {
@@ -17,7 +16,6 @@ const PasswordUpdatePage = () => {
   // 1-2. new password / new password(again) 상태 저장
   // 1-3. 비밀번호 유효성검사 정규 표현식
   const resUserInfo = useSelector((state) => state.responseUserInfo.value);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [newPassword, setNewPassword] = useState({
     password: '',
@@ -58,9 +56,6 @@ const PasswordUpdatePage = () => {
           },
         });
         if (res.status === 200) {
-          dispatch(
-            login({ username: res.data.username, password: res.data.password })
-          );
           alert('비밀번호가 변경되었습니다.');
           navigate('/questions/');
         }
