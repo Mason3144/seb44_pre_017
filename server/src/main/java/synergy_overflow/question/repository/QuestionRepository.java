@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.Query;
 import synergy_overflow.question.entity.Question;
 
 public interface QuestionRepository extends JpaRepository<Question, Long> {
-    Page<Question> findAllByAnswersIsNotNullOrderByQuestionIdDesc(Pageable pageable);
+    Page<Question> findDistinctAllByAnswersIsNotNullOrderByQuestionIdDesc(Pageable pageable);
 }

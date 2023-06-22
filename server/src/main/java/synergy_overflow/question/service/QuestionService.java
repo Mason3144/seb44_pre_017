@@ -50,7 +50,7 @@ public class QuestionService {
 
     private Page<Question> sortingQuestion(int page, int size, String sort) {
         if (sort.equals("answered")) {
-            return questionRepository.findAllByAnswersIsNotNullOrderByQuestionIdDesc(PageRequest.of(page, size));
+            return questionRepository.findDistinctAllByAnswersIsNotNullOrderByQuestionIdDesc(PageRequest.of(page, size));
         } else if (sort.equals("views")) {
             return questionRepository.findAll(
                     PageRequest.of(page, size, Sort.by(sort).descending()
