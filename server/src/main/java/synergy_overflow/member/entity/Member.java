@@ -3,6 +3,7 @@ package synergy_overflow.member.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import synergy_overflow.answer.entity.Answer;
 import synergy_overflow.comment.entity.Comment;
 import synergy_overflow.helper.audit.Auditable;
 import synergy_overflow.question.entity.Question;
@@ -40,15 +41,23 @@ public class Member extends Auditable implements Principal {
     @OneToMany(mappedBy = "writer", cascade = CascadeType.REMOVE)
     private List<Comment> comments = new ArrayList<>();
 
-    public void addQuestions(Question question) {
-        questions.add(question);
+    @OneToMany(mappedBy = "writer", cascade = CascadeType.REMOVE)
+    private List<Answer> answers =  new ArrayList<>();
+
+    public void setAnswers(Answer answer){
+       this.answers.add(answer);
+       if(answer.getWriter() != this) answer.setWriter(this);
+    }
+
+    public void setQuestions(Question question) {
+        this.questions.add(question);
         if (question.getWriter() != this) {
             question.setWriter(this);
         }
     }
 
     public void addComments(Comment comment) {
-        comments.add(comment);
+        this.comments.add(comment);
         if (comment.getWriter() != this) {
             comment.setWriter(this);
         }

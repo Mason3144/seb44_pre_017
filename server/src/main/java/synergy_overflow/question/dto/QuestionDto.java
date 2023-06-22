@@ -3,9 +3,9 @@ package synergy_overflow.question.dto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import synergy_overflow.answer.dto.AnswerDto;
 import synergy_overflow.helper.validator.NotSpace;
 import synergy_overflow.member.dto.MemberDto;
-import synergy_overflow.question.temporaries.temporaryDtos.AnswerDto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;

@@ -32,7 +32,7 @@ public class QuestionService {
 
     public Question createQuestion(Question question) {
         Member member = memberRepository.findByEmail(LoggedInMemberUtils.findLoggedInMember()).get();
-        member.addQuestions(question);
+        member.setQuestions(question);
 
         return questionRepository.save(question);
     }

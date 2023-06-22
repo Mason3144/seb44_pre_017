@@ -25,11 +25,10 @@ public class CommentController {
     @PostMapping("/questions/{question-id}/answers/{answer-id}/comments")
     public ResponseEntity postComment(
             @RequestBody @Valid CommentDto.Post requestBody,
-            @PathVariable("question-id") @Positive long questionId,
             @PathVariable("answer-id") @Positive long answerId) {
 
         Comment comment = mapper.commentPostDtoToComment(requestBody);
-        Comment createdComment = commentService.createComment(comment);
+        Comment createdComment = commentService.createComment(comment, answerId);
 
         CommentDto.Response response = mapper.commentToCommentResponse(createdComment);
 
