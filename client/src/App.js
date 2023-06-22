@@ -3,6 +3,9 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Header from './Components/Common/Header/Header';
+import TopQuestions from './Components/Question/TopQuestions/TopQuestions';
+import QuestionUpdatePage from './Pages/Question/QuestionUpdate.js/QuestionUpdatePage';
+import MyPage from './Pages/My/MyPage';
 import MainPage from './Pages/Common/MainPage/MainPage';
 import Sidebar from './Components/Common/Sidebar/Sidebar';
 import Footer from './Components/Common/Footer/Footer';
@@ -33,8 +36,8 @@ function App() {
           <Route path="/questions/ask" element={<QuestionCreatePage />} />
           <Route path="/questions/:questionId" element={<QuestionDetail />}/>
           <Route
-            path="/questions/{question-id}/update"
-            element={<div>QuestionUpdatePage 질문 수정 페이지</div>}
+            path="/questions/:questionId/update"
+            element={<QuestionUpdatePage />}
           />
           <Route
             path="/questions/:questionId/answers/:answerId/edit"
