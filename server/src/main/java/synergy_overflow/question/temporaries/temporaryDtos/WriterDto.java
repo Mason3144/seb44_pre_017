@@ -1,5 +1,6 @@
 package synergy_overflow.question.temporaries.temporaryDtos;
 
+
 import lombok.Builder;
 import lombok.Getter;
 
