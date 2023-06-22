@@ -1,16 +1,22 @@
+/* eslint-disable no-undef */
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Footer from './Components/Common/Footer/Footer';
-import Sidebar from './Components/Common/Sidebar/Sidebar';
-import Header from './Components/Common/Header/Header';
-import TopQuestions from './Components/Question/TopQuestions/TopQuestions';
 
+import Header from './Components/Common/Header/Header';
+import MainPage from './Pages/Common/MainPage/MainPage';
+import Sidebar from './Components/Common/Sidebar/Sidebar';
+import Footer from './Components/Common/Footer/Footer';
+import QuestionDetail from './Pages/Question/QuestionDetails/QuestionDetail';
+import MyPage from './Pages/My/MyPage.jsx';
+import LoginPage from './Pages/LoginSignup/LoginPage.jsx';
+import QuestionCreatePage from './Pages/Question/QuestionCreatePage/QuestionCreatePage';
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Header />
         <Sidebar />
+
         <Routes>
           <Route path="/home" element={<div>HomePage 홈 팀원소개</div>} />
           <Route path="/members" element={<div>SignupPage 회원가입</div>} />
@@ -18,32 +24,23 @@ function App() {
             path="/members/welcome"
             element={<div>AfterSignupPage 회원가입 완료</div>}
           />
-          <Route path="/" element={<div>LoginPage 로그인 페이지</div>} />
-          <Route path="/questions" element={<TopQuestions />} />
+          <Route path="/questions" element={<MainPage />} />
+          <Route path="/" element={<LoginPage />} />
           <Route
             path="/questions/board"
             element={<div>QuestionsPage All Questions</div>}
           />
-          <Route
-            path="/questions/ask"
-            element={<div>QuestionCreatePage 질문 생성 페이지</div>}
-          />
-          <Route
-            path="/questions/:questionId"
-            element={<div>QuestionDetailPage 질문 상세 페이지</div>}
-          />
+          <Route path="/questions/ask" element={<QuestionCreatePage />} />
+          <Route path="/questions/:questionId" element={<QuestionDetail />}/>
           <Route
             path="/questions/{question-id}/update"
             element={<div>QuestionUpdatePage 질문 수정 페이지</div>}
           />
           <Route
-            path="/questions/{question-id}/answers"
+            path="/questions/:questionId/answers/:answerId/edit"
             element={<div>AnswerUpdatePage 답변 수정 페이지</div>}
           />
-          <Route
-            path="/members/{member-id}"
-            element={<div>MyPage 회원정보 수정</div>}
-          />
+          <Route path="/members/" element={<MyPage />} />
           <Route
             path="/members/{member-id}/delete"
             element={<div>ProfileDelete 회원정보 삭제</div>}

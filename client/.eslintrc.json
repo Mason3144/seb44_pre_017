@@ -19,6 +19,11 @@
   },
   "rules": {
     "react/react-in-jsx-scope": 0,
-    "react/jsx-uses-react": 0
+    "react/jsx-uses-react": 0,
+    "import/no-named-as-default": 0,
+    "no-unused-vars": "off"
+    // import styled from 'styled-components'; -> 이 코드에서 아래 Problem 발생.
+    // problem using exported name 'styled' as identifier for default export.
+    // "import/no-named-as-default": 0 -> rules 에 추가하여 해결
   }
 }
