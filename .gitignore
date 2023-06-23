@@ -27,8 +27,8 @@ bin/
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
-/server/src/main/generated/*
-/server/src/test/java/synergy_overflow/*
+/server/src/main/generated/
+/server/src/test/java/synergy_overflow/
 
 ### NetBeans ###
 /nbproject/private/
