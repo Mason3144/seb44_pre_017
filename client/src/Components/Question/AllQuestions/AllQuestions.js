@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react';
@@ -33,7 +34,7 @@ const AllQuestions = () => {
     const getAllQuestions = async () => {
       setLoading(true);
 
-      const source = `http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/questions/board?size=10&page=${page}&sort=${filterValue}`;
+      const source = `${process.env.REACT_APP_API_URL}/questions/board?size=10&page=${page}&sort=${filterValue}`;
       const response = await axios.get(source, {
         headers: {
           'Content-Type': 'application/json',
@@ -41,7 +42,6 @@ const AllQuestions = () => {
         },
       });
       setQuestion(response.data);
-
       setLoading(false);
     };
 

@@ -36,7 +36,7 @@ const Signup = () => {
     } else {
       try {
         const url =
-          'http://ec2-54-148-132-64.us-west-2.compute.amazonaws.com:8080/members';
+          `${process.env.REACT_APP_API_URL}/members`;
         const res = await axios.post(url, signupInfo, {
           headers: { 'Content-Type': 'application/json' },
         });
@@ -55,7 +55,7 @@ const Signup = () => {
   };
 
   const LoginRequestHandlerGoogle = () => {
-    window.location.href = 'http://ec2-54-148-132-64.us-west-2.compute.amazonaws.com:8080/oauth2/authorization/google';
+    window.location.href = `${process.env.REACT_APP_API_URL}/oauth2/authorization/google`;
   }
   
   return (
