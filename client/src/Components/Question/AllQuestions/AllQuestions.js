@@ -75,11 +75,10 @@ const AllQuestions = () => {
             Answered
           </S.Buttons>
         </S.ButtonGroup>
-        {/* pagination 확인 위해 data 추가 */}
         <Posts question={question.data} loading={loading} />
         {!loading ? (
           <Pagination
-            totalElements={question.pageInfo.totalElements * 32}
+            totalElements={question.pageInfo.totalElements}
             size={question.pageInfo.size}
           />
         ) : null}

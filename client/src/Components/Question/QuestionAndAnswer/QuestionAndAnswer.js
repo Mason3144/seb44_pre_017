@@ -21,13 +21,14 @@ function QuestionAndAnswer({ data, isQuestion }) {
   const [newComment, setNewComment] = useState('');
   const [isAdopted, setIsAdopted] = useState('');
 
-  const memberId = () => data?.writer?.memberId;
+  const memberId = data.writer ? data.writer.memberId : '';
+  const toStringMemberId = memberId.toString();
   const login = useSelector((state) => state.login); //로그인상태
   const questionWriter = useSelector((state) => state.writer.value.memberId); //질문자Id
   const userId = useSelector((state) => state.userInfo.value.memberId); //사용자Id
   const { createdAt } = data;
-
   const { adopted } = data;
+
   useEffect(() => {
     {
       setIsAdopted(adopted);
@@ -116,7 +117,7 @@ function QuestionAndAnswer({ data, isQuestion }) {
 
   const handleDelete = useCallback(() => {
     //질문, 답변 삭제
-    if (memberId === userId && window.confirm('삭제하시겠습니까?')) {
+    if (toStringMemberId === userId && window.confirm('삭제하시겠습니까?')) {
       //작성자와 사용자의 Id가 같고
       if (isQuestion === true) {
         //질문인 경우
@@ -164,7 +165,7 @@ function QuestionAndAnswer({ data, isQuestion }) {
 
   //수정
   const goEdit = useCallback(() => {
-    if (memberId === userId) {
+    if (toStringMemberId === userId) {
       //작성자와 사용자 Id가 같을 때
       if (isQuestion === true) {
         //질문인 경우
@@ -297,14 +298,4 @@ function QuestionAndAnswer({ data, isQuestion }) {
   );
 }
 
-// function QuestionAndAnswer({ data, isQuestion }) {
-//   // const questionWriter = useSelector((state) => state.writer.value.memberId);
-//   return (
-//     <QuestionAndAnswerContainer
-//       data={data}
-//       isQuestion={isQuestion}
-//       questionWriter={questionWriter}
-//     />
-//   );
-// }
 export default QuestionAndAnswer;

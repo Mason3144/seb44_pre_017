@@ -41,12 +41,7 @@ function App() {
           <Route path="/questions/ask" element={<QuestionCreatePage />} />
           <Route path="/questions/:questionId" element={<QuestionDetail />} />
           <Route
-            path="/questions/:questionId/update"
-            element={<QuestionUpdatePage />}
-          />
-          <Route path="/questions/:questionId" element={<QuestionDetail />} />
-          <Route
-            path="/questions/:questionId/update"
+            path="/questions/:questionId/edit"
             element={<QuestionUpdatePage />}
           />
           <Route

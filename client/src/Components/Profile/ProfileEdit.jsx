@@ -4,7 +4,7 @@
 import { useState } from 'react';
 import * as S from './ProfileEdit.styled';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { responseUserInfo } from '../../redux/userInfoSlice';
 import { useNavigate } from 'react-router-dom';
 
@@ -36,6 +36,7 @@ const ProfileEdit = () => {
             Authorization: localStorage.getItem('Authorization'),
           },
         });
+        console.log(res);
         if (res.status === 200) {
           alert('회원정보 수정이 완료되었습니다.');
           dispatch(responseUserInfo(res.data.nickname));

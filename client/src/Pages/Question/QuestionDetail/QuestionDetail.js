@@ -5,12 +5,16 @@ import QuestionAndAnswer from '../../../Components/Question/QuestionAndAnswer/Qu
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import WebEditor from '../../../Components/Question/QuestionBox/WebEditor';
+import { useDispatch } from 'react-redux';
+import { writerInfo } from '../../../redux/writerSlice';
+
 function QuestionDetail() {
   const [data, setData] = useState({});
   const [newAnswer, setNewAnswer] = useState('');
   const [answer, setAnswer] = useState(null);
   const { questionId } = useParams();
-  
+  const dispatch = useDispatch();
+
   useEffect(() => {
     axios
       .get(
@@ -18,7 +22,9 @@ function QuestionDetail() {
       )
       .then((res) => {
         setData(res.data);
-      })
+        dispatch(writerInfo({ memberId: res.data.writer.memberId }))
+      }
+      )
       .catch((error) => {
         console.log('Error occurred:', error.message);
       });

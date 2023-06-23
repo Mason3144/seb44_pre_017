@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const writerSlice = createSlice({
   name: 'writer',
   initialState: {
-    value: { memberId: '' },
+    value: { memberId: null },
   },
   reducers: {
     writerInfo: (state, action) => {

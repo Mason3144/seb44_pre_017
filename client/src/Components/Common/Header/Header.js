@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleSidebar } from '../../../redux/sidebarSlice';
 import { setLoginState } from '../../../redux/loginSlice';
+import { login } from '../../../redux/userSlice';
 import * as S from './Header.styled';
 import { ReactComponent as Hamburger } from '../../../icons/hamburger.svg';
 import { ReactComponent as Search } from '../../../icons/search.svg';
@@ -12,7 +13,7 @@ function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const login = useSelector((state) => state.login);
+  const loginState = useSelector((state) => state.login);
   const memberId = useSelector((state) => state.userInfo.value.memberId);
 
   const handleSidebarToggle = () => {
@@ -22,13 +23,13 @@ function Header() {
   const handleLogout = () => {
     dispatch(setLoginState(false)); //로그인 상태 false
     localStorage.clear(); //토큰 삭제
+    dispatch(responseUserInfo({ memberId: null, nickname: '' })); //사용자 정보 삭제
     dispatch(login({ email: '' })); //이메일 정보 삭제
-    dispatch(responseUserInfo({ memberId: '', nickname: '' })); //사용자 정보 삭제
     navigate('/'); //홈으로 리다이렉트
   };
 
   const goHome = () => {
-    if (login === true) {
+    if (loginState === true) {
       navigate('/questions');
     } else {
       navigate('/');
@@ -67,7 +68,7 @@ function Header() {
           </S.SearchIcon>
           <S.Searchbar type="text" placeholder="Search..." />
         </S.SearchContainer>
-        {login === false ? (
+        {loginState === false ? (
           <>
             <S.LoginBtn onClick={goLogin}>Log in</S.LoginBtn>
             <S.SignupBtn onClick={goSignup}>Sign up</S.SignupBtn>

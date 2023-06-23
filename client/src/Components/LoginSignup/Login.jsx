@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../redux/userSlice';
 import { responseUserInfo } from '../../redux/userInfoSlice';
-import { setLoginState } from '../../redux/login';
+import { setLoginState } from '../../redux/loginSlice';
 import { useNavigate } from 'react-router-dom';
 axios.defaults.withCredentials = true;
 
@@ -147,6 +147,9 @@ export default Login;
 // App.js에서 GoogleLoginToken 컴포넌트를 위 URI로 경로 설정
 export const GoogleLoginToken = () => {
   const navigate = useNavigate();
+  window.location.href =
+    'http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google/success';
+
   let accessToken = new URL(location.href).searchParams.get('access_token');
   let refreshToken = new URL(location.href).searchParams.get('refresh_token');
 
@@ -202,9 +205,11 @@ export const KeepLogin = () => {
       dispatch(login({ email }));
     } else {
       dispatch(setLoginState(false));
-      dispatch(responseUserInfo({ memberId: '', nickname: '' }));
+      dispatch(responseUserInfo({ memberId: null, nickname: '' }));
       dispatch(login({ email: '' }));
-      localStorage.clear();
+      localStorage.removeItem('nickname');
+      localStorage.removeItem('memberId');
+      localStorage.removeItem('email');
     }
   }, [dispatch]);
 };
