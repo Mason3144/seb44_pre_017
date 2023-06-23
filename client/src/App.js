@@ -15,6 +15,11 @@ import PasswordUpdatePage from './Pages/My/PasswordUpdatePage.jsx';
 import LoginPage from './Pages/LoginSignup/LoginPage.jsx';
 import QuestionCreatePage from './Pages/Question/QuestionCreatePage/QuestionCreatePage';
 import QuestionPage from './Pages/Question/QuestionPage/QuestionPage';
+import {
+  GoogleLoginToken,
+  NoneRefreshTokenAutoLogout,
+  KeepLogin,
+} from './Components/LoginSignup/Login.jsx';
 
 function App() {
   return (
@@ -31,6 +36,10 @@ function App() {
           />
           <Route path="/questions" element={<MainPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route
+            path="/oauth2/authorization/google/success/"
+            element={<GoogleLoginToken />}
+          />
           <Route path="/questions/board" element={<QuestionPage />} />
           <Route path="/questions/ask" element={<QuestionCreatePage />} />
           <Route path="/questions/:questionId" element={<QuestionDetail />} />
@@ -62,6 +71,8 @@ function App() {
           />
         </Routes>
         <Footer />
+        <NoneRefreshTokenAutoLogout />
+        <KeepLogin />
       </BrowserRouter>
     </div>
   );
