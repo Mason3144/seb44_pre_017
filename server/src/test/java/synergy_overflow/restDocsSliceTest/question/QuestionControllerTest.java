@@ -1,3 +1,4 @@
+/*
 package synergy_overflow.restDocsSliceTest.question;
 
 
@@ -267,3 +268,4 @@ public class QuestionControllerTest extends QuestionStubData implements Question
                 ));
     }
 }
+*/

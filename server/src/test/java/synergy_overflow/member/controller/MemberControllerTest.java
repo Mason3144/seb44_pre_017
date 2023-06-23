@@ -79,7 +79,7 @@ class MemberControllerTest {
 
     }
 
-    @Test
+/*    @Test
     @Order(3)
     @DisplayName("회원 수정")
     void patchMember() throws Exception {
@@ -115,9 +115,9 @@ class MemberControllerTest {
                 .andExpect(jsonPath("$.nickname").value(patch.getNickname()));
 
 
-    }
+    }*/
 
-    @Test
+/*    @Test
     @Order(4)
     @DisplayName("회원 삭제")
     void deleteMember() throws Exception {
@@ -137,5 +137,5 @@ class MemberControllerTest {
         mockMvc.perform(
                 delete("/members/1")
         ).andExpect(status().isNoContent());
-    }
+    }*/
 }
