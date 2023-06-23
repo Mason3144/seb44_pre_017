@@ -17,7 +17,7 @@ function QuestionAndAnswer({ data, isQuestion }) {
   const navigate = useNavigate();
   const { questionId } = useParams();
   const { answerId } = data;
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState(null);
   const [newComment, setNewComment] = useState('');
   const [isAdopted, setIsAdopted] = useState('');
 
@@ -26,6 +26,7 @@ function QuestionAndAnswer({ data, isQuestion }) {
   const questionWriter = useSelector((state) => state.writer.value.memberId); //질문자Id
   const userId = useSelector((state) => state.userInfo.value.memberId); //사용자Id
   const { createdAt } = data;
+
   const { adopted } = data;
   useEffect(() => {
     {
@@ -275,7 +276,7 @@ function QuestionAndAnswer({ data, isQuestion }) {
       {isQuestion === false ? (
         <>
           {comments}
-          {comment > 0 ? <Comment data={comment} /> : ''}
+          {comment !== null ? <Comment data={comment} /> : ''}
           <S.Add>
             <S.AddText>Add a coment</S.AddText>
             <S.CommentInput
