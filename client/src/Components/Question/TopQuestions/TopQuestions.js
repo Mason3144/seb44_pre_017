@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
@@ -22,9 +23,7 @@ export const TopQuestions = () => {
 
   useEffect(() => {
     axios
-      .get(
-        'http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/questions/home'
-      )
+      .get(`${process.env.REACT_APP_API_URL}/questions/home`)
       .then((res) => {
         setData(res.data.data);
       })

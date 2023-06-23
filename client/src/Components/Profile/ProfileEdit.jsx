@@ -29,7 +29,7 @@ const ProfileEdit = () => {
     else {
       try {
         const memberId = resUserInfo.memberId;
-        const url = `http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/member/${memberId}`;
+        const url = `${process.env.REACT_APP_API_URL}/member/${memberId}`;
         const res = await axios.patch(url, changedUserInfo, {
           headers: {
             'Content-Type': 'application/json',
