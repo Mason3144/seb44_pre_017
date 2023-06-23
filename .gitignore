@@ -39,3 +39,4 @@ out/
 .vscode/
 /server/src/main/generated/
 /server/src/main/generated/
+/server/src/test/java/synergy_overflow/
