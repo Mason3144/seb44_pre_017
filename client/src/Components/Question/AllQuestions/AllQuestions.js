@@ -1,12 +1,15 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 import QuestionBox from '../QuestionBox/QuestionBox';
 import * as S from './AllQuestions.styled';
 
 const AllQuestions = () => {
+  const navigate = useNavigate();
+
   const [searchParams] = useSearchParams();
 
   const [question, setQuestion] = useState({});
@@ -14,6 +17,17 @@ const AllQuestions = () => {
   const [filterValue, setFilterValue] = useState('new');
 
   const page = searchParams.get('page') ?? 1;
+
+  const login = useSelector((state) => state.login);
+
+  const goAsk = () => {
+    if (login === true) {
+      navigate('/questions/ask');
+    } else {
+      navigate('/login');
+      alert('로그인 후 이용이 가능합니다.');
+    }
+  };
 
   useEffect(() => {
     const getAllQuestions = async () => {
@@ -37,7 +51,10 @@ const AllQuestions = () => {
   return (
     <section>
       <S.AllQuestionsGroup>
-        <S.QuestionBanner>All Questions</S.QuestionBanner>
+        <S.Question>
+          <S.QuestionBanner>All Questions</S.QuestionBanner>
+          <S.AskBtn onClick={goAsk}>Ask Question</S.AskBtn>
+        </S.Question>
         <S.ButtonGroup>
           <S.Buttons
             onClick={() => setFilterValue('new')}
@@ -58,7 +75,6 @@ const AllQuestions = () => {
             Answered
           </S.Buttons>
         </S.ButtonGroup>
-
         {/* pagination 확인 위해 data 추가 */}
         <Posts question={question.data} loading={loading} />
         {!loading ? (
