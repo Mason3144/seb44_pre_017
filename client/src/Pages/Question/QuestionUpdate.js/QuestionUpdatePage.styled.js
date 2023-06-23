@@ -66,6 +66,7 @@ export const EditBtn = styled.button`
   padding: 13px;
   margin-right: 10px;
   color: white;
+  cursor: pointer;
   &:hover {
     background-color: #0968ff;
   }
@@ -77,6 +78,7 @@ export const CancelBtn = styled.button`
   border-radius: 4px;
   padding: 13px;
   color: #0995ff;
+  cursor: pointer;
   &:hover {
     background-color: #f3f3f3;
   }
