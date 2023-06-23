@@ -1,4 +1,6 @@
 /* eslint-disable no-undef */
+/* eslint-disable prettier/prettier */
+
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -15,6 +17,8 @@ import PasswordUpdatePage from './Pages/My/PasswordUpdatePage.jsx';
 import LoginPage from './Pages/LoginSignup/LoginPage.jsx';
 import QuestionCreatePage from './Pages/Question/QuestionCreatePage/QuestionCreatePage';
 import QuestionPage from './Pages/Question/QuestionPage/QuestionPage';
+import SignupPage from './Pages/LoginSignup/SingupPage.jsx';
+import AfterSignupPage from './Pages/LoginSignup/AfterSignupPage.jsx';
 
 function App() {
   return (
@@ -24,11 +28,6 @@ function App() {
         <Sidebar />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/members" element={<div>SignupPage 회원가입</div>} />
-          <Route
-            path="/members/welcome"
-            element={<div>AfterSignupPage 회원가입 완료</div>}
-          />
           <Route path="/questions" element={<MainPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/questions/board" element={<QuestionPage />} />
@@ -47,17 +46,11 @@ function App() {
             path="/questions/:questionId/answers/:answerId/edit"
             element={<AnswerUpdatePage />}
           />
-          <Route path="/members/" element={<MyPage />} />
+          <Route path="/members/:memberId" element={<MyPage />} />
+          <Route path="/members" element={<SignupPage />} />
+          <Route path="/members/welcome" element={<AfterSignupPage />} />
           <Route
-            path="/members/{memberId}/delete"
-            element={<div>ProfileDelete 회원정보 삭제</div>}
-          />
-          <Route
-            path="/members/{memberId}/yourlogin"
-            element={<div>ProfileYourlogins My Logins</div>}
-          />
-          <Route
-            path="/members/{memberId}/yourlogin/change-password"
+            path="/members/:memberId/yourlogin/change-password"
             element={<PasswordUpdatePage />}
           />
         </Routes>
