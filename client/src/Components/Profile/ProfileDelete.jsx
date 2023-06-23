@@ -1,4 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
+/* eslint-disable prettier/prettier */
+
 import * as S from './ProfileDelete.styled';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
