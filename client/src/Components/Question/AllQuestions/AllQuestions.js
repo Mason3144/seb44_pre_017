@@ -78,7 +78,7 @@ const Posts = ({ question, loading }) => {
   return (
     <ul>
       {question.map((question) => (
-        <QuestionBox key={question.questionId} post={question} />
+        <QuestionBox key={question.questionId} question={question} />
       ))}
     </ul>
   );
