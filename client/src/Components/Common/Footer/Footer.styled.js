@@ -5,6 +5,8 @@ export const FooterContainer = styled.div`
   width: 100%;
   background-color: #232629;
   padding-top: 50px;
+  z-index: 2;
+  position: relative;
 `;
 
 export const Center = styled.div`

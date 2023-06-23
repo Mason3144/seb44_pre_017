@@ -1,5 +1,7 @@
 package synergy_overflow.member.service;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -8,14 +10,17 @@ import org.springframework.transaction.annotation.Transactional;
 import synergy_overflow.auth.utils.MemberAuthorityUtils;
 import synergy_overflow.exception.businessLogicException.BusinessLogicException;
 import synergy_overflow.exception.businessLogicException.ExceptionCode;
+import synergy_overflow.helper.loggedInChecker.LoggedInMemberUtils;
 import synergy_overflow.member.entity.Member;
 import synergy_overflow.member.repository.MemberRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
-@Transactional
+
 @Service
+@Transactional
 public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
@@ -48,6 +53,7 @@ public class MemberService {
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
     public Member updateMember(Member member) {
         Member findMember = findVerifiedMember(member.getMemberId());
+        LoggedInMemberUtils.verifyMine(findMember.getEmail());
 
         Optional.ofNullable(member.getNickname())
                 .ifPresent(findMember::setNickname);
@@ -72,6 +78,7 @@ public class MemberService {
     // 회원 삭제
     public void deleteMember(long memberId) {
         Member findMember = findVerifiedMember(memberId);
+        LoggedInMemberUtils.verifyMine(findMember.getEmail());
         memberRepository.delete(findMember);
     }
 
@@ -87,6 +94,17 @@ public class MemberService {
         return findMember;
     }
 
+    public boolean isExistMember(String email) {
+        Optional<Member> member = memberRepository.findByEmail(email);
+        return member.isPresent();
+    }
+
+    // 이미 존재하는 회원의 이메일로 멤버 객체 리턴
+    public Member findMemberByEmail(String email) {
+        Optional<Member> member = memberRepository.findByEmail(email);
+        return member.get();
+    }
+
     // 이미 등록된 이메일 주소인지 검증
     private void verifyExistsEmail(String email) {
         Optional<Member> member = memberRepository.findByEmail(email);
@@ -94,5 +112,13 @@ public class MemberService {
         if (member.isPresent()) {
             throw new BusinessLogicException(ExceptionCode.MEMBER_EXISTS);
         }
+    }
+
+    // 회원 권한 조회
+    public List<GrantedAuthority> findMemberAuthorities(Member member) {
+        List<GrantedAuthority> authorities = member.getRoles().stream()
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toList());
+        return authorities;
     }
 }

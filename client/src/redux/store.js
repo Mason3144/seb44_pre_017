@@ -1,17 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit';
 import sidebarReducer from './sidebarSlice';
 import userReducer from './userSlice';
-import loginReducer from './login';
+import loginReducer from './loginSlice';
 import responseUserInfoReducer from './userInfoSlice';
+import writerReducer from './writerSlice';
 
 export default configureStore({
   reducer: {
     user: userReducer,
-    login: loginReducer,
     sidebar: sidebarReducer,
+    login: loginReducer,
     responseUserInfo: responseUserInfoReducer,
+    userInfo: responseUserInfoReducer,
+    writer: writerReducer,
   },
-  // 아래처럼 user.username으로 값을 찾아서 사용하면 됩니다.
-  // <div>username: {user.username}</div>
-  // <div>password: {user.password}</div>
 });

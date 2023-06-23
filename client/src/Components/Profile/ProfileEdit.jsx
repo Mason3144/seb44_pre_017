@@ -11,6 +11,7 @@ const ProfileEdit = () => {
   const [displayName, setDisplayName] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const resUserInfo = useSelector((state) => state.responseUserInfo.value);
 
   const handleInputValue = (e) => {
     setDisplayName(e.target.value);
@@ -23,11 +24,12 @@ const ProfileEdit = () => {
   const displayNameChangeHandler = async () => {
     if (displayName === '') {
       alert('이름을 입력해주세요.');
-    } else {
+    } 
+    else {
       try {
-        const memberId = '1';
+        const memberId = resUserInfo.memberId;
         const url = `http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/member/${memberId}`;
-        const res = await axios.post(url, changedUserInfo, {
+        const res = await axios.patch(url, changedUserInfo, {
           headers: {
             'Content-Type': 'application/json',
             Authorization: localStorage.getItem('Authorization'),
@@ -43,6 +45,11 @@ const ProfileEdit = () => {
         alert('다시 시도해주세요.');
       }
     }
+  };
+
+  const cancelClickHandler = () => {
+    alert('변경이 취소되었습니다.');
+    navigate('/questions');
   };
 
   return (
@@ -71,7 +78,11 @@ const ProfileEdit = () => {
         >
           Save profile
         </S.Button>
-        <S.Button buttontype="cancel" className="cancel">
+        <S.Button
+          buttontype="cancel"
+          className="cancel"
+          onClick={cancelClickHandler}
+        >
           Cancel
         </S.Button>
       </S.ButtonContainer>

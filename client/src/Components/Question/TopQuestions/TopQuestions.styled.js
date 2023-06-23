@@ -3,7 +3,7 @@ export const Container = styled.div``;
 export const TitlContainer = styled.div`
   margin-top: 44px;
   display: flex;
-  gap: 730px;
+  gap: 800px;
 `;
 export const Title = styled.h1`
   font-size: 30px;
