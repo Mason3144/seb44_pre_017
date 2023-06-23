@@ -22,7 +22,7 @@ import synergy_overflow.auth.handler.MemberAuthenticationEntryPoint;
 import synergy_overflow.auth.handler.MemberAuthenticationFailureHandler;
 import synergy_overflow.auth.handler.MemberAuthenticationSuccessHandler;
 import synergy_overflow.auth.jwt.JwtTokenizer;
-import synergy_overflow.auth.oauth2.handler.OAuth2MemberSuccessHandler;
+import synergy_overflow.auth.oauth2.OAuth2MemberSuccessHandler;
 import synergy_overflow.auth.utils.MemberAuthorityUtils;
 import synergy_overflow.auth.utils.TokenUtils;
 import synergy_overflow.member.service.MemberService;
@@ -78,6 +78,7 @@ public class SecurityConfiguration {
                         .antMatchers(GET, "/").permitAll()  // 홈
                         .antMatchers(POST, "/auth/login").permitAll()   // 폼 로그인
                         .antMatchers(POST, "/members").permitAll()
+                        .antMatchers(GET, "/members").permitAll()
                         .antMatchers(GET, "/questions/board").permitAll()   // 전체 질문 게시판 조회
                         .antMatchers(GET, "/questions/{question-id}/**").permitAll() // 한 건의 질문과 답변 조회
                         .antMatchers("/h2/**").permitAll()

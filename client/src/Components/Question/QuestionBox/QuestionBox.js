@@ -10,32 +10,27 @@ const QuestionBox = ({ question }) => {
     navigate(`/questions/${questionId}`);
   };
 
-  if (!question) {
-    return null;
-  }
-
-  const { created_at } = question;
+  const { createdAt } = question;
 
   const detailDate = (a) => {
     const milliSeconds = new Date() - a;
     const seconds = milliSeconds / 1000;
-    if (seconds < 60) return `${Math.floor(seconds)}초 전`;
+    if (seconds < 60) return `${Math.floor(seconds)} secs ago`;
     const minutes = seconds / 60;
-    if (minutes < 60) return `${Math.floor(minutes)}분 전`;
+    if (minutes < 60) return `${Math.floor(minutes)} mins ago`;
     const hours = minutes / 60;
-    if (hours < 24) return `${Math.floor(hours)}시간 전`;
+    if (hours < 24) return `${Math.floor(hours)} hours ago`;
     const days = hours / 24;
-    if (days < 7) return `${Math.floor(days)}일 전`;
+    if (days < 7) return `${Math.floor(days)} days ago`;
     const weeks = days / 7;
-    if (weeks < 5) return `${Math.floor(weeks)}주 전`;
+    if (weeks < 5) return `${Math.floor(weeks)} weeks ago`;
     const months = days / 30;
-    if (months < 12) return `${Math.floor(months)}개월 전`;
+    if (months < 12) return `${Math.floor(months)} months ago`;
     const years = days / 365;
-    return `${Math.floor(years)}년 전`;
+    return `${Math.floor(years)} years ago`;
   };
 
-  //시간 데이터에 해당하는 값을 api 데이터의 날짜 파라미터로 변경합니다.
-  const nowDate = detailDate(new Date({ created_at }));
+  const nowDate = detailDate(new Date({ createdAt }));
 
   return (
     <S.ItemContainer>

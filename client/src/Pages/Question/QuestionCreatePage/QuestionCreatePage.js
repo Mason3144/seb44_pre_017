@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useId, useState } from 'react';
 import * as S from './QuestionCreatePage.styled';
-import { ReactComponent as Question } from '../../../images/question.svg';
+// import { ReactComponent as Question } from '../../../images/question.svg';
 import axios from 'axios';
 import WebEditor from '../../../Components/Question/QuestionBox/WebEditor';
 import { useNavigate } from 'react-router-dom';
@@ -13,11 +13,30 @@ const QuestionCreatePage = () => {
   const [titleValue, setTitleValue] = useState('');
 
   const onSubmit = async () => {
+    if (titleValue.length > 50) {
+      alert('Title should be 50 characters or less.');
+      return;
+    }
+
+    if (textValue.length < 20) {
+      alert('Text should be at least 20 characters.');
+      return;
+    }
+
     const source = `http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/questions/ask`;
-    const response = await axios.post(source, {
-      title: titleValue,
-      body: textValue,
-    });
+    const response = await axios.post(
+      source,
+      {
+        title: titleValue,
+        body: textValue,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: localStorage.getItem('Authorization'),
+        },
+      }
+    );
 
     if (response.status === 201) {
       navigate('/questions/board');
@@ -29,7 +48,7 @@ const QuestionCreatePage = () => {
       <S.PageGroup>
         <S.PageBanner>
           <S.PageTitle>Ask a public question </S.PageTitle>
-          <Question width="330px" height="200px" alt="QuestionPageLogo" />
+          {/* <Question width="330px" height="200px" alt="QuestionPageLogo" /> */}
         </S.PageBanner>
         <QuestionTips />
         <QuestionTitleBox value={titleValue} setValue={setTitleValue} />
@@ -40,7 +59,6 @@ const QuestionCreatePage = () => {
           </S.BodyNote>
           <WebEditor value={textValue} setValue={setTextValue} />
         </S.BodyBox>
-        {/* TODO: 버튼 디자인 */}
         <S.SubmitBtn onClick={onSubmit}>Post your question</S.SubmitBtn>
       </S.PageGroup>
     </section>

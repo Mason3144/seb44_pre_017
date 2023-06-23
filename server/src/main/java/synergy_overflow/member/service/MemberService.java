@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import synergy_overflow.auth.utils.MemberAuthorityUtils;
 import synergy_overflow.exception.businessLogicException.BusinessLogicException;
 import synergy_overflow.exception.businessLogicException.ExceptionCode;
+import synergy_overflow.helper.loggedInChecker.LoggedInMemberUtils;
 import synergy_overflow.member.entity.Member;
 import synergy_overflow.member.repository.MemberRepository;
 
@@ -17,8 +18,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Transactional
+
 @Service
+@Transactional
 public class MemberService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
@@ -51,6 +53,7 @@ public class MemberService {
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
     public Member updateMember(Member member) {
         Member findMember = findVerifiedMember(member.getMemberId());
+        LoggedInMemberUtils.verifyMine(findMember.getEmail());
 
         Optional.ofNullable(member.getNickname())
                 .ifPresent(findMember::setNickname);
@@ -75,6 +78,7 @@ public class MemberService {
     // 회원 삭제
     public void deleteMember(long memberId) {
         Member findMember = findVerifiedMember(memberId);
+        LoggedInMemberUtils.verifyMine(findMember.getEmail());
         memberRepository.delete(findMember);
     }
 
@@ -98,7 +102,6 @@ public class MemberService {
     // 이미 존재하는 회원의 이메일로 멤버 객체 리턴
     public Member findMemberByEmail(String email) {
         Optional<Member> member = memberRepository.findByEmail(email);
-
         return member.get();
     }
 

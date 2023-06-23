@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-public class TokenUtils extends JwtTokenizer{
+public class TokenUtils extends JwtTokenizer {
     // claims 추가해서 access 토큰 생성
     public String delegateAccessToken(Member member) {
         Map<String, Object> claims = new HashMap<>();

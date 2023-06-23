@@ -2,7 +2,6 @@ import * as S from './ProfileUser.styled';
 import { useSelector } from 'react-redux';
 
 const ProfileUser = () => {
-
   const user = useSelector((state) => state.userInfo.value);
 
   return (
