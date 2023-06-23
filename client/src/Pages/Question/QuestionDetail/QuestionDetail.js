@@ -10,6 +10,7 @@ function QuestionDetail() {
   const [newAnswer, setNewAnswer] = useState('');
   const [answer, setAnswer] = useState(null);
   const { questionId } = useParams();
+  
   useEffect(() => {
     axios
       .get(
@@ -24,6 +25,9 @@ function QuestionDetail() {
   }, []);
 
   const handleSubmit = () => {
+    if (answer !== null) {
+      setAnswer(null);
+    }
     axios
       .post(
         `http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/answers`,

@@ -39,6 +39,9 @@ function QuestionAndAnswer({ data, isQuestion }) {
   }, []);
 
   const handleAddComment = useCallback(() => {
+    if (comment !== null) {
+      setComment(null);
+    }
     //댓글등록
     axios
       .post(
