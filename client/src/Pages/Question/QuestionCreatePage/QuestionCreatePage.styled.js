@@ -95,4 +95,5 @@ export const SubmitBtn = styled.button`
   border-radius: 4px;
   padding: 13px;
   color: white;
+  cursor: pointer;
 `;
