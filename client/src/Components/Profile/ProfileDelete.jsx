@@ -1,4 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
+/* eslint-disable prettier/prettier */
+
 import * as S from './ProfileDelete.styled';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -36,7 +38,6 @@ const ProfileDelete = () => {
     // 3-1. URI에 참조될 memberId에 스토어에서 가져온 memberId 할당
     const memberId = resUserInfo.memberId;
     const url = `http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/members/${memberId}`;
-    console.log(resUserInfo); // 스토어에 저장된 memberId가 전달되었는지 테스트할 콘솔
 
     // 3-2. 서버에 delete 요청. 요청 바디, 응답 객체 없음
     const res = axios.delete(url, {
@@ -50,7 +51,6 @@ const ProfileDelete = () => {
       alert('회원정보가 삭제되었습니다.');
       dispatch(setLoginState(false));
       navigate('/home');
-      console.log(setLoginState); // 로그인 상태가 변경되었는지 테스트할 콘솔
     } else {
       return;
     }
@@ -66,8 +66,6 @@ const ProfileDelete = () => {
           <ul>
             <li>{secondletter1}</li>
             <li>{secondletter2}</li>
-            <p>id: {resUserInfo.memberId}</p>
-            <p>password: {resUserInfo.nickname}</p>
           </ul>
           <br />
           {lastletter}
