@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import * as S from './QuestionDetail.styled';
 import { useState, useEffect } from 'react';
 import QuestionAndAnswer from '../../../Components/Question/QuestionAndAnswer/QuestionAndAnswer';
@@ -7,10 +8,9 @@ import WebEditor from '../../../Components/Question/QuestionBox/WebEditor';
 function QuestionDetail() {
   const [data, setData] = useState({});
   const [newAnswer, setNewAnswer] = useState('');
-  const [answer, setAnswer] = useState({});
-
+  const [answer, setAnswer] = useState(null);
   const { questionId } = useParams();
-
+  
   useEffect(() => {
     axios
       .get(
@@ -25,6 +25,9 @@ function QuestionDetail() {
   }, []);
 
   const handleSubmit = () => {
+    if (answer !== null) {
+      setAnswer(null);
+    }
     axios
       .post(
         `http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/answers`,
@@ -56,7 +59,7 @@ function QuestionDetail() {
       <QuestionAndAnswer data={data} isQuestion={true} />
       <S.Title>{data.answers ? data.answers.length : '0'} Answers</S.Title>
       <S.AnswerContainer>{answers}</S.AnswerContainer>
-      {answer > 0 ? <QuestionAndAnswer data={answer} isQuestion={false} /> : ''}
+      {answer !== null ? <QuestionAndAnswer data={answer} isQuestion={false} /> : ''}
       <S.Title>Your Answer</S.Title>
       <S.Editor>
         <WebEditor

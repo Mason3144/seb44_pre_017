@@ -10,7 +10,7 @@ const QuestionBox = ({ question }) => {
     navigate(`/questions/${questionId}`);
   };
 
-  const { created_at } = question;
+  const { createdAt } = question;
 
   const detailDate = (a) => {
     const milliSeconds = new Date() - a;
@@ -30,7 +30,7 @@ const QuestionBox = ({ question }) => {
     return `${Math.floor(years)} years ago`;
   };
 
-  const nowDate = detailDate(new Date({ created_at }));
+  const nowDate = detailDate(new Date({ createdAt }));
 
   return (
     <S.ItemContainer>
