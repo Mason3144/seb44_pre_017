@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import styled from 'styled-components';
 export const Container = styled.div`
   width: 1000px;
@@ -87,8 +88,9 @@ export const Edit = styled.div`
     color: #8ebefa;
   }
 `;
+export const Delete=styled(Edit)``
 export const Writer = styled.div`
-  margin-left: 500px;
+  margin-left: 400px;
   color: #3172c6;
 `;
 export const Date = styled.div`

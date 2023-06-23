@@ -24,7 +24,7 @@ export const GreetingContainer = styled.div`
   background-color: #3b3f43;
   color: #f8f9f9;
 `;
-export const Team = styled.h1`
+export const Team = styled.div`
   height: 500px;
   background-color: #f8f9f9;
   letter-spacing: 20px;

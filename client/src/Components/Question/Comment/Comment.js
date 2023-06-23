@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable react/prop-types*/
 import * as S from './Comment.styled';
 function Comment({ data }) {

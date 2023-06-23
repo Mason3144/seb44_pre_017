@@ -4,14 +4,13 @@
 /* eslint-disable no-undef */
 import axios from 'axios';
 import * as S from './Login.styled';
-import { useState } from 'react';
-import { useDispatch , useSelector } from 'react-redux';
-import { login } from '../../redux/user';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../../redux/userSlice';
 import { responseUserInfo } from '../../redux/userInfoSlice';
 import { setLoginState } from '../../redux/loginSlice';
 import { useNavigate } from 'react-router-dom';
 axios.defaults.withCredentials = true;
-
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -20,7 +19,7 @@ const Login = () => {
 
   // input창에 입력되는 로그인 text 저장
   const [loginInfo, setLoginInfo] = useState({
-    username: '',
+    email: '',
     password: '',
   });
 
@@ -39,9 +38,9 @@ const Login = () => {
   // 1. 이메일 로그인
   // 1-1. 유효성 검사
   const LoginRequestHandler = async () => {
-    if (!loginInfo.username || !loginInfo.password) {
+    if (!loginInfo.email || !loginInfo.password) {
       return alert('아이디와 비밀번호를 입력하세요.');
-    } else if (loginInfo.username.match(regExpEmail) === null) {
+    } else if (loginInfo.email.match(regExpEmail) === null) {
       return alert('올바른 Email 형식이 아닙니다.');
     } else if (loginInfo.password.match(regExpPassword) === null) {
       return alert(
@@ -50,9 +49,7 @@ const Login = () => {
     } else {
       try {
         // 1-2. 유저 정보 저장
-        dispatch(
-          login({ username: loginInfo.username, password: loginInfo.password })
-        );
+        dispatch(login({ email: loginInfo.email }));
         const url =
           'http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/auth/login';
         const res = await axios.post(url, loginInfo, {
@@ -61,29 +58,31 @@ const Login = () => {
           },
         });
         // 1-3. 로그인 성공 시, 로그인 상태 변경
-        console.log(res);
         if (res.status === 200) {
           dispatch(setLoginState(true));
           alert('로그인에 성공하였습니다.');
           navigate('/questions');
-          console.log(res.data);
 
-          // 1-4 읽기 전용 객체를 깊은 복사로 수정해서 변수에 할당
+          // 1-4. 리덕스 스토어 객체는 읽기 전용 객체이기 때문에
+          // 깊은 복사 후 updatedUserInfo 변수에 할당
           const updatedUserInfo = {
             ...resUserInfo,
             memberId: res.data.memberId,
             nickname: res.data.nickname,
-          }
-          console.log(updatedUserInfo);
+          };
 
-          // 1-5. 엑세스 토큰, 리프레시 토큰 받고, 브라우저 로컬스토리지에 저장)
+          // 1-5. updateUserInfo 변수, loginInfo 변수를 리덕스 스토어 및 로컬 스토리지에 저장
+          dispatch(responseUserInfo(updatedUserInfo));
+          dispatch(login(loginInfo));
+          localStorage.setItem('memberId', updatedUserInfo.memberId);
+          localStorage.setItem('nickname', updatedUserInfo.nickname);
+          localStorage.setItem('email', loginInfo.email);
+
+          // 1-6. 엑세스 토큰, 리프레시 토큰 받고, 브라우저 로컬스토리지에 저장
           const ACCESS_TOKEN = res.headers.get('Authorization');
           const REFRESH_TOKEN = res.headers.get('refresh');
           localStorage.setItem('Authorization', ACCESS_TOKEN);
           localStorage.setItem('refresh', REFRESH_TOKEN);
-
-          // 1-6. 리덕스 스토어에 저장
-          dispatch(responseUserInfo(updatedUserInfo));
         } else {
           alert('로그인에 실패하였습니다.');
         }
@@ -94,28 +93,12 @@ const Login = () => {
     }
   };
 
-  // 2. 구글 로그인
+  // 2. 구글 로그인 페이지 이동
   const LoginRequestHandlerGoogle = () => {
     window.location.href =
-      'http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google';
-
-    // 2-1. 구글 로그인 시, 토큰 받기
-    // /oauth2/authorization/google/success'; App.js 에서 왼쪽 URI로 라우터 설정
-    let accessToken = new URL(location.href).searchParams.get('Authorization');
-    let refreshToken = new URL(location.href).searchParams.get('refreshToken');
-
-    localStorage.setItem('Authorization', accessToken);
-    localStorage.setItem('refresh', refreshToken);
-
-    console.log(accessToken);
-    console.log(refreshToken);
-
-    location.href =
-      'http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google/success';
+      'http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google/';
   };
 
-
-  console.log()
   return (
     <S.LoginWrapper>
       <S.StyledStackoverflowLogo />
@@ -128,10 +111,8 @@ const Login = () => {
       <S.EmailLoginContainer>
         <div className="EmailTextBox">
           <strong>Email</strong>
-          <S.LoginInputBox
-            type="text"
-            onChange={handleInputValue('username')}
-          />
+          <div></div>
+          <S.LoginInputBox type="text" onChange={handleInputValue('email')} />
         </div>
         <div className="PasswordTextBox">
           <strong>Password</strong>
@@ -160,3 +141,75 @@ const Login = () => {
 };
 
 export default Login;
+
+// 2-1. 서버에서 구글 로그인 성공 시, 클라이언트로 리다이렉트 되는 URI 에서, 엑세스/리프레시 토큰 받기
+// 클라이언트로 리다이렉트 되는 /oauth2/authorization/google/success/
+// App.js에서 GoogleLoginToken 컴포넌트를 위 URI로 경로 설정
+export const GoogleLoginToken = () => {
+  const navigate = useNavigate();
+  window.location.href =
+    'http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google/success';
+
+  let accessToken = new URL(location.href).searchParams.get('access_token');
+  let refreshToken = new URL(location.href).searchParams.get('refresh_token');
+
+  localStorage.setItem('Authorization', accessToken);
+  localStorage.setItem('refresh', refreshToken);
+
+  useEffect(() => navigate('/questions'));
+  return <div>Loading..</div>;
+};
+
+// 3. 토큰 만료 시, 자동 로그아웃 기능: 리프레시 토큰 만료 시, 자동 로그아웃(로그인 상태 false)
+export const NoneRefreshTokenAutoLogout = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const checkRefreshToken = () => {
+      const refreshToken = localStorage.getItem('refresh');
+
+      if (!refreshToken) {
+        setLoginState(false);
+        navigate('/login');
+      } else {
+        return;
+      }
+    };
+
+    // 5분 마다 checkRefreshToken 함수를 실행합니다.
+    const interval = setInterval(checkRefreshToken, 5 * 60 * 1000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
+  return;
+};
+
+// 4. 로그인 유지 함수 (dispatch가 변경될 때마다 실행) / dispatch가 변경되는 경우: 로그인, 비밀번호 수정
+// 4-1. 조건문(엑세스 토큰이 존재하면 실행)
+// 4-1-1. 로그인 상태를 true 전환
+// 4-1-2. 사용자 정보 로컬 스토리지에 저장
+// 4-1-3. 로컬 스토리지 정보 -> 리덕스 스토어 저장
+// 4-2. 엑세스 토큰 만료시 로그인 유지 종료
+export const KeepLogin = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const accessToken = localStorage.getItem('Authorization');
+    const nickname = localStorage.getItem('nickname');
+    const memberId = localStorage.getItem('memberId');
+    const email = localStorage.getItem('email');
+    if (accessToken) {
+      dispatch(setLoginState(true));
+      dispatch(responseUserInfo({ memberId, nickname }));
+      dispatch(login({ email }));
+    } else {
+      dispatch(setLoginState(false));
+      dispatch(responseUserInfo({ memberId: null, nickname: '' }));
+      dispatch(login({ email: '' }));
+      localStorage.removeItem('nickname');
+      localStorage.removeItem('memberId');
+      localStorage.removeItem('email');
+    }
+  }, [dispatch]);
+};

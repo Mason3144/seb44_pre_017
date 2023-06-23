@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const ProfileUser = () => {
-  const user = useSelector((state) => state.user.value);
+  const email = useSelector((state) => state.user.value.email);
   const memberId = useSelector((state) => state.userInfo.value.memberId);
   const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ const ProfileUser = () => {
         </S.TitleWrapper>
         <S.SubTitle>Stack Exchange</S.SubTitle>
         <S.UserInfoWrapper>
-          <S.Text>{user.username}</S.Text>
+          <S.Text>{email}</S.Text>
           <S.ButtonWrapper>
             <S.Button buttontype="changepassword" onClick={goToChangePassword}>
               Change password
