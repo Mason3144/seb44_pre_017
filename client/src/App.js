@@ -1,9 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable prettier/prettier */
-
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
 import HomePage from './Pages/Common/HomePage/HomePage';
 import Header from './Components/Common/Header/Header';
 import AnswerUpdatePage from './Pages/Question/AnswerUpdatePage/AnswerUpdatePage';
@@ -19,6 +17,11 @@ import QuestionCreatePage from './Pages/Question/QuestionCreatePage/QuestionCrea
 import QuestionPage from './Pages/Question/QuestionPage/QuestionPage';
 import SignupPage from './Pages/LoginSignup/SingupPage.jsx';
 import AfterSignupPage from './Pages/LoginSignup/AfterSignupPage.jsx';
+import {
+  GoogleLoginToken,
+  NoneRefreshTokenAutoLogout,
+  KeepLogin,
+} from './Components/LoginSignup/Login.jsx';
 
 function App() {
   return (
@@ -30,6 +33,10 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/questions" element={<MainPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route
+            path="/oauth2/authorization/google/success/"
+            element={<GoogleLoginToken />}
+          />
           <Route path="/questions/board" element={<QuestionPage />} />
           <Route path="/questions/ask" element={<QuestionCreatePage />} />
           <Route path="/questions/:questionId" element={<QuestionDetail />} />
@@ -55,6 +62,8 @@ function App() {
           />
         </Routes>
         <Footer />
+        <NoneRefreshTokenAutoLogout />
+        <KeepLogin />
       </BrowserRouter>
     </div>
   );

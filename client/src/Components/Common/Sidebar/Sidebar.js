@@ -19,7 +19,7 @@ function Sidebar() {
     if (login === true) {
       navigate('/questions');
     } else {
-      navigate('/home');
+      navigate('/');
     }
   };
 
