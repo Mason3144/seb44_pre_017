@@ -24,7 +24,7 @@ const QuestionCreatePage = () => {
       return;
     }
 
-    const source = `${process.env.REACT_APP_API_URL}/questions/ask`;
+    const source = `/questions/ask`;
     const response = await axios.post(
       source,
       {

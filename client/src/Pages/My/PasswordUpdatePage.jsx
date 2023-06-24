@@ -38,7 +38,7 @@ const PasswordUpdatePage = () => {
     } else {
       try {
         const memberId = user.memberId;
-        const url = `${process.env.REACT_APP_API_URL}/${memberId}`;
+        const url = `/${memberId}`;
         const requestPassword = {
           password: newPassword.password,
         };

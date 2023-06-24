@@ -16,7 +16,7 @@ const QuestionUpdatePage = () => {
 
   useEffect(() => {
     const getQuestion = async () => {
-      const source = `${process.env.REACT_APP_API_URL}/questions/${questionId}`;
+      const source = `/questions/${questionId}`;
       const response = await axios.get(source, {
         headers: {
           'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ const QuestionUpdatePage = () => {
       return;
     }
 
-    const source = `${process.env.REACT_APP_API_URL}/questions/${questionId}/edit`;
+    const source = `/questions/${questionId}/edit`;
 
     const response = await axios.patch(
       source,
