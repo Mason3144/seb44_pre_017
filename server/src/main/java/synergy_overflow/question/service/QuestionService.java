@@ -10,7 +10,7 @@ import synergy_overflow.exception.businessLogicException.ExceptionCode;
 import synergy_overflow.helper.loggedInChecker.LoggedInMemberUtils;
 import synergy_overflow.helper.patchUtil.CustomBeanUtils;
 import synergy_overflow.member.entity.Member;
-import synergy_overflow.member.repository.MemberRepository;
+import synergy_overflow.member.service.MemberService;
 import synergy_overflow.question.entity.Question;
 import synergy_overflow.question.repository.QuestionRepository;
 
@@ -22,16 +22,16 @@ import java.util.Optional;
 public class QuestionService {
     private final QuestionRepository questionRepository;
     private final CustomBeanUtils<Question> editUtil;
-    private final MemberRepository memberRepository;
+    private final MemberService memberService;
 
-    public QuestionService(QuestionRepository questionRepository, CustomBeanUtils<Question> editUtil, MemberRepository memberRepository) {
+    public QuestionService(QuestionRepository questionRepository, CustomBeanUtils<Question> editUtil, MemberService memberService) {
         this.questionRepository = questionRepository;
         this.editUtil = editUtil;
-        this.memberRepository = memberRepository;
+        this.memberService = memberService;
     }
 
     public Question createQuestion(Question question) {
-        Member member = memberRepository.findByEmail(LoggedInMemberUtils.findLoggedInMember()).get();
+        Member member = memberService.findMemberByEmail(LoggedInMemberUtils.findLoggedInMember());
         member.setQuestions(question);
 
         return questionRepository.save(question);
