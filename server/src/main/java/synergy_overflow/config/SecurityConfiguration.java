@@ -131,7 +131,7 @@ public class SecurityConfiguration {
         configuration.setAllowedOrigins(
                 Arrays.asList(
                         "http://localhost:3000",
-                        "http://synergyoverflow.s3-website.ap-northeast-2.amazonaws.com:80"
+                        "http://synergyoverflow.s3-website.ap-northeast-2.amazonaws.com"
                 )
         );
         // 파라미터로 지정한 메서드에 대한 HTTP 통신 허용
