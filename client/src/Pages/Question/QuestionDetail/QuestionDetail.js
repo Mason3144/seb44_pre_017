@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable no-undef */
 import * as S from './QuestionDetail.styled';
 import { useState, useEffect } from 'react';
 import QuestionAndAnswer from '../../../Components/Question/QuestionAndAnswer/QuestionAndAnswer';
@@ -17,14 +18,11 @@ function QuestionDetail() {
 
   useEffect(() => {
     axios
-      .get(
-        `http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`
-      )
+      .get(`${process.env.REACT_APP_API_URL}/questions/${questionId}`)
       .then((res) => {
         setData(res.data);
-        dispatch(writerInfo({ memberId: res.data.writer.memberId }))
-      }
-      )
+        dispatch(writerInfo({ memberId: res.data.writer.memberId }));
+      })
       .catch((error) => {
         console.log('Error occurred:', error.message);
       });
@@ -36,7 +34,7 @@ function QuestionDetail() {
     }
     axios
       .post(
-        `http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/answers`,
+        `${process.env.REACT_APP_API_URL}/questions/${questionId}/answers`,
         { answerBody: newAnswer },
         {
           headers: {
