@@ -48,6 +48,10 @@ public class AnswerService {
     public void deleteAnswer(long answerId) {
         Answer findAnswer = findVerifiedAnswer(answerId);
         LoggedInMemberUtils.verifyMine(findAnswer.getWriter().getEmail());
+
+        Question question = questionService.findExistsQuestion(findAnswer.getQuestion().getQuestionId());
+        question.setAdopted(false);
+
         answerRepository.delete(findAnswer);
     }
 

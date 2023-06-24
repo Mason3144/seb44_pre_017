@@ -95,7 +95,7 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
         return UriComponentsBuilder.newInstance()
                 .scheme("http")
                 .host("localhost")
-//                .port(80) // default
+                .port(3000) // default
                 .path("/oauth2/authorization/google/success")
                 .queryParams(queryParams)
                 .build().toUri();

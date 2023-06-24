@@ -128,9 +128,10 @@ public class SecurityConfiguration {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         // 모든 Origin에 대해 스크립트 기반의 HTTP 통신을 허용
-        configuration.setAllowedOrigins(Arrays.asList("http://synergyoverflow.s3-website.ap-northeast-2.amazonaws.com:80/"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
         // 파라미터로 지정한 메서드에 대한 HTTP 통신 허용
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PATCH", "DELETE"));
+
 
         configuration.setAllowCredentials(true);
         configuration.setMaxAge(1000L);
