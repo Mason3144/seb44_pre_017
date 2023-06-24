@@ -117,7 +117,12 @@ function QuestionAndAnswer({ data, isQuestion }) {
     if (toStringMemberId === userId && window.confirm('삭제하시겠습니까?')) {
       if (isQuestion === true) {
         axios
-          .delete(`${process.env.REACT_APP_API_URL}/questions/${questionId}`)
+          .delete(`${process.env.REACT_APP_API_URL}/questions/${questionId}`, {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: localStorage.getItem('Authorization'),
+            },
+          })
           .then(() => {
             console.log('삭제 성공');
             alert('질문이 삭제되었습니다.');
