@@ -15,7 +15,7 @@ const AnswerUpdatePage = () => {
 
   useEffect(() => {
     const getAnswer = async () => {
-      const source = `/questions/${questionId}`;
+      const source = `${process.env.REACT_APP_API_URL}/questions/${questionId}`;
       const response = await axios.get(source, {
         headers: {
           'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ const AnswerUpdatePage = () => {
   }, []);
 
   const onSubmit = async () => {
-    const source = `/questions/${questionId}/answers/${answerId}/edit`;
+    const source = `${process.env.REACT_APP_API_URL}/questions/${questionId}/answers/${answerId}/edit`;
 
     const response = await axios.patch(
       source,

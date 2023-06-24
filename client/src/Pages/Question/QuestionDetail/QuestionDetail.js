@@ -18,7 +18,7 @@ function QuestionDetail() {
 
   useEffect(() => {
     axios
-      .get(`/questions/${questionId}`)
+      .get(`${process.env.REACT_APP_API_URL}/questions/${questionId}`)
       .then((res) => {
         setData(res.data);
         dispatch(writerInfo({ memberId: res.data.writer.memberId }));
@@ -34,7 +34,7 @@ function QuestionDetail() {
     }
     axios
       .post(
-        `/questions/${questionId}/answers`,
+        `${process.env.REACT_APP_API_URL}/questions/${questionId}/answers`,
         { answerBody: newAnswer },
         {
           headers: {

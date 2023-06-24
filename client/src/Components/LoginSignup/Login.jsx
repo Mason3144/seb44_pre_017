@@ -43,7 +43,7 @@ const Login = () => {
     } else {
       try {
         dispatch(login({ email: loginInfo.email }));
-        const url = `/auth/login`;
+        const url = `${process.env.REACT_APP_API_URL}/auth/login`;
         const res = await axios.post(url, loginInfo, {
           headers: {
             'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ const Login = () => {
 
   const LoginRequestHandlerGoogle = () => {
     window.location.href =
-      `/oauth2/authorization/google/`;
+      `${process.env.REACT_APP_API_URL}/oauth2/authorization/google/`;
   };
 
   return (
@@ -130,7 +130,7 @@ export default Login;
 export const GoogleLoginToken = () => {
   const navigate = useNavigate();
   window.location.href =
-    `/oauth2/authorization/google/success`;
+    `${process.env.REACT_APP_API_URL}/oauth2/authorization/google/success`;
 
   let accessToken = new URL(location.href).searchParams.get('access_token');
   let refreshToken = new URL(location.href).searchParams.get('refresh_token');

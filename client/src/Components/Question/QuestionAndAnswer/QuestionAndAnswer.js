@@ -47,7 +47,7 @@ function QuestionAndAnswer({ data, isQuestion }) {
 
     axios
       .post(
-        `/questions/${questionId}/answers/${answerId}/comments`,
+        `${process.env.REACT_APP_API_URL}/questions/${questionId}/answers/${answerId}/comments`,
         {},
         {
           headers: {
@@ -76,7 +76,7 @@ function QuestionAndAnswer({ data, isQuestion }) {
     if (questionWriter === userId) {
       axios
         .post(
-          `/questions/${questionId}/answers${answerId}/adopt`,
+          `${process.env.REACT_APP_API_URL}/questions/${questionId}/answers${answerId}/adopt`,
           {},
           {
             headers: {
@@ -99,7 +99,9 @@ function QuestionAndAnswer({ data, isQuestion }) {
   const handleAdoptDelete = useCallback(() => {
     if (questionWriter === userId) {
       axios
-        .delete(`/questions/${questionId}/answers${answerId}/adopt`)
+        .delete(
+          `${process.env.REACT_APP_API_URL}/questions/${questionId}/answers${answerId}/adopt`
+        )
         .then(() => {
           setIsAdopted(false);
         })
@@ -115,7 +117,7 @@ function QuestionAndAnswer({ data, isQuestion }) {
     if (toStringMemberId === userId && window.confirm('삭제하시겠습니까?')) {
       if (isQuestion === true) {
         axios
-          .delete(`/questions/${questionId}`)
+          .delete(`${process.env.REACT_APP_API_URL}/questions/${questionId}`)
           .then(() => {
             console.log('삭제 성공');
             alert('질문이 삭제되었습니다.');
@@ -126,7 +128,9 @@ function QuestionAndAnswer({ data, isQuestion }) {
           });
       } else {
         axios
-          .delete(`/questions/${questionId}/answers/${answerId}`)
+          .delete(
+            `${process.env.REACT_APP_API_URL}/questions/${questionId}/answers/${answerId}`
+          )
           .then(() => {
             console.log('삭제 성공');
             alert('답변이 삭제되었습니다.');

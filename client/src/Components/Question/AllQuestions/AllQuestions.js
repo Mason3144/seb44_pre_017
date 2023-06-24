@@ -34,7 +34,7 @@ const AllQuestions = () => {
     const getAllQuestions = async () => {
       setLoading(true);
 
-      const source = `/questions/board?size=10&page=${page}&sort=${filterValue}`;
+      const source = `${process.env.REACT_APP_API_URL}/questions/board?size=10&page=${page}&sort=${filterValue}`;
       const response = await axios.get(source, {
         headers: {
           'Content-Type': 'application/json',

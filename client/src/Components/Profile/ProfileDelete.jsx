@@ -32,7 +32,7 @@ const ProfileDelete = () => {
 
   const DeleteRequestHandler = () => {
     const memberId = resUserInfo.memberId;
-    const url = `/members/${memberId}`;
+    const url = `${process.env.REACT_APP_API_URL}/members/${memberId}`;
     const res = axios.delete(url, {
       headers: {
         'Content-Type': 'application/json',

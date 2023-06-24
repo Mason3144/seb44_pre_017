@@ -23,7 +23,7 @@ export const TopQuestions = () => {
 
   useEffect(() => {
     axios
-      .get(`/questions/home`)
+      .get(`${process.env.REACT_APP_API_URL}/questions/home`)
       .then((res) => {
         setData(res.data.data);
       })
