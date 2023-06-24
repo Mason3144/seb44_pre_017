@@ -36,6 +36,7 @@ const ProfileDelete = () => {
     const res = axios.delete(url, {
       headers: {
         'Content-Type': 'application/json',
+        Authorization: localStorage.getItem('Authorization'),
       },
     });
     if (res.status === 200) {

@@ -44,7 +44,10 @@ const Login = () => {
       try {
         dispatch(login({ email: loginInfo.email }));
         const url = `${process.env.REACT_APP_API_URL}/auth/login`;
-        const res = await axios.post(url, loginInfo, {
+        const res = await axios.post(url, {
+          username: loginInfo.email,
+          password: loginInfo.password
+        }, {
           headers: {
             'Content-Type': 'application/json',
           },
@@ -169,6 +172,7 @@ export const NoneRefreshTokenAutoLogout = () => {
 
 export const KeepLogin = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     const accessToken = localStorage.getItem('Authorization');
     const nickname = localStorage.getItem('nickname');
@@ -178,6 +182,7 @@ export const KeepLogin = () => {
       dispatch(setLoginState(true));
       dispatch(responseUserInfo({ memberId, nickname }));
       dispatch(login({ email }));
+      navigate('/questions');
     } else {
       dispatch(setLoginState(false));
       dispatch(responseUserInfo({ memberId: null, nickname: '' }));

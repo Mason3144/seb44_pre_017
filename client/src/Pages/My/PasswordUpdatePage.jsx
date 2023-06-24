@@ -38,7 +38,7 @@ const PasswordUpdatePage = () => {
     } else {
       try {
         const memberId = user.memberId;
-        const url = `${process.env.REACT_APP_API_URL}/${memberId}`;
+        const url = `${process.env.REACT_APP_API_URL}/members/${memberId}`;
         const requestPassword = {
           password: newPassword.password,
         };
@@ -66,9 +66,15 @@ const PasswordUpdatePage = () => {
         <S.SmallTextOfTitle>Change password for (email)</S.SmallTextOfTitle>
         <S.SubWrapper>
           <S.SubTitle>New Password</S.SubTitle>
-          <S.Input onChange={handleInputValue('password')}></S.Input>
+          <S.Input
+            type="password"
+            onChange={handleInputValue('password')}
+          ></S.Input>
           <S.SubTitle>New Password (again)</S.SubTitle>
-          <S.Input onChange={handleInputValue('passwordAgain')}></S.Input>
+          <S.Input
+            type="password"
+            onChange={handleInputValue('passwordAgain')}
+          ></S.Input>
           <div></div>
           <S.Button onClick={SaveRequestHandler}>Save</S.Button>
         </S.SubWrapper>
