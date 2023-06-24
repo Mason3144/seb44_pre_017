@@ -92,10 +92,13 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
         queryParams.add("memberId", member.getMemberId().toString());
         queryParams.add("nickname", member.getNickname());
 
+
+//        https://0fd9-175-211-17-8.ngrok-free.app/
+
         return UriComponentsBuilder.newInstance()
                 .scheme("http")
-                .host("localhost")
-                .port(3000) // default
+                .host("0fd9-175-211-17-8.ngrok-free.app")
+//                .port(3000) // default
                 .path("/oauth2/authorization/google/success")
                 .queryParams(queryParams)
                 .build().toUri();
