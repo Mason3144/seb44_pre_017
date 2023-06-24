@@ -93,11 +93,9 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
         queryParams.add("nickname", member.getNickname());
 
 
-//        https://0fd9-175-211-17-8.ngrok-free.app/
-
         return UriComponentsBuilder.newInstance()
                 .scheme("http")
-                .host("0fd9-175-211-17-8.ngrok-free.app")
+                .host("synergyoverflow.s3-website.ap-northeast-2.amazonaws.com")
 //                .port(3000) // default
                 .path("/oauth2/authorization/google/success")
                 .queryParams(queryParams)
