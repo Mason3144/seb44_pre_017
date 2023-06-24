@@ -21,11 +21,11 @@ function Header() {
   };
 
   const handleLogout = () => {
-    dispatch(setLoginState(false)); //로그인 상태 false
-    localStorage.clear(); //토큰 삭제
-    dispatch(responseUserInfo({ memberId: null, nickname: '' })); //사용자 정보 삭제
-    dispatch(login({ email: '' })); //이메일 정보 삭제
-    navigate('/'); //홈으로 리다이렉트
+    dispatch(setLoginState(false));
+    localStorage.clear();
+    dispatch(responseUserInfo({ memberId: null, nickname: '' }));
+    dispatch(login({ email: '' }));
+    navigate('/');
   };
 
   const goHome = () => {

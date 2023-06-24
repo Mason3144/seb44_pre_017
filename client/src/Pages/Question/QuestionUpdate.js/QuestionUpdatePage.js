@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
 import { useState, useId, useEffect } from 'react';
 import * as S from './QuestionUpdatePage.styled';
@@ -15,7 +16,7 @@ const QuestionUpdatePage = () => {
 
   useEffect(() => {
     const getQuestion = async () => {
-      const source = `http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`;
+      const source = `${process.env.REACT_APP_API_URL}/questions/${questionId}`;
       const response = await axios.get(source, {
         headers: {
           'Content-Type': 'application/json',
@@ -41,7 +42,7 @@ const QuestionUpdatePage = () => {
       return;
     }
 
-    const source = `http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/edit`;
+    const source = `${process.env.REACT_APP_API_URL}/questions/${questionId}/edit`;
 
     const response = await axios.patch(
       source,

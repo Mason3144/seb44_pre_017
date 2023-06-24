@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { useState, useEffect } from 'react';
 import * as S from './AnswerUpdatePage.styled';
 import WebEditor from '../../../Components/Question/QuestionBox/WebEditor';
@@ -14,7 +15,7 @@ const AnswerUpdatePage = () => {
 
   useEffect(() => {
     const getAnswer = async () => {
-      const source = `http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`;
+      const source = `${process.env.REACT_APP_API_URL}/questions/${questionId}`;
       const response = await axios.get(source, {
         headers: {
           'Content-Type': 'application/json',
@@ -30,7 +31,7 @@ const AnswerUpdatePage = () => {
   }, []);
 
   const onSubmit = async () => {
-    const source = `http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/answers/${answerId}/edit`;
+    const source = `${process.env.REACT_APP_API_URL}/questions/${questionId}/answers/${answerId}/edit`;
 
     const response = await axios.patch(
       source,

@@ -1,7 +1,8 @@
+/* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
 import { useId, useState } from 'react';
 import * as S from './QuestionCreatePage.styled';
-// import { ReactComponent as Question } from '../../../images/question.svg';
+import { ReactComponent as Question } from '../../../images/question.svg';
 import axios from 'axios';
 import WebEditor from '../../../Components/Question/QuestionBox/WebEditor';
 import { useNavigate } from 'react-router-dom';
@@ -23,7 +24,7 @@ const QuestionCreatePage = () => {
       return;
     }
 
-    const source = `http://ec2-54-180-113-202.ap-northeast-2.compute.amazonaws.com:8080/questions/ask`;
+    const source = `${process.env.REACT_APP_API_URL}/questions/ask`;
     const response = await axios.post(
       source,
       {
@@ -48,7 +49,7 @@ const QuestionCreatePage = () => {
       <S.PageGroup>
         <S.PageBanner>
           <S.PageTitle>Ask a public question </S.PageTitle>
-          {/* <Question width="330px" height="200px" alt="QuestionPageLogo" /> */}
+          <Question width="330px" height="200px" alt="QuestionPageLogo" />
         </S.PageBanner>
         <QuestionTips />
         <QuestionTitleBox value={titleValue} setValue={setTitleValue} />
