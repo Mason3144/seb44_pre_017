@@ -41,3 +41,5 @@ jwt:                      # JWT 관련 정보
   key: ${/synergy/env/spring.jwt.key}  # 시스템 환경 변수에서 로드
   access-token-expiration-minutes: 30
   refresh-token-expiration-minutes: 420
+awsParameterStorePropertySource:
+  enabled: true
