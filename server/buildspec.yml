@@ -12,10 +12,10 @@ phases:
       - ./gradlew build
   post_build:
     commands:
-      - echo $(basename ./synergy/server/build/libs/*.jar)
+      - echo $(basename ./server/build/libs/*.jar)
 artifacts:
   files:
-    - synergy/server/build/libs/*.jar
-    - synergy/server/scripts/**
-    - synergy/server/appspec.yml
+    - server/build/libs/*.jar
+    - server/scripts/**
+    - server/appspec.yml
   discard-paths: yes
