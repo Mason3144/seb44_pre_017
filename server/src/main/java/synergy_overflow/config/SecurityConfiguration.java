@@ -127,15 +127,20 @@ public class SecurityConfiguration {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        // 모든 Origin에 대해 스크립트 기반의 HTTP 통신을 허용
-        configuration.setAllowedOrigins(Arrays.asList("http://synergyoverflow.s3-website.ap-northeast-2.amazonaws.com:80/"));
+        // 모든 Origin에 대해 스크립트 기반의 HTTP 통신을 허용 -> 변경: client 서버만 통신 허용
+        configuration.setAllowedOrigins(
+                Arrays.asList(
+                        "http://localhost:3000",
+                        "http://synergyoverflow.s3-website.ap-northeast-2.amazonaws.com:80"
+                )
+        );
         // 파라미터로 지정한 메서드에 대한 HTTP 통신 허용
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PATCH", "DELETE"));
 
         configuration.setAllowCredentials(true);
         configuration.setMaxAge(1000L);
         configuration.setAllowedHeaders(Arrays.asList("Origin", "X-Requested-With", "Content-Type", "Accept", "Authorization"));
-        configuration.setExposedHeaders(Arrays.asList("authorization","refresh"));
+        configuration.setExposedHeaders(Arrays.asList("authorization", "refresh"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
