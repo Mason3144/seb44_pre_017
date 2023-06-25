@@ -5,6 +5,7 @@ import axios from 'axios';
 import * as S from './Signup.styled';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { GoogleLoginToken } from './Login.jsx';
 
 axios.defaults.withCredentials = true;
 
@@ -57,6 +58,8 @@ const Signup = () => {
   const LoginRequestHandlerGoogle = () => {
     window.location.href = `${process.env.REACT_APP_API_URL}/oauth2/authorization/google`;
   }
+  
+  GoogleLoginToken();
   
   return (
     <S.SignupWrapper>
