@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 
 @RestController
-@RequestMapping
+@RequestMapping("/questions/{question-id}/answers/{answer-id}/comments")
 public class CommentController {
     private final CommentService commentService;
     private final CommentMapper mapper;
@@ -22,7 +22,7 @@ public class CommentController {
         this.mapper = mapper;
     }
 
-    @PostMapping("/questions/{question-id}/answers/{answer-id}/comments")
+    @PostMapping
     public ResponseEntity postComment(
             @RequestBody @Valid CommentDto.Post requestBody,
             @PathVariable("answer-id") @Positive long answerId) {

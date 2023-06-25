@@ -39,7 +39,7 @@ server:                     # 모든 response에 대해 지정된 인코딩 적�
       force-response: true
 jwt:                      # JWT 관련 정보
   key: ${/synergy/env/spring.jwt.key}  # 시스템 환경 변수에서 로드
-  access-token-expiration-minutes: 30
-  refresh-token-expiration-minutes: 420
+  access-token-expiration-minutes: 9999
+  refresh-token-expiration-minutes: 20000
 awsParameterStorePropertySource:
   enabled: true
