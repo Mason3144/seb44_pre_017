@@ -3,13 +3,13 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-undef */
 import axios from 'axios';
-import * as S from './Login.styled';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import * as S from './Login.styled';
 import { login } from '../../redux/userSlice';
 import { responseUserInfo } from '../../redux/userInfoSlice';
 import { setLoginState } from '../../redux/loginSlice';
-import { useNavigate } from 'react-router-dom';
 axios.defaults.withCredentials = true;
 
 const Login = () => {
@@ -84,7 +84,7 @@ const Login = () => {
 
   const LoginRequestHandlerGoogle = () => {
     window.location.href =
-      `${process.env.REACT_APP_API_URL}/oauth2/authorization/google/`;
+      `${process.env.REACT_APP_API_URL}/oauth2/authorization/google`;
   };
 
   return (
@@ -129,27 +129,6 @@ const Login = () => {
 };
 
 export default Login;
-
-export const GoogleLoginToken = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-    
-  let accessToken = new URL(location.href).searchParams.get('access_token');
-  let refreshToken = new URL(location.href).searchParams.get('refresh_token');
-  let nickname = new URL(location.href).searchParams.get('nickname');
-  let memberId = new URL(location.href).searchParams.get('memberId');
-    
-  localStorage.setItem('Authorization', accessToken);
-  localStorage.setItem('refresh', refreshToken);
-  localStorage.setItem('nickname', nickname);
-  localStorage.setItem('memberId', memberId);
-
-  dispatch(responseUserInfo({ memberId, nickname }));
-  dispatch(setLoginState(true));
-
-  useEffect(() => navigate('/questions'));
-  return <div>Loading..</div>;
-};
 
 export const NoneRefreshTokenAutoLogout = () => {
   const navigate = useNavigate();
@@ -198,4 +177,26 @@ export const KeepLogin = () => {
       localStorage.removeItem('email');
     }
   }, [dispatch]);
+};
+
+
+export const GoogleLoginToken = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  let accessToken = new URL(location.href).searchParams.get('access_token');
+  let refreshToken = new URL(location.href).searchParams.get('refresh_token');
+  let nickname = new URL(location.href).searchParams.get('nickname');
+  let memberId = new URL(location.href).searchParams.get('memberId');
+
+  localStorage.setItem('Authorization', accessToken);
+  localStorage.setItem('refresh', refreshToken);
+  localStorage.setItem('nickname', nickname);
+  localStorage.setItem('memberId', memberId);
+
+  dispatch(responseUserInfo({ memberId, nickname }));
+  dispatch(setLoginState(true));
+
+  useEffect(() => navigate('/questions'));
+  return <div>Loading..</div>;
 };
