@@ -132,14 +132,20 @@ export default Login;
 
 export const GoogleLoginToken = () => {
   const navigate = useNavigate();
-  // window.location.href = `http://synergyoverflow.s3-website.ap-northeast-2.amazonaws.com/oauth2/authorization/google/success`;
-  // window.location.href 제거 or 안에 주소를 클라이언트 서버 주소로 바꿔야 함.
-
+  const dispatch = useDispatch();
+    
   let accessToken = new URL(location.href).searchParams.get('access_token');
   let refreshToken = new URL(location.href).searchParams.get('refresh_token');
-
+  let nickname = new URL(location.href).searchParams.get('nickname');
+  let memberId = new URL(location.href).searchParams.get('memberId');
+    
   localStorage.setItem('Authorization', accessToken);
   localStorage.setItem('refresh', refreshToken);
+  localStorage.setItem('nickname', nickname);
+  localStorage.setItem('memberId', memberId);
+
+  dispatch(responseUserInfo({ memberId, nickname }));
+  dispatch(setLoginState(true));
 
   useEffect(() => navigate('/questions'));
   return <div>Loading..</div>;
