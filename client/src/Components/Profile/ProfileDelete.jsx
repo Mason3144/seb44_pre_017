@@ -42,6 +42,7 @@ const ProfileDelete = () => {
     if (res.status === 200) {
       alert('회원정보가 삭제되었습니다.');
       dispatch(setLoginState(false));
+      localStorage.clear();
       navigate('/home');
     } else {
       return;

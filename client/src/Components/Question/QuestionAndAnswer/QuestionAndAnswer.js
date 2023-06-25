@@ -76,7 +76,7 @@ function QuestionAndAnswer({ data, isQuestion }) {
     if (questionWriter === userId) {
       axios
         .post(
-          `${process.env.REACT_APP_API_URL}/questions/${questionId}/answers${answerId}/adopt`,
+          `${process.env.REACT_APP_API_URL}/questions/${questionId}/answers/${answerId}/adopt`,
           {},
           {
             headers: {
@@ -100,7 +100,7 @@ function QuestionAndAnswer({ data, isQuestion }) {
     if (questionWriter === userId) {
       axios
         .delete(
-          `${process.env.REACT_APP_API_URL}/questions/${questionId}/answers${answerId}/adopt`
+          `${process.env.REACT_APP_API_URL}/questions/${questionId}/answers/${answerId}/adopt`
         )
         .then(() => {
           setIsAdopted(false);
@@ -161,6 +161,7 @@ function QuestionAndAnswer({ data, isQuestion }) {
 
   const goEdit = useCallback(() => {
     if (toStringMemberId === userId) {
+      // !== 으로 시도해보기
       if (isQuestion === true) {
         navigate(`/questions/${questionId}/edit`);
       } else {

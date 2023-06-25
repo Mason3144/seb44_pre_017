@@ -132,8 +132,8 @@ export default Login;
 
 export const GoogleLoginToken = () => {
   const navigate = useNavigate();
-  window.location.href =
-    `${process.env.REACT_APP_API_URL}/oauth2/authorization/google/success`;
+  // window.location.href = `http://synergyoverflow.s3-website.ap-northeast-2.amazonaws.com/oauth2/authorization/google/success`;
+  // window.location.href 제거 or 안에 주소를 클라이언트 서버 주소로 바꿔야 함.
 
   let accessToken = new URL(location.href).searchParams.get('access_token');
   let refreshToken = new URL(location.href).searchParams.get('refresh_token');
