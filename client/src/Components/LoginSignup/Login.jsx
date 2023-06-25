@@ -184,7 +184,7 @@ export const KeepLogin = () => {
     const nickname = localStorage.getItem('nickname');
     const memberId = localStorage.getItem('memberId');
     const email = localStorage.getItem('email');
-    if (accessToken) {
+    if (accessToken !== null) {
       dispatch(setLoginState(true));
       dispatch(responseUserInfo({ memberId, nickname }));
       dispatch(login({ email }));
