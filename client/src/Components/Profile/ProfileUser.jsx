@@ -1,8 +1,7 @@
 import * as S from './ProfileUser.styled';
-import { useSelector } from 'react-redux';
 
 const ProfileUser = () => {
-  const user = useSelector((state) => state.userInfo.value);
+  const nickname = localStorage.getItem('nickname');
 
   return (
     <div className="profile-user">
@@ -10,7 +9,7 @@ const ProfileUser = () => {
         <S.ProfileContainer>
           <S.UserImg></S.UserImg>
           <S.UsernameContainer>
-            <S.Username>{user.nickname}</S.Username>
+            <S.Username>{nickname}</S.Username>
           </S.UsernameContainer>
         </S.ProfileContainer>
         <S.ProfileButtonBar>
