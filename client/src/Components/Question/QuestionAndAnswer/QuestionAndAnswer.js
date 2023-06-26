@@ -18,17 +18,25 @@ function QuestionAndAnswer({ data, isQuestion }) {
   const navigate = useNavigate();
   const { questionId } = useParams();
   const { answerId } = data;
-  const [comment, setComment] = useState(null);
   const [newComment, setNewComment] = useState('');
   const [isAdopted, setIsAdopted] = useState('');
 
   const memberId = data.writer ? data.writer.memberId : '';
-  const toStringMemberId = memberId.toString();
   const login = useSelector((state) => state.login);
   const questionWriter = useSelector((state) => state.writer.value.memberId);
-  const userId = useSelector((state) => state.userInfo.value.memberId);
+  const userId = Number(useSelector((state) => state.userInfo.value.memberId));
   const { createdAt } = data;
   const { adopted } = data;
+
+  let realBody = '';
+  if (data.body !== undefined) {
+    realBody = data.body.replace(/[<][^>]*[>]/g, '');
+  }
+
+  let realAnswerBody = '';
+  if (data.answerBody !== undefined) {
+    realAnswerBody = data.answerBody.replace(/[<][^>]*[>]/g, '');
+  }
 
   useEffect(() => {
     {
@@ -36,19 +44,11 @@ function QuestionAndAnswer({ data, isQuestion }) {
     }
   }, [adopted]);
 
-  const handleComment = useCallback((e) => {
-    setNewComment(e.target.value);
-  }, []);
-
   const handleAddComment = useCallback(() => {
-    if (comment !== null) {
-      setComment(null);
-    }
-
     axios
       .post(
         `${process.env.REACT_APP_API_URL}/questions/${questionId}/answers/${answerId}/comments`,
-        {},
+        { commentBody: newComment },
         {
           headers: {
             'Content-Type': 'application/json',
@@ -56,8 +56,7 @@ function QuestionAndAnswer({ data, isQuestion }) {
           },
         }
       )
-      .then((res) => {
-        setComment(res.data);
+      .then(() => {
         setNewComment('');
       })
       .catch((error) => {
@@ -70,9 +69,11 @@ function QuestionAndAnswer({ data, isQuestion }) {
           }
         }
       });
-  }, [questionId, answerId]);
+  }, [questionId, answerId, newComment]);
 
   const handleAdopt = useCallback(() => {
+    console.log(typeof questionWriter);
+    console.log(typeof userId);
     if (questionWriter === userId) {
       axios
         .post(
@@ -100,7 +101,13 @@ function QuestionAndAnswer({ data, isQuestion }) {
     if (questionWriter === userId) {
       axios
         .delete(
-          `${process.env.REACT_APP_API_URL}/questions/${questionId}/answers/${answerId}/adopt`
+          `${process.env.REACT_APP_API_URL}/questions/${questionId}/answers/${answerId}/adopt`,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: localStorage.getItem('Authorization'),
+            },
+          }
         )
         .then(() => {
           setIsAdopted(false);
@@ -109,41 +116,51 @@ function QuestionAndAnswer({ data, isQuestion }) {
           console.log('Error:', error.message);
         });
     } else {
-      null;
+      alert('질문 작성자만 채택 취소가 가능합니다.');
     }
   }, [questionWriter, userId, questionId, answerId]);
 
   const handleDelete = useCallback(() => {
-    if (toStringMemberId === userId && window.confirm('삭제하시겠습니까?')) {
-      if (isQuestion === true) {
-        axios
-          .delete(`${process.env.REACT_APP_API_URL}/questions/${questionId}`, {
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: localStorage.getItem('Authorization'),
-            },
-          })
-          .then(() => {
-            console.log('삭제 성공');
-            alert('질문이 삭제되었습니다.');
-            navigate('/questions/board');
-          })
-          .catch((error) => {
-            console.log('Error:', error.message);
-          });
-      } else {
-        axios
-          .delete(
-            `${process.env.REACT_APP_API_URL}/questions/${questionId}/answers/${answerId}`
-          )
-          .then(() => {
-            console.log('삭제 성공');
-            alert('답변이 삭제되었습니다.');
-            navigate('/questions/board');
-          })
-          .catch((error) => {
-            console.log('Error:', error.message);
-          });
+    if (memberId === userId) {
+      if (window.confirm('삭제하시겠습니까?')) {
+        if (isQuestion === true) {
+          axios
+            .delete(
+              `${process.env.REACT_APP_API_URL}/questions/${questionId}`,
+              {
+                headers: {
+                  'Content-Type': 'application/json',
+                  Authorization: localStorage.getItem('Authorization'),
+                },
+              }
+            )
+            .then(() => {
+              console.log('삭제 성공');
+              alert('질문이 삭제되었습니다.');
+              navigate('/questions/board');
+            })
+            .catch((error) => {
+              console.log('Error:', error.message);
+            });
+        } else {
+          axios
+            .delete(
+              `${process.env.REACT_APP_API_URL}/questions/${questionId}/answers/${answerId}`,
+              {
+                headers: {
+                  'Content-Type': 'application/json',
+                  Authorization: localStorage.getItem('Authorization'),
+                },
+              }
+            )
+            .then(() => {
+              console.log('삭제 성공');
+              alert('답변이 삭제되었습니다.');
+            })
+            .catch((error) => {
+              console.log('Error:', error.message);
+            });
+        }
       }
     } else {
       alert('작성자만 삭제가 가능합니다.');
@@ -160,7 +177,7 @@ function QuestionAndAnswer({ data, isQuestion }) {
   }, [login, navigate]);
 
   const goEdit = useCallback(() => {
-    if (toStringMemberId === userId) {
+    if (memberId === userId) {
       // !== 으로 시도해보기
       if (isQuestion === true) {
         navigate(`/questions/${questionId}/edit`);
@@ -190,7 +207,7 @@ function QuestionAndAnswer({ data, isQuestion }) {
     return `${Math.floor(years)} years ago`;
   }, []);
 
-  const now = useMemo(() => new Date({ createdAt }), [createdAt]);
+  const now = useMemo(() => new Date(createdAt), [createdAt]);
   const nowDate = useMemo(() => detailDate(now), [detailDate, now]);
 
   let year = now.getFullYear();
@@ -261,7 +278,11 @@ function QuestionAndAnswer({ data, isQuestion }) {
           </div>
         </S.Side>
         <S.Content>
-          {isQuestion === true ? data.body : data.answerBody}
+          {isQuestion ? (
+            <div dangerouslySetInnerHTML={{ __html: data.body }} />
+          ) : (
+            <div dangerouslySetInnerHTML={{ __html: data.answerBody }} />
+          )}
           <S.BottomLine>
             <S.Edit onClick={goEdit}>Edit</S.Edit>
             <S.Delete onClick={handleDelete}>Delete</S.Delete>
@@ -273,13 +294,12 @@ function QuestionAndAnswer({ data, isQuestion }) {
       {isQuestion === false ? (
         <>
           {comments}
-          {comment !== null ? <Comment data={comment} /> : ''}
           <S.Add>
             <S.AddText>Add a coment</S.AddText>
             <S.CommentInput
               type="text"
               value={newComment}
-              onChange={handleComment}
+              onChange={(e) => setNewComment(e.target.value)}
             ></S.CommentInput>
             <S.AddBtn onClick={handleAddComment}>Add</S.AddBtn>
           </S.Add>

@@ -29,6 +29,7 @@ function App() {
       <BrowserRouter>
         <Header />
         <Sidebar />
+        <main>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/questions" element={<MainPage />} />
@@ -55,7 +56,8 @@ function App() {
             path="/members/:memberId/yourlogin/change-password"
             element={<PasswordUpdatePage />}
           />
-        </Routes>
+          </Routes>
+          </main>
         <Footer />
         <NoneRefreshTokenAutoLogout />
         <KeepLogin />

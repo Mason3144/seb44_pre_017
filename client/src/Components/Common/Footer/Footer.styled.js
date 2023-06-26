@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const FooterContainer = styled.div`
   height: 250px;
+  max-width: 1920px;
   width: 100%;
   background-color: #232629;
   padding-top: 50px;

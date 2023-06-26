@@ -4,6 +4,8 @@ export const HeaderContainer = styled.div`
   position: sticky;
   top: 0%;
   z-index: 1;
+  max-width: 1920px;
+  width: 100%;
   height: 70px;
   background-color: #ffffff;
   display: flex;

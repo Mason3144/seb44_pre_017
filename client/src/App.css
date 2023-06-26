@@ -1,3 +1,18 @@
-*{margin: 0;
-padding: 0;
-box-sizing: border-box;}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* footer 하단 고정 */
+main {
+  height: auto;
+  max-height: max-content;
+  min-height: 649px;
+}
+
+footer {
+  height: 250px;
+  position: fixed;
+  transform: translateY(-100%);
+}

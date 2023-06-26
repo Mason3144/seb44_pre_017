@@ -24,7 +24,7 @@ const AnswerUpdatePage = () => {
       });
 
       setTitleValue(response.data.title);
-      setTextValue(response.data.body);
+      setTextValue(response.data.answers[0].answerBody);
     };
 
     getAnswer();

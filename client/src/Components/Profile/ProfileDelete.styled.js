@@ -11,6 +11,7 @@ export const ProfileDeleteWrapper = styled.div`
 
 export const ProfileDeleteTitle = styled.div`
   font-size: 25px;
+  font-weight: 600;
   margin-top: 15px;
   padding-bottom: 10px;
   width: 683px;
