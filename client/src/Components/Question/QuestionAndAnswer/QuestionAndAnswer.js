@@ -278,7 +278,11 @@ function QuestionAndAnswer({ data, isQuestion }) {
           </div>
         </S.Side>
         <S.Content>
-          {isQuestion === true ? realBody : realAnswerBody}
+          {isQuestion ? (
+            <div dangerouslySetInnerHTML={{ __html: data.body }} />
+          ) : (
+            <div dangerouslySetInnerHTML={{ __html: data.answerBody }} />
+          )}
           <S.BottomLine>
             <S.Edit onClick={goEdit}>Edit</S.Edit>
             <S.Delete onClick={handleDelete}>Delete</S.Delete>
