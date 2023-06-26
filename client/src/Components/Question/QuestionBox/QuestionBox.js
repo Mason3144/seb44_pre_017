@@ -30,7 +30,7 @@ const QuestionBox = ({ question }) => {
     return `${Math.floor(years)} years ago`;
   };
 
-  const nowDate = detailDate(new Date(createdAt));
+  const nowDate = detailDate(new Date(`${createdAt}z`));
 
   return (
     <S.ItemContainer>

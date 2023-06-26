@@ -14,8 +14,9 @@ function Header() {
   const dispatch = useDispatch();
 
   const loginState = useSelector((state) => state.login);
-  const memberId = useSelector((state) => state.userInfo.value.memberId);
-
+  const memberId = useSelector(
+    (state) => state.responseUserInfo.value.memberId
+  );
   const handleSidebarToggle = () => {
     dispatch(toggleSidebar());
   };
