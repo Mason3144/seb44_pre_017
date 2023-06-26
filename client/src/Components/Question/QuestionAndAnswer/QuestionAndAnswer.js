@@ -72,8 +72,6 @@ function QuestionAndAnswer({ data, isQuestion }) {
   }, [questionId, answerId, newComment]);
 
   const handleAdopt = useCallback(() => {
-    console.log(typeof questionWriter);
-    console.log(typeof userId);
     if (questionWriter === userId) {
       axios
         .post(
@@ -207,7 +205,7 @@ function QuestionAndAnswer({ data, isQuestion }) {
     return `${Math.floor(years)} years ago`;
   }, []);
 
-  const now = useMemo(() => new Date(createdAt), [createdAt]);
+  const now = useMemo(() => new Date(`${createdAt}Z`), [createdAt]);
   const nowDate = useMemo(() => detailDate(now), [detailDate, now]);
 
   let year = now.getFullYear();

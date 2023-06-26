@@ -40,8 +40,8 @@ const ProfileEdit = () => {
         if (res.status === 200) {
           alert('회원정보 수정이 완료되었습니다.');
           localStorage.setItem('nickname', res.data.nickname);
+          location.reload('/questions');
           dispatch(responseUserInfo(res.data.nickname));
-          navigate('/questions');
         }
       } catch (err) {
         console.error(err);
