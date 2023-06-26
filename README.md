@@ -54,6 +54,11 @@ SynergyOverFlow는 게시판을 통해 회원이 등록한 질문을 다른 회�
 </tbody>
 </table>
 
+
+# 🗺️ ERD
+<img src=".github/ERD.png">
+<br>
+
 [//]: # (<div align=center><h1>📚 STACKS AND TOOLS</h1></div>)
 
 # 📚 STACKS AND TOOLS
