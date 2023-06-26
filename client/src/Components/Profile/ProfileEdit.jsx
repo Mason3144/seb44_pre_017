@@ -39,6 +39,7 @@ const ProfileEdit = () => {
         console.log(res);
         if (res.status === 200) {
           alert('회원정보 수정이 완료되었습니다.');
+          localStorage.setItem('nickname', res.data.nickname);
           dispatch(responseUserInfo(res.data.nickname));
           navigate('/questions');
         }
