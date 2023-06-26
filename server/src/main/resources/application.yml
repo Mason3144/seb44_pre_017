@@ -9,6 +9,8 @@ spring:
     url: jdbc:h2:mem:test
   jpa:
     hibernate:
+      jdbc:
+        time_zone: Asia/Seoul
       ddl-auto: create    # 스키마 자동 생성
     show-sql: true        # SQL 쿼리 출력
     properties:
@@ -22,8 +24,8 @@ spring:
       client:
         registration:
           google:
-            client-id: ${G_CLIENT_ID}
-            client-secret: ${G_CLIENT_SECRET}
+            client-id: ${/synergy/env/spring.security.oauth2.client.registration.google.client-id}
+            client-secret: ${/synergy/env/spring.security.oauth2.client.registration.google.client-secret}
             scope:
               - profile
               - email
@@ -38,6 +40,8 @@ server:                     # 모든 response에 대해 지정된 인코딩 적�
     encoding:
       force-response: true
 jwt:                      # JWT 관련 정보
-  key: ${JWT_SECRET_KEY}  # 시스템 환경 변수에서 로드
-  access-token-expiration-minutes: 30
-  refresh-token-expiration-minutes: 420
+  key: ${/synergy/env/spring.jwt.key}  # 시스템 환경 변수에서 로드
+  access-token-expiration-minutes: 9999
+  refresh-token-expiration-minutes: 20000
+awsParameterStorePropertySource:
+  enabled: true

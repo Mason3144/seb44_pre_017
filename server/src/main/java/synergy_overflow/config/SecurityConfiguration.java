@@ -74,6 +74,8 @@ public class SecurityConfiguration {
 
                 .and()
                 .authorizeHttpRequests(authorize -> authorize // 접근 권한 인가
+                        // TODO refactoring point 1
+
                         // 전체 허용
                         .antMatchers(GET, "/").permitAll()  // 홈
                         .antMatchers(POST, "/auth/login").permitAll()   // 폼 로그인
@@ -83,7 +85,6 @@ public class SecurityConfiguration {
                         .antMatchers(GET, "/questions/{question-id}/**").permitAll() // 한 건의 질문과 답변 조회
                         .antMatchers("/h2/**").permitAll()
 
-                        // TODO 전체 허용을 제외한 나머지는 모두 회원 조회 가능으로 변경?
                         .anyRequest().hasRole("USER")
                 )
                 .oauth2Login(oauth2 -> oauth2

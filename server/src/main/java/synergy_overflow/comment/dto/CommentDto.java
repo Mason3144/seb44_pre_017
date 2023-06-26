@@ -22,6 +22,7 @@ public class CommentDto {
     @AllArgsConstructor
     @Getter
     @Builder
+    @Setter
     public static class Response {
         private long answerId;
         private long commentId;

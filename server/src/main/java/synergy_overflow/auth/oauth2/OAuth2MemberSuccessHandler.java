@@ -78,7 +78,8 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
     }
 
     private void redirect(HttpServletRequest request, HttpServletResponse response, Member member) throws IOException {
-        String accessToken = tokenUtils.delegateAccessToken(member);
+        String accessToken = tokenUtils.delegateAccessToken(member
+        );
         String refreshToken = tokenUtils.delegateRefreshToken(member);
 
         String uri = createURI(accessToken, refreshToken, member).toString();
@@ -92,10 +93,12 @@ public class OAuth2MemberSuccessHandler extends SimpleUrlAuthenticationSuccessHa
         queryParams.add("memberId", member.getMemberId().toString());
         queryParams.add("nickname", member.getNickname());
 
+        // 컨트롤러로 보낸후 프론트로 리다이렉트 시도
+
         return UriComponentsBuilder.newInstance()
                 .scheme("http")
-                .host("localhost")
-                .port(3000) // default
+                .host("synergyoverflow.s3-website.ap-northeast-2.amazonaws.com")
+//                .port(3000) // default
                 .path("/oauth2/authorization/google/success")
                 .queryParams(queryParams)
                 .build().toUri();
