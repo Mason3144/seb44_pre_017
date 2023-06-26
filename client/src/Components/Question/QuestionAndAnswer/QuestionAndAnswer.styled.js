@@ -9,9 +9,10 @@ export const Container = styled.div`
 
 export const TitleContainer = styled.div`
   display: flex;
-  gap: 750px;
+  gap: 20px;
 `;
 export const AskBtn = styled.button`
+width: 115px;
   background-color: #1eaeff;
   color: #ffffff;
   border: 1.5px solid #1eaeff;
@@ -24,9 +25,10 @@ export const AskBtn = styled.button`
   }
 `;
 
-export const Title = styled.h1`
+export const Title = styled.div`
   font-size: 30px;
   font-weight: 400;
+  width: 100%;
 `;
 export const Info = styled.div`
   display: flex;

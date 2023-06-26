@@ -48,6 +48,11 @@ function QuestionDetail() {
         })
         .catch((error) => {
           console.log('Error occurred while posting answer:', error.message);
+          if (error.response.status === 401) {
+            alert('로그인이 필요합니다.')
+          } else { 
+            return;
+          }
         });
     }
   };

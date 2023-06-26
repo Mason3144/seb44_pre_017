@@ -14,6 +14,12 @@ export const ProfileContainer = styled.div`
 `;
 
 export const UserImg = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  color: white;
+  background-color: #0091ff;
   box-sizing: border-box;
   border: 1px solid lightgray;
   border-radius: 5px;
