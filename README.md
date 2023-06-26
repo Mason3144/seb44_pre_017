@@ -1,4 +1,4 @@
-<img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=SynergeOverFlow&fontSize=90" />
+<img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=SynergyOverFlow&fontSize=90" />
 
 # 👨‍💻 프로젝트 개요
 
