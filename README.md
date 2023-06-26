@@ -54,11 +54,6 @@ SynergyOverFlow는 게시판을 통해 회원이 등록한 질문을 다른 회�
 </tbody>
 </table>
 
-
-# 🗺️ ERD
-<img src=".github/ERD.png">
-<br>
-
 [//]: # (<div align=center><h1>📚 STACKS AND TOOLS</h1></div>)
 <br>
 <br>
@@ -84,6 +79,10 @@ SynergyOverFlow는 게시판을 통해 회원이 등록한 질문을 다른 회�
 답변은 수정, 조회, 삭제가 가능하며, 삭제 시 관련된 댓글도 함께 삭제됩니다.<br>
 
 <br>
+<br>
+
+# 🗺️ ERD
+<img src=".github/ERD.png" width="820" height="600">
 <br>
 
 # 📚 STACKS AND TOOLS
