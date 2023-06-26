@@ -22,7 +22,7 @@ function Comment({ data }) {
     return `${Math.floor(years)} years ago`;
   };
 
-  const now = new Date({ createdAt });
+  const now = new Date( createdAt );
   const nowDate = detailDate(now);
 
   return (
