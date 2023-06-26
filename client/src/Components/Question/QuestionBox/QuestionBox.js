@@ -30,13 +30,13 @@ const QuestionBox = ({ question }) => {
     return `${Math.floor(years)} years ago`;
   };
 
-  const nowDate = detailDate(new Date({ createdAt }));
+  const nowDate = detailDate(new Date(createdAt));
 
   return (
     <S.ItemContainer>
       <S.Left>
         <S.Votes>0 votes</S.Votes>
-        <S.Answers>{question.commentsNumber} answers</S.Answers>
+        <S.Answers>{question.answerNumber} answers</S.Answers>
         <S.Views>{question.views} views</S.Views>
       </S.Left>
       <S.Right>
