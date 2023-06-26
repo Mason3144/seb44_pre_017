@@ -4,6 +4,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import synergy_overflow.exception.businessLogicException.BusinessLogicException;
 import synergy_overflow.exception.businessLogicException.ExceptionCode;
 
+import java.util.Map;
+
 public class LoggedInMemberUtils {
     // 로그인된 유저 이메일 반환
     public static String findLoggedInMember() {

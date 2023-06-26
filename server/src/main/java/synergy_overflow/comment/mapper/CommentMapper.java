@@ -5,6 +5,7 @@ import org.mapstruct.ReportingPolicy;
 import synergy_overflow.comment.dto.CommentDto;
 import synergy_overflow.comment.entity.Comment;
 import synergy_overflow.member.dto.MemberDto;
+import synergy_overflow.member.entity.Member;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface CommentMapper {
@@ -18,5 +19,5 @@ public interface CommentMapper {
                 .createdAt(comment.getCreatedAt())
                 .writer(new MemberDto.Response(comment.getWriter().getMemberId(), comment.getWriter().getNickname()))
                 .build();
-    };
+    }
 }

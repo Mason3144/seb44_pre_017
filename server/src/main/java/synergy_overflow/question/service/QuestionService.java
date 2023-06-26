@@ -32,6 +32,7 @@ public class QuestionService {
 
     public Question createQuestion(Question question) {
         Member member = memberService.findMemberByEmail(LoggedInMemberUtils.findLoggedInMember());
+
         member.setQuestions(question);
 
         return questionRepository.save(question);
@@ -76,6 +77,7 @@ public class QuestionService {
 
     public void removeQuestion(long questionId) {
         Question existQuestion = findExistsQuestion(questionId);
+
         LoggedInMemberUtils.verifyMine(existQuestion.getWriter().getEmail());
         questionRepository.deleteById(questionId);
     }
