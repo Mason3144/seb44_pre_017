@@ -30,24 +30,27 @@ const ProfileDelete = () => {
           profiles. I have read the information stated above and understand the
           implications of having my profile deleted.`;
 
-  const DeleteRequestHandler = () => {
-    const memberId = resUserInfo.memberId;
-    const url = `${process.env.REACT_APP_API_URL}/members/${memberId}`;
-    const res = axios.delete(url, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: localStorage.getItem('Authorization'),
-      },
-    });
-    if (res.status === 200) {
-      alert('회원정보가 삭제되었습니다.');
-      dispatch(setLoginState(false));
-      localStorage.clear();
-      navigate('/home');
-    } else {
-      return;
+  const DeleteRequestHandler = async () => {
+    try {
+      const memberId = +resUserInfo.memberId;
+      const url = `${process.env.REACT_APP_API_URL}/members/${memberId}`;
+      const res = await axios.delete(url, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: localStorage.getItem('Authorization'),
+        },
+      });
+      if (res.status === 204) {
+        alert("회원정보가 삭제되었습니다.")
+        dispatch(setLoginState(false));
+        localStorage.clear();
+        navigate('/home');
+      }
+    } 
+    catch (err) {
+      console.error(err);
     }
-  };
+  }
 
   return (
     <div className="profile-delete">
