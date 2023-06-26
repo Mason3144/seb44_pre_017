@@ -4,7 +4,7 @@ import * as S from './QuestionDetail.styled';
 import { useState, useEffect } from 'react';
 import QuestionAndAnswer from '../../../Components/Question/QuestionAndAnswer/QuestionAndAnswer';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import WebEditor from '../../../Components/Question/QuestionBox/WebEditor';
 import { useDispatch } from 'react-redux';
 import { writerInfo } from '../../../redux/writerSlice';
@@ -14,7 +14,6 @@ function QuestionDetail() {
   const [newAnswer, setNewAnswer] = useState('');
   const { questionId } = useParams();
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -49,8 +48,8 @@ function QuestionDetail() {
         .catch((error) => {
           console.log('Error occurred while posting answer:', error.message);
           if (error.response.status === 401) {
-            alert('로그인이 필요합니다.')
-          } else { 
+            alert('로그인이 필요합니다.');
+          } else {
             return;
           }
         });
