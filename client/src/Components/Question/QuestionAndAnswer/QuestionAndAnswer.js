@@ -27,6 +27,8 @@ function QuestionAndAnswer({ data, isQuestion }) {
   const userId = Number(useSelector((state) => state.userInfo.value.memberId));
   const { createdAt } = data;
   const { adopted } = data;
+  const createDOMPurify = require('dompurify');
+  const { JSDOM } = require('jsdom');
 
   let realBody = '';
   if (data.body !== undefined) {
@@ -232,6 +234,9 @@ function QuestionAndAnswer({ data, isQuestion }) {
     data.comments &&
     data.comments.map((data) => <Comment data={data} key={data.commentId} />);
 
+  const window = new JSDOM('').window;
+  const DOMPurify = createDOMPurify(window);
+
   return (
     <S.Container>
       {isQuestion === true ? (
@@ -277,9 +282,17 @@ function QuestionAndAnswer({ data, isQuestion }) {
         </S.Side>
         <S.Content>
           {isQuestion ? (
-            <div dangerouslySetInnerHTML={{ __html: data.body }} />
+            <div
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(data.body),
+              }}
+            />
           ) : (
-            <div dangerouslySetInnerHTML={{ __html: data.answerBody }} />
+            <div
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(data.answerBody),
+              }}
+            />
           )}
           <S.BottomLine>
             <S.Edit onClick={goEdit}>Edit</S.Edit>
