@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useCallback, useMemo, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import dompurify from 'dompurify';
 
 import { ReactComponent as Up } from '../../../icons/up.svg';
 import { ReactComponent as Down } from '../../../icons/down.svg';
@@ -27,8 +28,6 @@ function QuestionAndAnswer({ data, isQuestion }) {
   const userId = Number(useSelector((state) => state.userInfo.value.memberId));
   const { createdAt } = data;
   const { adopted } = data;
-  const createDOMPurify = require('dompurify');
-  const { JSDOM } = require('jsdom');
 
   let realBody = '';
   if (data.body !== undefined) {
@@ -234,27 +233,6 @@ function QuestionAndAnswer({ data, isQuestion }) {
     data.comments &&
     data.comments.map((data) => <Comment data={data} key={data.commentId} />);
 
-  const window = new JSDOM('').window;
-  const DOMPurify = createDOMPurify(window);
-
-  const dataBody = DOMPurify.sanitize(
-    <div>
-      dangerouslySetInnerHTML=
-      {{
-        __html: data.body,
-      }}
-    </div>
-  );
-
-  const dataAnswerBody = DOMPurify.sanitize(
-    <div>
-      dangerouslySetInnerHTML=
-      {{
-        __html: data.answerBody,
-      }}
-    </div>
-  );
-
   return (
     <S.Container>
       {isQuestion === true ? (
@@ -299,7 +277,19 @@ function QuestionAndAnswer({ data, isQuestion }) {
           </div>
         </S.Side>
         <S.Content>
-          {isQuestion ? dataBody : dataAnswerBody}
+          {isQuestion ? (
+            <div
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(data.body),
+              }}
+            />
+          ) : (
+            <div
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(data.answerBody),
+              }}
+            />
+          )}
           <S.BottomLine>
             <S.Edit onClick={goEdit}>Edit</S.Edit>
             <S.Delete onClick={handleDelete}>Delete</S.Delete>
