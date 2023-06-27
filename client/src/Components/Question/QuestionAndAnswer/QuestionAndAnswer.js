@@ -5,7 +5,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useCallback, useMemo, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import dompurify from 'dompurify';
 
 import { ReactComponent as Up } from '../../../icons/up.svg';
 import { ReactComponent as Down } from '../../../icons/down.svg';
@@ -177,7 +176,6 @@ function QuestionAndAnswer({ data, isQuestion }) {
 
   const goEdit = useCallback(() => {
     if (memberId === userId) {
-      // !== 으로 시도해보기
       if (isQuestion === true) {
         navigate(`/questions/${questionId}/edit`);
       } else {
@@ -233,8 +231,6 @@ function QuestionAndAnswer({ data, isQuestion }) {
     data.comments &&
     data.comments.map((data) => <Comment data={data} key={data.commentId} />);
 
-  const sanitizer = dompurify.sanitize;
-
   return (
     <S.Container>
       {isQuestion === true ? (
@@ -282,13 +278,13 @@ function QuestionAndAnswer({ data, isQuestion }) {
           {isQuestion ? (
             <div
               dangerouslySetInnerHTML={{
-                __html: sanitizer(`${data.body}`),
+                __html: data.body,
               }}
             />
           ) : (
             <div
               dangerouslySetInnerHTML={{
-                __html: sanitizer(`${data.answerBody}`),
+                __html: data.answerBody,
               }}
             />
           )}
