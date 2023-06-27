@@ -233,6 +233,8 @@ function QuestionAndAnswer({ data, isQuestion }) {
     data.comments &&
     data.comments.map((data) => <Comment data={data} key={data.commentId} />);
 
+  const sanitizer = dompurify.sanitize;
+
   return (
     <S.Container>
       {isQuestion === true ? (
@@ -280,13 +282,13 @@ function QuestionAndAnswer({ data, isQuestion }) {
           {isQuestion ? (
             <div
               dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(data.body),
+                __html: sanitizer(`${data.body}`),
               }}
             />
           ) : (
             <div
               dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(data.answerBody),
+                __html: sanitizer(`${data.answerBody}`),
               }}
             />
           )}
