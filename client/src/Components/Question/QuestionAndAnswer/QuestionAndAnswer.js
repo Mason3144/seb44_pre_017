@@ -237,6 +237,24 @@ function QuestionAndAnswer({ data, isQuestion }) {
   const window = new JSDOM('').window;
   const DOMPurify = createDOMPurify(window);
 
+  const dataBody = DOMPurify.sanitize(
+    <div>
+      dangerouslySetInnerHTML=
+      {{
+        __html: data.body,
+      }}
+    </div>
+  );
+
+  const dataAnswerBody = DOMPurify.sanitize(
+    <div>
+      dangerouslySetInnerHTML=
+      {{
+        __html: data.answerBody,
+      }}
+    </div>
+  );
+
   return (
     <S.Container>
       {isQuestion === true ? (
@@ -281,19 +299,7 @@ function QuestionAndAnswer({ data, isQuestion }) {
           </div>
         </S.Side>
         <S.Content>
-          {isQuestion ? (
-            <div
-              dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(data.body),
-              }}
-            />
-          ) : (
-            <div
-              dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(data.answerBody),
-              }}
-            />
-          )}
+          {isQuestion ? dataBody : dataAnswerBody}
           <S.BottomLine>
             <S.Edit onClick={goEdit}>Edit</S.Edit>
             <S.Delete onClick={handleDelete}>Delete</S.Delete>
