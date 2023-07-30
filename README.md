@@ -10,7 +10,6 @@ SynergyOverFlow는 게시판을 통해 회원이 등록한 질문을 다른 회�
 ## 🔗 배포 링크
 <h6>http://synergyoverflow.s3-website.ap-northeast-2.amazonaws.com</h6>
 <br>
-<br>
 
 ## 🧑🏻‍💻 Member
 
