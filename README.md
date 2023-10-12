@@ -1,15 +1,12 @@
-<img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=200&section=header&text=SynergyOverFlow&fontSize=90" />
-
 # 👨‍💻 프로젝트 개요
+본격적으로 메인 프로젝트에 들어가기 이전, 개발자들의 협업방법을 체험해보기 위해 실행된 예비 프로젝트입니다. 
 
-SynergyOverFlow는 게시판을 통해 회원이 등록한 질문을 다른 회원들이
-답변과 댓글들을 작성하여 해결법을 제시해주는 웹 어플레케이션입니다.
+약 2주간 진행되었으며 유명 웹사이트(스택오버플로우)를 벤치마킹 하였습니다.
+
 <br>
 <br>
 
-## 🔗 배포 링크
-<h6>http://synergyoverflow.s3-website.ap-northeast-2.amazonaws.com</h6>
-<br>
+
 
 ## 🧑🏻‍💻 Member
 
