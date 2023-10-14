@@ -130,6 +130,7 @@ Stub Data Server는 구현된 컨트롤러를 통하여 고정된 Mock Data만�
 
 - <a href="https://github.com/Mason3144/stub_data_server">[Stub Data Server 리파지토리]</a>
 
+<br>
 
 ## 배포 자동화
 AWS-EC2를 통해 배포를 마치고 AWS-Pipeline을 통해 배포 자동화를 진행했습니다.
@@ -146,6 +147,7 @@ AWS-Pipeline을 이용한 자동 배포의 흐름은 다음과 같습니다.
 <img src="https://github.com/Mason3144/stub_data_server/assets/59563548/f8e74fc2-105f-4410-9921-859cb37eeb79">
 [AWS-CodePipeline을 이용한 자동 배포 로그] 
 
+<br>
 
 ## 환경변수 통합 관리
 이번 프로젝트에서는 AWS-Parameter store를 이용하여 환경변수를 통합관리 하였습니다.
@@ -159,7 +161,7 @@ AWS-Pipeline을 이용한 자동 배포의 흐름은 다음과 같습니다.
 1. Parameter store의 경우 환경변수를 하나하나 각각 등록해야했지만 Secret manager는 그룹화하여 등록할 수 있습니다.
 2. Parameter store는 서버에 의존성을 추가해주고 그에 대한 설정이 필요했지만 Secret manager는 그러한 과정들이 필요가 없습니다.
 
-
+<br>
 
 ## 게시글(질문) 도메인 기능 구현
 질문 도메인과 관련된 컨트롤러, 비즈니스로직, 슬라이스 테스트를 구현하였습니다.
@@ -168,6 +170,7 @@ AWS-Pipeline을 이용한 자동 배포의 흐름은 다음과 같습니다.
 
 질문 엔티티에는 조회수와 채택에 관한 필드를 포함하고있어 게시글 목록에서 해당 정보에대한 접근이 가능합니다.
 
+<br>
 <br>
 
 # 🤔 문제 발생 및 해결
